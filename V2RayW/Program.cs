@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace V2RayW
 {
@@ -17,6 +18,21 @@ namespace V2RayW
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new MainForm();
+            //Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Upgrade();
+            dynamic[] dProfiles = Properties.Settings.Default.profilesStr.Split('\t').Select(pstr => JObject.Parse(pstr)).ToArray();
+            foreach (dynamic dp in dProfiles)
+            {
+                var p = new Profile();
+                p.address = dp.address;
+                p.allowPassive = dp.allowPassive;
+                p.alterId = dp.alterId;
+                p.network = dp.network;
+                p.remark = dp.remark;
+                p.userId = dp.userId;
+                Program.profiles.Add(p);
+            }
+            Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
             Application.Run();
         }
 

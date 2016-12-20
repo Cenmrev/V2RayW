@@ -40,8 +40,8 @@
             this.textBoxDNS = new System.Windows.Forms.TextBox();
             this.buttonTS = new System.Windows.Forms.Button();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.listBoxServers = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxNetwork = new System.Windows.Forms.ComboBox();
@@ -122,8 +122,8 @@
             // 
             // groupBoxServer
             // 
-            this.groupBoxServer.Controls.Add(this.button1);
-            this.groupBoxServer.Controls.Add(this.button2);
+            this.groupBoxServer.Controls.Add(this.buttonRemove);
+            this.groupBoxServer.Controls.Add(this.buttonAdd);
             this.groupBoxServer.Controls.Add(this.listBoxServers);
             this.groupBoxServer.Controls.Add(this.panel1);
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
@@ -131,24 +131,27 @@
             this.groupBoxServer.TabStop = false;
             this.groupBoxServer.Enter += new System.EventHandler(this.groupBoxServer_Enter);
             // 
-            // button1
+            // buttonRemove
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.buttonRemove, "buttonRemove");
+            this.buttonRemove.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
-            // button2
+            // buttonAdd
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.buttonAdd, "buttonAdd");
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // listBoxServers
             // 
             this.listBoxServers.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxServers, "listBoxServers");
             this.listBoxServers.Name = "listBoxServers";
+            this.listBoxServers.SelectedIndexChanged += new System.EventHandler(this.listBoxServers_SelectedIndexChanged);
             // 
             // panel1
             // 
@@ -179,31 +182,37 @@
             resources.GetString("comboBoxNetwork.Items2")});
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
+            this.comboBoxNetwork.SelectedIndexChanged += new System.EventHandler(this.comboBoxNetwork_SelectedIndexChanged);
             // 
             // textBoxRemark
             // 
             resources.ApplyResources(this.textBoxRemark, "textBoxRemark");
             this.textBoxRemark.Name = "textBoxRemark";
+            this.textBoxRemark.TextChanged += new System.EventHandler(this.textBoxRemark_TextChanged);
             // 
             // textBoxAlterID
             // 
             resources.ApplyResources(this.textBoxAlterID, "textBoxAlterID");
             this.textBoxAlterID.Name = "textBoxAlterID";
+            this.textBoxAlterID.TextChanged += new System.EventHandler(this.textBoxAlterID_TextChanged);
             // 
             // textBoxUserId
             // 
             resources.ApplyResources(this.textBoxUserId, "textBoxUserId");
             this.textBoxUserId.Name = "textBoxUserId";
+            this.textBoxUserId.TextChanged += new System.EventHandler(this.textBoxUserId_TextChanged);
             // 
             // textBoxPort
             // 
             resources.ApplyResources(this.textBoxPort, "textBoxPort");
             this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
             // 
             // textBoxAddress
             // 
             resources.ApplyResources(this.textBoxAddress, "textBoxAddress");
             this.textBoxAddress.Name = "textBoxAddress";
+            this.textBoxAddress.TextChanged += new System.EventHandler(this.textBoxAddress_TextChanged);
             // 
             // label9
             // 
@@ -216,6 +225,7 @@
             resources.ApplyResources(this.checkBoxAllowP, "checkBoxAllowP");
             this.checkBoxAllowP.Name = "checkBoxAllowP";
             this.checkBoxAllowP.UseVisualStyleBackColor = true;
+            this.checkBoxAllowP.CheckedChanged += new System.EventHandler(this.checkBoxAllowP_CheckedChanged);
             // 
             // label8
             // 
@@ -300,7 +310,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBoxServers;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }
