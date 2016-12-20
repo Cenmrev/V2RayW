@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace V2RayW
 {
@@ -37,6 +39,10 @@ namespace V2RayW
                 p.userId = dp.userId;
                 Program.profiles.Add(p);
             }
+            string a = "dfa";
+            string b = a;
+            a = "adfdadf";
+            Debug.WriteLine(String.Format("a={0}, b= {0}", a, b));
             Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
             //Debug.WriteLine(Program.profileToStr(profiles[0]));
             //Debug.WriteLine(Program.selectedServerIndex);
@@ -72,6 +78,17 @@ namespace V2RayW
             return JsonConvert.SerializeObject(pd);
         }
 
+        public static T DeepCopy<T>(T other)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, other);
+                ms.Position = 0;
+                return (T)formatter.Deserialize(ms);
+            }
+        }
+
         internal static int strToInt(string str, int defaultValue)
         {
             int result = 0;
@@ -95,5 +112,17 @@ namespace V2RayW
         internal int port = 10086;
         internal string remark = "new server";
         internal string userId = "";
+        public Profile DeepCopy()
+        {
+            Profile p = new Profile();
+            p.address = String.Copy(this.address);
+            p.allowPassive = this.allowPassive;
+            p.alterId = this.alterId;
+            p.network = this.network;
+            p.port = this.port;
+            p.remark = String.Copy(this.remark);
+            p.userId = String.Copy(this.userId);
+            return p;
+        }
     }
 }

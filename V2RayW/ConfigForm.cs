@@ -16,6 +16,9 @@ namespace V2RayW
 
     public partial class ConfigForm : Form
     {
+        public static List<Profile> profiles = new List<Profile>();
+        public static int selectedServerIndex;
+
         public ConfigForm()
         {
             InitializeComponent();
@@ -33,6 +36,12 @@ namespace V2RayW
             Properties.Settings.Default.dns = textBoxDNS.Text;
             Properties.Settings.Default.selectedServerIndex = listBoxServers.SelectedIndex;
             Properties.Settings.Default.Save();
+            Program.profiles.Clear();
+            foreach (Profile p in profiles)
+            {
+                Program.profiles.Add(p.DeepCopy());
+            }
+            Program.selectedServerIndex = selectedServerIndex;
             this.Close();
         }
 
@@ -44,6 +53,13 @@ namespace V2RayW
 
         private void ConfigForm_Load(object sender, EventArgs e)
         {
+            selectedServerIndex = Program.selectedServerIndex;
+            profiles.Clear();
+            foreach (Profile p in Program.profiles)
+            {
+                profiles.Add(p.DeepCopy());
+            }
+
             Properties.Settings.Default.Upgrade();
             textBoxLocalPort.Text = Properties.Settings.Default.localPort.ToString();
             checkBoxUDP.Checked = Properties.Settings.Default.udpSupport;
@@ -73,28 +89,29 @@ namespace V2RayW
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Program.profiles.Add(new Profile());
-            Program.selectedServerIndex = Program.profiles.Count() - 1;
+            profiles.Add(new Profile());
+            selectedServerIndex = profiles.Count() - 1;
             /*
-            for(int i = 0; i < Program.profiles.Count(); i++)
+            for(int i = 0; i < profiles.Count(); i++)
             {
-                Debug.WriteLine(Program.profiles[i].address);
+                Debug.WriteLine(profiles[i].address);
             }
-            Debug.WriteLine(Program.selectedServerIndex);*/
+            Debug.WriteLine(selectedServerIndex);*/
             this.loadProfiles();
         }
 
         private void loadProfiles()
         {
             listBoxServers.Items.Clear();
-            foreach (var p in Program.profiles)
+            foreach (var p in profiles)
             {
                 listBoxServers.Items.Add(p.remark == "" ? p.address : p.remark);
             }
-            //Debug.WriteLine(String.Format("lis cout = {0}", listBoxServers.Items.Count));
-            if (Program.selectedServerIndex >= 0)
+            Debug.WriteLine(String.Format("lis cout = {0}", listBoxServers.Items.Count));
+            Debug.WriteLine(String.Format("select {0}", selectedServerIndex));
+            if (selectedServerIndex >= 0)
             {
-                listBoxServers.SelectedIndex = Program.selectedServerIndex;
+                listBoxServers.SelectedIndex = selectedServerIndex;
             } else
             {
                 textBoxAddress.Text = "";
@@ -109,8 +126,8 @@ namespace V2RayW
 
         private void listBoxServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.selectedServerIndex = listBoxServers.SelectedIndex;
-            var sp = Program.profiles[Program.selectedServerIndex];
+            selectedServerIndex = listBoxServers.SelectedIndex;
+            var sp = profiles[selectedServerIndex];
             textBoxAddress.Text = sp.address;
             textBoxPort.Text = sp.port.ToString();
             textBoxUserId.Text = sp.userId;
@@ -122,71 +139,71 @@ namespace V2RayW
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            if (Program.profiles.Count <= 0)
+            if (profiles.Count <= 0)
             {
                 return;
             }
-            Program.profiles.RemoveAt(Program.selectedServerIndex);
-            if(Program.selectedServerIndex >= Program.profiles.Count())
+            profiles.RemoveAt(selectedServerIndex);
+            if(selectedServerIndex >= profiles.Count())
             {
-                Program.selectedServerIndex -= 1;
+                selectedServerIndex -= 1;
             }
             loadProfiles();
         }
 
         private void textBoxAddress_TextChanged(object sender, EventArgs e)
         {
-            if(Program.selectedServerIndex >= 0)
+            if(selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].address = textBoxAddress.Text;
+                profiles[selectedServerIndex].address = textBoxAddress.Text;
             }
         }
 
         private void textBoxPort_TextChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].port = Program.strToInt(textBoxPort.Text, 10086);
+                profiles[selectedServerIndex].port = Program.strToInt(textBoxPort.Text, 10086);
             }
         }
 
         private void textBoxUserId_TextChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].userId = textBoxUserId.Text;
+                profiles[selectedServerIndex].userId = textBoxUserId.Text;
             }
         }
 
         private void textBoxAlterID_TextChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].alterId = Program.strToInt(textBoxAlterID.Text, 20);
+                profiles[selectedServerIndex].alterId = Program.strToInt(textBoxAlterID.Text, 20);
             }
         }
 
         private void textBoxRemark_TextChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].remark = textBoxRemark.Text;
+                profiles[selectedServerIndex].remark = textBoxRemark.Text;
             }
         }
 
         private void checkBoxAllowP_CheckedChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].allowPassive = checkBoxAllowP.Checked;
+                profiles[selectedServerIndex].allowPassive = checkBoxAllowP.Checked;
             }
         }
 
         private void comboBoxNetwork_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Program.selectedServerIndex >= 0)
+            if (selectedServerIndex >= 0)
             {
-                Program.profiles[Program.selectedServerIndex].network = comboBoxNetwork.SelectedIndex;
+                profiles[selectedServerIndex].network = comboBoxNetwork.SelectedIndex;
             }
         }
     }
