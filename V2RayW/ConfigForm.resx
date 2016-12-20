@@ -535,13 +535,13 @@
     <value>WebSocket</value>
   </data>
   <data name="comboBoxNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 128</value>
+    <value>235, 128</value>
   </data>
   <data name="comboBoxNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="comboBoxNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 25</value>
+    <value>99, 25</value>
   </data>
   <data name="comboBoxNetwork.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -763,7 +763,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 131</value>
+    <value>168, 131</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 17</value>

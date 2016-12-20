@@ -16,9 +16,12 @@ namespace V2RayW
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var config = new MainForm();
+            var mainForm = new MainForm();
             Application.Run();
         }
+
+        public static List<Profile> profiles = new List<Profile>();
+        public static int selectedServerIndex = 0;
 
         internal static int strToInt(string str, int defaultValue)
         {
@@ -32,5 +35,16 @@ namespace V2RayW
                 return defaultValue;
             }
         }
+    }
+    
+    public class Profile
+    {
+        internal string address = "";
+        internal bool allowPassive = false;
+        internal int alterId = 64;
+        internal int network = 0;
+        internal int port = 10086;
+        internal string remark = "new server";
+        internal string userId = "";
     }
 }
