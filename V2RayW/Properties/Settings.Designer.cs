@@ -27,8 +27,8 @@ namespace V2RayW.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{\"kcpSettings\":{\"mtu\":1350,\"tti\":50,\"uplinkCapacity\":5,\"downlinkCapacity\":20,\"rea" +
             "dBufferSize\":2,\"writeBufferSize\":2,\"congestion\":\"false\",\"header\":\"none\"},\"tcpSet" +
-            "tings\":{\"connectionReuse\":\"false\"},\"wsSettings\":{\"connectionReuse\":\"false\",\"path" +
-            "\":\"\"}}")]
+            "tings\":{\"connectionReuse\":\"true\"},\"wsSettings\":{\"connectionReuse\":\"true\",\"path\":" +
+            "\"\"}}")]
         public string transportSettings {
             get {
                 return ((string)(this["transportSettings"]));

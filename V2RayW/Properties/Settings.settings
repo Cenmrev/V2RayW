@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="transportSettings" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":"none"},"tcpSettings":{"connectionReuse":"false"},"wsSettings":{"connectionReuse":"false","path":""}}</Value>
+      <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":"none"},"tcpSettings":{"connectionReuse":"true"},"wsSettings":{"connectionReuse":"true","path":""}}</Value>
     </Setting>
   </Settings>
 </SettingsFile>

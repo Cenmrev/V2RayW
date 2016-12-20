@@ -33,12 +33,6 @@
             this.buttonTSHelp = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.checkBoxTcpCr = new System.Windows.Forms.CheckBox();
-            this.checkBoxWsCr = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxWsPath = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxKcpCon = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,11 +50,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxTcpCr = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBoxWsPath = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.checkBoxWsCr = new System.Windows.Forms.CheckBox();
+            this.buttonTsReset = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonTSCancel
@@ -129,67 +130,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "KCP";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.checkBoxTcpCr);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(470, 139);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "TCP";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.textBoxWsPath);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.checkBoxWsCr);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(470, 139);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "WebSocket";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxTcpCr
-            // 
-            this.checkBoxTcpCr.AutoSize = true;
-            this.checkBoxTcpCr.Location = new System.Drawing.Point(49, 60);
-            this.checkBoxTcpCr.Name = "checkBoxTcpCr";
-            this.checkBoxTcpCr.Size = new System.Drawing.Size(126, 21);
-            this.checkBoxTcpCr.TabIndex = 0;
-            this.checkBoxTcpCr.Text = "connection reuse";
-            this.checkBoxTcpCr.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxWsCr
-            // 
-            this.checkBoxWsCr.AutoSize = true;
-            this.checkBoxWsCr.Location = new System.Drawing.Point(25, 28);
-            this.checkBoxWsCr.Name = "checkBoxWsCr";
-            this.checkBoxWsCr.Size = new System.Drawing.Size(126, 21);
-            this.checkBoxWsCr.TabIndex = 1;
-            this.checkBoxWsCr.Text = "connection reuse";
-            this.checkBoxWsCr.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(22, 72);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 17);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "path:";
-            // 
-            // textBoxWsPath
-            // 
-            this.textBoxWsPath.Location = new System.Drawing.Point(65, 69);
-            this.textBoxWsPath.Name = "textBoxWsPath";
-            this.textBoxWsPath.Size = new System.Drawing.Size(376, 23);
-            this.textBoxWsPath.TabIndex = 9;
             // 
             // panel1
             // 
@@ -355,6 +295,81 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "mtu";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.checkBoxTcpCr);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Size = new System.Drawing.Size(470, 139);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "TCP";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTcpCr
+            // 
+            this.checkBoxTcpCr.AutoSize = true;
+            this.checkBoxTcpCr.Location = new System.Drawing.Point(49, 60);
+            this.checkBoxTcpCr.Name = "checkBoxTcpCr";
+            this.checkBoxTcpCr.Size = new System.Drawing.Size(126, 21);
+            this.checkBoxTcpCr.TabIndex = 0;
+            this.checkBoxTcpCr.Text = "connection reuse";
+            this.checkBoxTcpCr.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.textBoxWsPath);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.checkBoxWsCr);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(470, 139);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "WebSocket";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // textBoxWsPath
+            // 
+            this.textBoxWsPath.Location = new System.Drawing.Point(65, 69);
+            this.textBoxWsPath.Name = "textBoxWsPath";
+            this.textBoxWsPath.Size = new System.Drawing.Size(376, 23);
+            this.textBoxWsPath.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(22, 72);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 17);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "path:";
+            // 
+            // checkBoxWsCr
+            // 
+            this.checkBoxWsCr.AutoSize = true;
+            this.checkBoxWsCr.Location = new System.Drawing.Point(25, 28);
+            this.checkBoxWsCr.Name = "checkBoxWsCr";
+            this.checkBoxWsCr.Size = new System.Drawing.Size(126, 21);
+            this.checkBoxWsCr.TabIndex = 1;
+            this.checkBoxWsCr.Text = "connection reuse";
+            this.checkBoxWsCr.UseVisualStyleBackColor = true;
+            // 
+            // buttonTsReset
+            // 
+            this.buttonTsReset.AutoSize = true;
+            this.buttonTsReset.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTsReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonTsReset.Location = new System.Drawing.Point(213, 186);
+            this.buttonTsReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonTsReset.Name = "buttonTsReset";
+            this.buttonTsReset.Size = new System.Drawing.Size(87, 27);
+            this.buttonTsReset.TabIndex = 11;
+            this.buttonTsReset.Text = "Reset";
+            this.buttonTsReset.UseVisualStyleBackColor = true;
+            this.buttonTsReset.Click += new System.EventHandler(this.buttonTsReset_Click);
+            // 
             // FormTransSetting
             // 
             this.AcceptButton = this.buttonTSSave;
@@ -362,6 +377,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonTSCancel;
             this.ClientSize = new System.Drawing.Size(504, 226);
+            this.Controls.Add(this.buttonTsReset);
             this.Controls.Add(this.buttonTSSave);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonTSHelp);
@@ -379,12 +395,12 @@
             this.Load += new System.EventHandler(this.FormTransSetting_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,5 +436,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonTsReset;
     }
 }

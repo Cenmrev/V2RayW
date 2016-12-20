@@ -77,8 +77,6 @@ namespace V2RayW
         private void FormTransSetting_Load(object sender, EventArgs e)
         {
             Properties.Settings.Default.Upgrade();
-            //var transportSettings = JsonConvert.DeserializeObject(Properties.Settings.Default["transportSettings"].ToString());
-            //dynamic transportSettings = JObject.Parse(Properties.Settings.Default["transportSettings"].ToString());
             string transportSettingsStr = (string)Properties.Settings.Default["transportSettings"];
             dynamic transportSettings = JObject.Parse(transportSettingsStr);
             textBoxKcpMtu.Text = transportSettings.kcpSettings.mtu;
@@ -93,8 +91,21 @@ namespace V2RayW
             checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse == "true";
             checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse == "true";
             textBoxWsPath.Text = transportSettings.wsSettings.path;
-            System.Diagnostics.Debug.WriteLine(transportSettingsStr);
-            //textBoxKcpMtu.Text = transportSettings.kcpSettings.mtu;
+        }
+
+        private void buttonTsReset_Click(object sender, EventArgs e)
+        {
+            textBoxKcpMtu.Text = "1350";
+            textBoxKcpTti.Text = "20";
+            textBoxKcpUc.Text = "5";
+            textBoxKcpDc.Text = "20";
+            textBoxKcpRb.Text = "2";
+            textBoxKcpWb.Text = "2";
+            comboBoxKcpCon.SelectedIndex = 0;
+            comboBoxKcpHt.SelectedIndex = 0;
+            checkBoxTcpCr.Checked = true;
+            checkBoxWsCr.Checked = true;
+            textBoxWsPath.Text = "";
         }
     }
 }
