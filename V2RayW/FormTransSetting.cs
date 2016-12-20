@@ -16,5 +16,15 @@ namespace V2RayW
         {
             InitializeComponent();
         }
+
+        private void buttonTSCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonTSHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.v2ray.com/chapter_02/05_transport.html");
+        }
     }
 }

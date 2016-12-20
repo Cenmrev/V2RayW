@@ -190,6 +190,7 @@
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // checkBox1
             // 

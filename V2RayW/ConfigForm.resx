@@ -280,7 +280,7 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 379</value>
+    <value>364, 378</value>
   </data>
   <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -313,7 +313,7 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 378</value>
+    <value>457, 378</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -376,7 +376,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 23</value>
+    <value>480, 23</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -508,7 +508,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="listBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 140</value>
+    <value>154, 140</value>
   </data>
   <data name="listBox1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -535,13 +535,13 @@
     <value>WebSocket</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 128</value>
+    <value>248, 128</value>
   </data>
   <data name="comboBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 25</value>
+    <value>86, 25</value>
   </data>
   <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -568,7 +568,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="textBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 23</value>
+    <value>254, 23</value>
   </data>
   <data name="textBox7.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -622,7 +622,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 23</value>
+    <value>254, 23</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -643,13 +643,13 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 6</value>
+    <value>284, 6</value>
   </data>
   <data name="textBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>50, 23</value>
   </data>
   <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -676,7 +676,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -700,7 +700,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 6</value>
+    <value>267, 9</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>11, 17</value>
@@ -763,7 +763,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 132</value>
+    <value>181, 131</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 17</value>
@@ -910,13 +910,13 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 48</value>
+    <value>167, 28</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 163</value>
+    <value>347, 163</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -946,7 +946,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBoxServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 233</value>
+    <value>532, 233</value>
   </data>
   <data name="groupBoxServer.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -973,7 +973,7 @@
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>658, 418</value>
+    <value>557, 418</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei, 9pt</value>

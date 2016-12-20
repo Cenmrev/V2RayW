@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonTSCancel = new System.Windows.Forms.Button();
+            this.buttonTSSave = new System.Windows.Forms.Button();
             this.buttonTSHelp = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxTcpCr = new System.Windows.Forms.CheckBox();
+            this.checkBoxWsCr = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBoxWsPath = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxKcpCon = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBoxKcpHt = new System.Windows.Forms.ComboBox();
+            this.textBoxKcpWb = new System.Windows.Forms.TextBox();
+            this.textBoxKcpDc = new System.Windows.Forms.TextBox();
+            this.textBoxKcpTti = new System.Windows.Forms.TextBox();
+            this.textBoxKcpRb = new System.Windows.Forms.TextBox();
+            this.textBoxKcpUc = new System.Windows.Forms.TextBox();
+            this.textBoxKcpMtu = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -63,32 +63,33 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // buttonTSCancel
             // 
-            this.buttonCancel.AutoSize = true;
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
-            this.buttonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonCancel.Location = new System.Drawing.Point(399, 186);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(87, 27);
-            this.buttonCancel.TabIndex = 8;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonTSCancel.AutoSize = true;
+            this.buttonTSCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonTSCancel.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTSCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonTSCancel.Location = new System.Drawing.Point(399, 186);
+            this.buttonTSCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonTSCancel.Name = "buttonTSCancel";
+            this.buttonTSCancel.Size = new System.Drawing.Size(87, 27);
+            this.buttonTSCancel.TabIndex = 8;
+            this.buttonTSCancel.Text = "Cancel";
+            this.buttonTSCancel.UseVisualStyleBackColor = true;
+            this.buttonTSCancel.Click += new System.EventHandler(this.buttonTSCancel_Click);
             // 
-            // buttonSave
+            // buttonTSSave
             // 
-            this.buttonSave.AutoSize = true;
-            this.buttonSave.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
-            this.buttonSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonSave.Location = new System.Drawing.Point(306, 186);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(87, 27);
-            this.buttonSave.TabIndex = 7;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonTSSave.AutoSize = true;
+            this.buttonTSSave.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTSSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonTSSave.Location = new System.Drawing.Point(306, 186);
+            this.buttonTSSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonTSSave.Name = "buttonTSSave";
+            this.buttonTSSave.Size = new System.Drawing.Size(87, 27);
+            this.buttonTSSave.TabIndex = 7;
+            this.buttonTSSave.Text = "Save";
+            this.buttonTSSave.UseVisualStyleBackColor = true;
             // 
             // buttonTSHelp
             // 
@@ -102,6 +103,7 @@
             this.buttonTSHelp.TabIndex = 9;
             this.buttonTSHelp.Text = "Help";
             this.buttonTSHelp.UseVisualStyleBackColor = true;
+            this.buttonTSHelp.Click += new System.EventHandler(this.buttonTSHelp_Click);
             // 
             // tabControlMain
             // 
@@ -129,7 +131,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBox1);
+            this.tabPage2.Controls.Add(this.checkBoxTcpCr);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
@@ -141,9 +143,9 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.textBox7);
+            this.tabPage3.Controls.Add(this.textBoxWsPath);
             this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.checkBox2);
+            this.tabPage3.Controls.Add(this.checkBoxWsCr);
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -152,25 +154,25 @@
             this.tabPage3.Text = "WebSocket";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // checkBoxTcpCr
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(49, 60);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(126, 21);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "connection reuse";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxTcpCr.AutoSize = true;
+            this.checkBoxTcpCr.Location = new System.Drawing.Point(49, 60);
+            this.checkBoxTcpCr.Name = "checkBoxTcpCr";
+            this.checkBoxTcpCr.Size = new System.Drawing.Size(126, 21);
+            this.checkBoxTcpCr.TabIndex = 0;
+            this.checkBoxTcpCr.Text = "connection reuse";
+            this.checkBoxTcpCr.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkBoxWsCr
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(25, 28);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(126, 21);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "connection reuse";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxWsCr.AutoSize = true;
+            this.checkBoxWsCr.Location = new System.Drawing.Point(25, 28);
+            this.checkBoxWsCr.Name = "checkBoxWsCr";
+            this.checkBoxWsCr.Size = new System.Drawing.Size(126, 21);
+            this.checkBoxWsCr.TabIndex = 1;
+            this.checkBoxWsCr.Text = "connection reuse";
+            this.checkBoxWsCr.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -181,24 +183,24 @@
             this.label9.TabIndex = 2;
             this.label9.Text = "path:";
             // 
-            // textBox7
+            // textBoxWsPath
             // 
-            this.textBox7.Location = new System.Drawing.Point(65, 69);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(376, 23);
-            this.textBox7.TabIndex = 9;
+            this.textBoxWsPath.Location = new System.Drawing.Point(65, 69);
+            this.textBoxWsPath.Name = "textBoxWsPath";
+            this.textBoxWsPath.Size = new System.Drawing.Size(376, 23);
+            this.textBoxWsPath.TabIndex = 9;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.comboBox2);
+            this.panel1.Controls.Add(this.comboBoxKcpCon);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.textBox6);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.comboBoxKcpHt);
+            this.panel1.Controls.Add(this.textBoxKcpWb);
+            this.panel1.Controls.Add(this.textBoxKcpDc);
+            this.panel1.Controls.Add(this.textBoxKcpTti);
+            this.panel1.Controls.Add(this.textBoxKcpRb);
+            this.panel1.Controls.Add(this.textBoxKcpUc);
+            this.panel1.Controls.Add(this.textBoxKcpMtu);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
@@ -211,18 +213,18 @@
             this.panel1.Size = new System.Drawing.Size(458, 126);
             this.panel1.TabIndex = 22;
             // 
-            // comboBox2
+            // comboBoxKcpCon
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBoxKcpCon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxKcpCon.FormattingEnabled = true;
+            this.comboBoxKcpCon.Items.AddRange(new object[] {
             "true",
             "false"});
-            this.comboBox2.Location = new System.Drawing.Point(113, 91);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 25);
-            this.comboBox2.TabIndex = 37;
+            this.comboBoxKcpCon.Location = new System.Drawing.Point(113, 91);
+            this.comboBoxKcpCon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBoxKcpCon.Name = "comboBoxKcpCon";
+            this.comboBoxKcpCon.Size = new System.Drawing.Size(100, 25);
+            this.comboBoxKcpCon.TabIndex = 37;
             // 
             // label10
             // 
@@ -233,61 +235,61 @@
             this.label10.TabIndex = 36;
             this.label10.Text = "congestion";
             // 
-            // comboBox1
+            // comboBoxKcpHt
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxKcpHt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxKcpHt.FormattingEnabled = true;
+            this.comboBoxKcpHt.Items.AddRange(new object[] {
             "none",
             "srtp",
             "utp"});
-            this.comboBox1.Location = new System.Drawing.Point(346, 91);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 25);
-            this.comboBox1.TabIndex = 35;
+            this.comboBoxKcpHt.Location = new System.Drawing.Point(346, 91);
+            this.comboBoxKcpHt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBoxKcpHt.Name = "comboBoxKcpHt";
+            this.comboBoxKcpHt.Size = new System.Drawing.Size(100, 25);
+            this.comboBoxKcpHt.TabIndex = 35;
             // 
-            // textBox6
+            // textBoxKcpWb
             // 
-            this.textBox6.Location = new System.Drawing.Point(346, 61);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 23);
-            this.textBox6.TabIndex = 34;
+            this.textBoxKcpWb.Location = new System.Drawing.Point(346, 61);
+            this.textBoxKcpWb.Name = "textBoxKcpWb";
+            this.textBoxKcpWb.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpWb.TabIndex = 34;
             // 
-            // textBox5
+            // textBoxKcpDc
             // 
-            this.textBox5.Location = new System.Drawing.Point(346, 32);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 23);
-            this.textBox5.TabIndex = 33;
+            this.textBoxKcpDc.Location = new System.Drawing.Point(346, 32);
+            this.textBoxKcpDc.Name = "textBoxKcpDc";
+            this.textBoxKcpDc.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpDc.TabIndex = 33;
             // 
-            // textBox4
+            // textBoxKcpTti
             // 
-            this.textBox4.Location = new System.Drawing.Point(346, 3);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 23);
-            this.textBox4.TabIndex = 32;
+            this.textBoxKcpTti.Location = new System.Drawing.Point(346, 3);
+            this.textBoxKcpTti.Name = "textBoxKcpTti";
+            this.textBoxKcpTti.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpTti.TabIndex = 32;
             // 
-            // textBox3
+            // textBoxKcpRb
             // 
-            this.textBox3.Location = new System.Drawing.Point(113, 61);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 31;
+            this.textBoxKcpRb.Location = new System.Drawing.Point(113, 61);
+            this.textBoxKcpRb.Name = "textBoxKcpRb";
+            this.textBoxKcpRb.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpRb.TabIndex = 31;
             // 
-            // textBox2
+            // textBoxKcpUc
             // 
-            this.textBox2.Location = new System.Drawing.Point(113, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 30;
+            this.textBoxKcpUc.Location = new System.Drawing.Point(113, 32);
+            this.textBoxKcpUc.Name = "textBoxKcpUc";
+            this.textBoxKcpUc.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpUc.TabIndex = 30;
             // 
-            // textBox1
+            // textBoxKcpMtu
             // 
-            this.textBox1.Location = new System.Drawing.Point(113, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 29;
+            this.textBoxKcpMtu.Location = new System.Drawing.Point(113, 3);
+            this.textBoxKcpMtu.Name = "textBoxKcpMtu";
+            this.textBoxKcpMtu.Size = new System.Drawing.Size(100, 23);
+            this.textBoxKcpMtu.TabIndex = 29;
             // 
             // label8
             // 
@@ -354,13 +356,15 @@
             // 
             // FormTransSetting
             // 
+            this.AcceptButton = this.buttonTSSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonTSCancel;
             this.ClientSize = new System.Drawing.Size(504, 226);
-            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonTSSave);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonTSHelp);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonTSCancel);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -369,6 +373,7 @@
             this.Name = "FormTransSetting";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Transport Settings";
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -385,27 +390,27 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonTSCancel;
+        private System.Windows.Forms.Button buttonTSSave;
         private System.Windows.Forms.Button buttonTSHelp;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.CheckBox checkBoxTcpCr;
+        private System.Windows.Forms.TextBox textBoxWsPath;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxWsCr;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxKcpCon;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboBoxKcpHt;
+        private System.Windows.Forms.TextBox textBoxKcpWb;
+        private System.Windows.Forms.TextBox textBoxKcpDc;
+        private System.Windows.Forms.TextBox textBoxKcpTti;
+        private System.Windows.Forms.TextBox textBoxKcpRb;
+        private System.Windows.Forms.TextBox textBoxKcpUc;
+        private System.Windows.Forms.TextBox textBoxKcpMtu;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;

@@ -30,7 +30,7 @@ namespace V2RayW
         private void buttonTS_Click(object sender, EventArgs e)
         {
             var tsWindow = new FormTransSetting();
-            tsWindow.ShowDialog();
+            tsWindow.ShowDialog(this);
         }
 
         private void ConfigForm_Load(object sender, EventArgs e)
@@ -49,6 +49,11 @@ namespace V2RayW
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
         {
 
         }
