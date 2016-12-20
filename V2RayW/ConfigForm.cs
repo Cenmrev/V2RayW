@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace V2RayW
 {
-    public partial class Form1 : Form
+    public partial class ConfigForm : Form
     {
-        public Form1()
+        public ConfigForm()
         {
             InitializeComponent();
         }
