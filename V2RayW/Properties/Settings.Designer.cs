@@ -8,22 +8,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace V2RayW.Properties
-{
-
-
+namespace V2RayW.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"kcpSettings\":{\"mtu\":1350,\"tti\":50,\"uplinkCapacity\":5,\"downlinkCapacity\":20,\"rea" +
+            "dBufferSize\":2,\"writeBufferSize\":2,\"congestion\":\"false\",\"header\":\"none\"},\"tcpSet" +
+            "tings\":{\"connectionReuse\":\"false\"},\"wsSettings\":{\"connectionReuse\":\"false\",\"path" +
+            "\":\"\"}}")]
+        public string transportSettings {
+            get {
+                return ((string)(this["transportSettings"]));
+            }
+            set {
+                this["transportSettings"] = value;
             }
         }
     }

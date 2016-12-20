@@ -1,7 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="V2RayW.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="transportSettings" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":"none"},"tcpSettings":{"connectionReuse":"false"},"wsSettings":{"connectionReuse":"false","path":""}}</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

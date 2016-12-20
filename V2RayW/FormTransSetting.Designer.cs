@@ -90,6 +90,7 @@
             this.buttonTSSave.TabIndex = 7;
             this.buttonTSSave.Text = "Save";
             this.buttonTSSave.UseVisualStyleBackColor = true;
+            this.buttonTSSave.Click += new System.EventHandler(this.buttonTSSave_Click);
             // 
             // buttonTSHelp
             // 
@@ -218,8 +219,8 @@
             this.comboBoxKcpCon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxKcpCon.FormattingEnabled = true;
             this.comboBoxKcpCon.Items.AddRange(new object[] {
-            "true",
-            "false"});
+            "false",
+            "true"});
             this.comboBoxKcpCon.Location = new System.Drawing.Point(113, 91);
             this.comboBoxKcpCon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxKcpCon.Name = "comboBoxKcpCon";
@@ -375,6 +376,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Transport Settings";
+            this.Load += new System.EventHandler(this.FormTransSetting_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
