@@ -30,13 +30,15 @@ namespace V2RayW
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+            /*
             if (this.configForm == null || this.configForm.IsDisposed)
             {
-                Application.Exit();
+                
             } else
             {
                 MessageBox.Show("Saving configure first!");
-            }
+            }*/
 
         }
 

@@ -39,11 +39,11 @@ namespace V2RayW
                 p.userId = dp.userId;
                 Program.profiles.Add(p);
             }
-            string a = "dfa";
-            string b = a;
-            a = "adfdadf";
-            Debug.WriteLine(String.Format("a={0}, b= {0}", a, b));
             Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
+            if (! (Program.selectedServerIndex < Program.profiles.Count) )
+            {
+                Program.selectedServerIndex = Program.profiles.Count - 1;
+            }
             //Debug.WriteLine(Program.profileToStr(profiles[0]));
             //Debug.WriteLine(Program.selectedServerIndex);
             Application.Run();
@@ -105,13 +105,13 @@ namespace V2RayW
     
     public class Profile
     {
-        internal string address = "";
+        internal string address = "v2ray.cool";
         internal bool allowPassive = false;
         internal int alterId = 64;
         internal int network = 0;
         internal int port = 10086;
-        internal string remark = "new server";
-        internal string userId = "";
+        internal string remark = "";
+        internal string userId = "23ad6b10-8d1a-40f7-8ad0-e3e35cd38297";
         public Profile DeepCopy()
         {
             Profile p = new Profile();

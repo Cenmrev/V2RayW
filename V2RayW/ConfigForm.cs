@@ -33,7 +33,7 @@ namespace V2RayW
         {
             Properties.Settings.Default.localPort = Program.strToInt(textBoxLocalPort.Text, 8080);
             Properties.Settings.Default.udpSupport = checkBoxUDP.Checked;
-            Properties.Settings.Default.dns = textBoxDNS.Text;
+            Properties.Settings.Default.dns = textBoxDNS.Text != "" ? textBoxDNS.Text : "localhost";
             Properties.Settings.Default.selectedServerIndex = listBoxServers.SelectedIndex;
             Properties.Settings.Default.Save();
             Program.profiles.Clear();
@@ -156,6 +156,7 @@ namespace V2RayW
             if(selectedServerIndex >= 0)
             {
                 profiles[selectedServerIndex].address = textBoxAddress.Text;
+                loadProfiles();
             }
         }
 
@@ -188,6 +189,7 @@ namespace V2RayW
             if (selectedServerIndex >= 0)
             {
                 profiles[selectedServerIndex].remark = textBoxRemark.Text;
+                loadProfiles();
             }
         }
 
