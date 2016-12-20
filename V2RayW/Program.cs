@@ -19,5 +19,18 @@ namespace V2RayW
             var config = new MainForm();
             Application.Run();
         }
+
+        internal static int strToInt(string str, int defaultValue)
+        {
+            int result = 0;
+            if (Int32.TryParse(str, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
     }
 }

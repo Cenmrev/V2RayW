@@ -37,5 +37,78 @@ namespace V2RayW.Properties {
                 this["transportSettings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string dns {
+            get {
+                return ((string)(this["dns"]));
+            }
+            set {
+                this["dns"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8080")]
+        public int localPort {
+            get {
+                return ((int)(this["localPort"]));
+            }
+            set {
+                this["localPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"address\":\"v2ray.cool\",\"allowPassive\":0,\"alterId\":64,\"network\":0,\"port\":10086,\"r" +
+            "emark\":\"test server\",\"userId\":\"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297\"}")]
+        public string profilesStr {
+            get {
+                return ((string)(this["profilesStr"]));
+            }
+            set {
+                this["profilesStr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool proxyIsOn {
+            get {
+                return ((bool)(this["proxyIsOn"]));
+            }
+            set {
+                this["proxyIsOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int selectedServerIndex {
+            get {
+                return ((int)(this["selectedServerIndex"]));
+            }
+            set {
+                this["selectedServerIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool udpSupport {
+            get {
+                return ((bool)(this["udpSupport"]));
+            }
+            set {
+                this["udpSupport"] = value;
+            }
+        }
     }
 }

@@ -36,27 +36,27 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxLocalPort = new System.Windows.Forms.TextBox();
+            this.textBoxDNS = new System.Windows.Forms.TextBox();
             this.buttonTS = new System.Windows.Forms.Button();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listBoxServers = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.comboBoxNetwork = new System.Windows.Forms.ComboBox();
+            this.textBoxRemark = new System.Windows.Forms.TextBox();
+            this.textBoxAlterID = new System.Windows.Forms.TextBox();
+            this.textBoxUserId = new System.Windows.Forms.TextBox();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
+            this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxAllowP = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBoxServer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,15 +103,15 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // textBox1
+            // textBoxLocalPort
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            resources.ApplyResources(this.textBoxLocalPort, "textBoxLocalPort");
+            this.textBoxLocalPort.Name = "textBoxLocalPort";
             // 
-            // textBox2
+            // textBoxDNS
             // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
+            resources.ApplyResources(this.textBoxDNS, "textBoxDNS");
+            this.textBoxDNS.Name = "textBoxDNS";
             // 
             // buttonTS
             // 
@@ -124,23 +124,42 @@
             // 
             this.groupBoxServer.Controls.Add(this.button1);
             this.groupBoxServer.Controls.Add(this.button2);
-            this.groupBoxServer.Controls.Add(this.listBox1);
+            this.groupBoxServer.Controls.Add(this.listBoxServers);
             this.groupBoxServer.Controls.Add(this.panel1);
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
             this.groupBoxServer.Enter += new System.EventHandler(this.groupBoxServer_Enter);
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // listBoxServers
+            // 
+            this.listBoxServers.FormattingEnabled = true;
+            resources.ApplyResources(this.listBoxServers, "listBoxServers");
+            this.listBoxServers.Name = "listBoxServers";
+            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.textBox7);
-            this.panel1.Controls.Add(this.textBox6);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.comboBoxNetwork);
+            this.panel1.Controls.Add(this.textBoxRemark);
+            this.panel1.Controls.Add(this.textBoxAlterID);
+            this.panel1.Controls.Add(this.textBoxUserId);
+            this.panel1.Controls.Add(this.textBoxPort);
+            this.panel1.Controls.Add(this.textBoxAddress);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.checkBoxAllowP);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
@@ -150,41 +169,41 @@
             this.panel1.Name = "panel1";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // comboBox1
+            // comboBoxNetwork
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.comboBoxNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNetwork.FormattingEnabled = true;
+            this.comboBoxNetwork.Items.AddRange(new object[] {
+            resources.GetString("comboBoxNetwork.Items"),
+            resources.GetString("comboBoxNetwork.Items1"),
+            resources.GetString("comboBoxNetwork.Items2")});
+            resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
+            this.comboBoxNetwork.Name = "comboBoxNetwork";
             // 
-            // textBox7
+            // textBoxRemark
             // 
-            resources.ApplyResources(this.textBox7, "textBox7");
-            this.textBox7.Name = "textBox7";
+            resources.ApplyResources(this.textBoxRemark, "textBoxRemark");
+            this.textBoxRemark.Name = "textBoxRemark";
             // 
-            // textBox6
+            // textBoxAlterID
             // 
-            resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.Name = "textBox6";
+            resources.ApplyResources(this.textBoxAlterID, "textBoxAlterID");
+            this.textBoxAlterID.Name = "textBoxAlterID";
             // 
-            // textBox5
+            // textBoxUserId
             // 
-            resources.ApplyResources(this.textBox5, "textBox5");
-            this.textBox5.Name = "textBox5";
+            resources.ApplyResources(this.textBoxUserId, "textBoxUserId");
+            this.textBoxUserId.Name = "textBoxUserId";
             // 
-            // textBox4
+            // textBoxPort
             // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.Name = "textBox4";
+            resources.ApplyResources(this.textBoxPort, "textBoxPort");
+            this.textBoxPort.Name = "textBoxPort";
             // 
-            // textBox3
+            // textBoxAddress
             // 
-            resources.ApplyResources(this.textBox3, "textBox3");
-            this.textBox3.Name = "textBox3";
+            resources.ApplyResources(this.textBoxAddress, "textBoxAddress");
+            this.textBoxAddress.Name = "textBoxAddress";
             // 
             // label9
             // 
@@ -192,11 +211,11 @@
             this.label9.Name = "label9";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // checkBox1
+            // checkBoxAllowP
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.checkBoxAllowP, "checkBoxAllowP");
+            this.checkBoxAllowP.Name = "checkBoxAllowP";
+            this.checkBoxAllowP.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -223,25 +242,6 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.listBox1, "listBox1");
-            this.listBox1.Name = "listBox1";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonSave;
@@ -250,8 +250,8 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.groupBoxServer);
             this.Controls.Add(this.buttonTS);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDNS);
+            this.Controls.Add(this.textBoxLocalPort);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.label3);
@@ -281,25 +281,25 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxLocalPort;
+        private System.Windows.Forms.TextBox textBoxDNS;
         private System.Windows.Forms.Button buttonTS;
         private System.Windows.Forms.GroupBox groupBoxServer;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox comboBoxNetwork;
+        private System.Windows.Forms.TextBox textBoxRemark;
+        private System.Windows.Forms.TextBox textBoxAlterID;
+        private System.Windows.Forms.TextBox textBoxUserId;
+        private System.Windows.Forms.TextBox textBoxPort;
+        private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxAllowP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxServers;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
     }

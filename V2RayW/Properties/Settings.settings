@@ -5,5 +5,23 @@
     <Setting Name="transportSettings" Type="System.String" Scope="User">
       <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":"none"},"tcpSettings":{"connectionReuse":"true"},"wsSettings":{"connectionReuse":"true","path":""}}</Value>
     </Setting>
+    <Setting Name="dns" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="localPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+    <Setting Name="profilesStr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}</Value>
+    </Setting>
+    <Setting Name="proxyIsOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="selectedServerIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="udpSupport" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

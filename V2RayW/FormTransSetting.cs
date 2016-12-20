@@ -38,12 +38,12 @@ namespace V2RayW
             var transportSettings = new {
                 kcpSettings = new 
                 {
-                    mtu = strToInt(textBoxKcpMtu.Text, 1350),
-                    tti = strToInt(textBoxKcpTti.Text, 50),
-                    uplinkCapacity = strToInt(textBoxKcpUc.Text, 5),
-                    downlinkCapacity = strToInt(textBoxKcpDc.Text, 20),
-                    readBufferSize = strToInt(textBoxKcpRb.Text, 2),
-                    writeBufferSize = strToInt(textBoxKcpWb.Text, 2),
+                    mtu = Program.strToInt(textBoxKcpMtu.Text, 1350),
+                    tti = Program.strToInt(textBoxKcpTti.Text, 50),
+                    uplinkCapacity = Program.strToInt(textBoxKcpUc.Text, 5),
+                    downlinkCapacity = Program.strToInt(textBoxKcpDc.Text, 20),
+                    readBufferSize = Program.strToInt(textBoxKcpRb.Text, 2),
+                    writeBufferSize = Program.strToInt(textBoxKcpWb.Text, 2),
                     congestion = comboBoxKcpCon.Text,
                     header = comboBoxKcpHt.Text
                 },
@@ -62,22 +62,12 @@ namespace V2RayW
             this.Close();
         }
 
-        private int strToInt(string str, int defaultValue)
-        {
-            int result = 0;
-            if (Int32.TryParse(str, out result))
-            {
-                return result;
-            } else
-            {
-                return defaultValue;
-            }
-        }
+
 
         private void FormTransSetting_Load(object sender, EventArgs e)
         {
             Properties.Settings.Default.Upgrade();
-            string transportSettingsStr = (string)Properties.Settings.Default["transportSettings"];
+            string transportSettingsStr = Properties.Settings.Default.transportSettings;
             dynamic transportSettings = JObject.Parse(transportSettingsStr);
             textBoxKcpMtu.Text = transportSettings.kcpSettings.mtu;
             textBoxKcpTti.Text = transportSettings.kcpSettings.tti;
