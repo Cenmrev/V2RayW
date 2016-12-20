@@ -32,5 +32,15 @@ namespace V2RayW
             var tsWindow = new FormTransSetting();
             tsWindow.ShowDialog();
         }
+
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxServer_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
