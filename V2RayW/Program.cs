@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace V2RayW
 {
@@ -15,11 +17,14 @@ namespace V2RayW
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new MainForm();
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
+            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
             dynamic[] dProfiles = Properties.Settings.Default.profilesStr.Split('\t').Select(pstr => JObject.Parse(pstr)).ToArray();
             foreach (dynamic dp in dProfiles)
             {
@@ -33,11 +38,39 @@ namespace V2RayW
                 Program.profiles.Add(p);
             }
             Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
+            //Debug.WriteLine(Program.profileToStr(profiles[0]));
+            //Debug.WriteLine(Program.selectedServerIndex);
             Application.Run();
         }
 
+        static void OnProcessExit(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
+            var profileArray = Program.profiles.Select(p => profileToStr(p));
+            Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
+            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
+            Properties.Settings.Default.Save();
+        }
+
+
         public static List<Profile> profiles = new List<Profile>();
         public static int selectedServerIndex = 0;
+
+        //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
+        internal static string profileToStr(Profile p)
+        {
+            var pd = new
+            {
+                address = p.address,
+                port = p.port,
+                userId = p.userId,
+                alterId = p.alterId,
+                remark = p.remark,
+                allowPassive = p.allowPassive,
+                network = p.network
+            };
+            return JsonConvert.SerializeObject(pd);
+        }
 
         internal static int strToInt(string str, int defaultValue)
         {

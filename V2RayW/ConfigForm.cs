@@ -91,6 +91,7 @@ namespace V2RayW
             {
                 listBoxServers.Items.Add(p.remark == "" ? p.address : p.remark);
             }
+            //Debug.WriteLine(String.Format("lis cout = {0}", listBoxServers.Items.Count));
             if (Program.selectedServerIndex >= 0)
             {
                 listBoxServers.SelectedIndex = Program.selectedServerIndex;
