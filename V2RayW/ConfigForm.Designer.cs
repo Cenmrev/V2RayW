@@ -86,6 +86,7 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // buttonSave
             // 
@@ -147,6 +148,7 @@
             this.panel1.Controls.Add(this.label4);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // comboBox1
             // 
@@ -256,6 +258,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBoxUDP);
             this.Controls.Add(this.labelLocalPort);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ConfigForm";
             this.Load += new System.EventHandler(this.ConfigForm_Load);
