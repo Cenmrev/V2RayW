@@ -19,7 +19,12 @@ namespace V2RayW
 
         private void FormCoreOutput_Load(object sender, EventArgs e)
         {
+            //textBoxOutput.Text = Program.output.ToString();
+        }
 
+        private void timerlog_Tick(object sender, EventArgs e)
+        {
+            textBoxOutput.Text = Program.output.ToString();
         }
     }
 }

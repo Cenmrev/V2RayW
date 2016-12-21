@@ -15,6 +15,7 @@ namespace V2RayW
     {
 
         ConfigForm configForm;
+        FormCoreOutput outputForm;
 
         public MainForm()
         {
@@ -126,14 +127,21 @@ namespace V2RayW
             Program.updateSystemProxy();
         }
 
-        private void viewLogToolStripMenuItem_Click(object sender, EventArgs e)
+        internal void viewLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.outputForm == null || this.outputForm.IsDisposed)
+            {
+                outputForm = new FormCoreOutput();
+                outputForm.Show();
+            }
+            outputForm.Focus();
+            /*
             if(Program.proxyIsOn)
             {
                 startStopToolStripMenuItem_Click(sender,e);
             }
             System.Threading.Thread.Sleep(500);
-            MessageBox.Show(Program.v2rayoutput);
+            MessageBox.Show(Program.v2rayoutput);*/
         }
     }
 }

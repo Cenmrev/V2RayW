@@ -10,6 +10,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.ComponentModel;
 using System.Threading;
+using System.Text;
 
 namespace V2RayW
 {
@@ -23,10 +24,10 @@ namespace V2RayW
         public static MainForm mainForm;
         const string v2rayVersion = "v2.11";
         static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
-        public static string v2rayoutput;
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
-
+        public static StringBuilder output = new StringBuilder();
+        private static int lineCount = 0;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -260,7 +261,20 @@ namespace V2RayW
             v2rayProcess.StartInfo.UseShellExecute = false;
             v2rayProcess.StartInfo.RedirectStandardOutput = true;
             v2rayProcess.StartInfo.CreateNoWindow = true;
+            //https://msdn.microsoft.com/en-us/library/system.diagnostics.process.outputdatareceived.aspx
+            output.Clear();
+            lineCount = 0;
+            v2rayProcess.OutputDataReceived += new DataReceivedEventHandler((psender, pe) =>
+            {
+                // Prepend line numbers to each line of the output.
+                if (!String.IsNullOrEmpty(pe.Data))
+                {
+                    lineCount++;
+                    output.Append("[" + lineCount + "]: " + pe.Data + "\r\n");
+                }
+            });
             v2rayProcess.Start();
+            v2rayProcess.BeginOutputReadLine();
             while (!bw.CancellationPending && !v2rayProcess.HasExited)
             {
                 v2rayProcess.WaitForExit(500);
@@ -272,7 +286,6 @@ namespace V2RayW
             }
             catch { }
             Debug.WriteLine("killed");
-            v2rayoutput = v2rayProcess.StandardOutput.ReadToEnd();
             if (bw.CancellationPending)
             {
                 e.Cancel = true;
@@ -290,7 +303,7 @@ namespace V2RayW
                 DialogResult res = MessageBox.Show("v2ray core exited unexpectedly! \n View log information?","Error", MessageBoxButtons.OKCancel,MessageBoxIcon.Stop);
                 if (res == DialogResult.OK)
                 {
-                    MessageBox.Show(v2rayoutput);
+                    mainForm.viewLogToolStripMenuItem_Click(sender, e);
                 }
                 proxyIsOn = false;
                 mainForm.updateMenu();
