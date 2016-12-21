@@ -74,12 +74,23 @@ namespace V2RayW
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
+            Properties.Settings.Default.proxyMode = Program.proxyMode;
+            Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
+            var profileArray = Program.profiles.Select(p => Program.profileToStr(p));
+            Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
+            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
+            Properties.Settings.Default.Save();
+            Program.proxyIsOn = false;
+            Program.finalAction = true;
+            Program.updateSystemProxy();
+            Program._resetEvent.WaitOne();
             Application.Exit();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://v2ray.com");
+            Process.Start("http://v2ray.com");
         }
 
         private void notifyIconMain_MouseDoubleClick(object sender, MouseEventArgs e)

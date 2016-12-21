@@ -24,8 +24,8 @@ namespace V2RayW
         const string v2rayVersion = "v2.11";
         static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
         public static string v2rayoutput;
-        private static AutoResetEvent _resetEvent = new AutoResetEvent(false);
-        static bool finalAction = false;
+        public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
+        public static bool finalAction = false;
 
         /// <summary>
         /// The main entry point for the application.
@@ -52,7 +52,7 @@ namespace V2RayW
             }
 
             // save settings when exiting the program
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
+            // AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
             
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
@@ -110,6 +110,7 @@ namespace V2RayW
             proxyIsOn = false;
             Debug.WriteLine("going to stop v");
             finalAction = true;
+            MessageBox.Show("dsaf");
             updateSystemProxy();
             _resetEvent.WaitOne();
         }
@@ -150,7 +151,8 @@ namespace V2RayW
 
         public static async Task stopV2Ray()
         { // make sure v2ray is stopped
-            v2rayCoreWorker.CancelAsync();
+            if (v2rayCoreWorker.IsBusy)
+                v2rayCoreWorker.CancelAsync();
             while (v2rayCoreWorker.IsBusy)
             {
                 await Task.Delay(100);
@@ -159,6 +161,9 @@ namespace V2RayW
 
         public static async void updateSystemProxy()
         {
+            // for final action, change system proxy first and then stop v2ray;
+            if (finalAction) runSysproxy();
+
             if (proxyIsOn)
             {
                 await stopV2Ray();
@@ -171,12 +176,49 @@ namespace V2RayW
                     proxyIsOn = false;
                     mainForm.updateMenu();
                 }
-                //change system proxy
-            } else if (v2rayCoreWorker.IsBusy)
+            } else
             {
                 await stopV2Ray();
                 Debug.WriteLine("v stopped");
-                //change system proxy
+            }
+            //change system proxy
+            if (!finalAction && runSysproxy() != 0)
+            {
+                MessageBox.Show("Fained to modify system proxy settings!");
+            }
+        }
+
+        public static int runSysproxy()
+        {
+            var sysproxyProcess = new Process();
+            sysproxyProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + (Environment.Is64BitOperatingSystem ? "sysproxy64.exe" : "sysproxy.exe");
+            if (proxyIsOn)
+            {
+                if (proxyMode != 1) // not pac mode
+                {
+                    sysproxyProcess.StartInfo.Arguments = $"global 127.0.0.1:{Properties.Settings.Default.localPort} <local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
+                } else // pacmode 
+                {
+                    ;
+                }
+                
+            } else
+            {
+                sysproxyProcess.StartInfo.Arguments = "off";
+            }
+            sysproxyProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            sysproxyProcess.StartInfo.UseShellExecute = false;
+            sysproxyProcess.StartInfo.RedirectStandardOutput = true;
+            sysproxyProcess.StartInfo.CreateNoWindow = true;
+            try
+            {
+                sysproxyProcess.Start();
+                sysproxyProcess.WaitForExit();
+                return sysproxyProcess.ExitCode;
+            } catch (Exception e)
+            {
+                MessageBox.Show($"error!\n{ e.ToString() }");
+                return 1;
             }
         }
 
@@ -212,7 +254,7 @@ namespace V2RayW
             BackgroundWorker bw = sender as BackgroundWorker;
 
             var v2rayProcess = new Process();
-            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray";
+            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray.exe";
             v2rayProcess.StartInfo.Arguments = "-config " + AppDomain.CurrentDomain.BaseDirectory + "configw.json";
             v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             v2rayProcess.StartInfo.UseShellExecute = false;
