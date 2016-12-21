@@ -22,7 +22,7 @@ namespace V2RayW
         public static bool proxyIsOn = false;
         public static int proxyMode = 0;
         public static MainForm mainForm;
-        const string v2rayVersion = "v2.11";
+        const string v2rayVersion = "v2.11.2";
         static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
@@ -99,6 +99,7 @@ namespace V2RayW
             throw new NotImplementedException();
         }
 
+        /*
         static void OnProcessExit(object sender, EventArgs e)
         {
             Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
@@ -114,7 +115,7 @@ namespace V2RayW
             MessageBox.Show("dsaf");
             updateSystemProxy();
             _resetEvent.WaitOne();
-        }
+        }*/
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
         internal static string profileToStr(Profile p)
