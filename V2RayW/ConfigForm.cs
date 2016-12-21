@@ -188,7 +188,7 @@ namespace V2RayW
         {
             if (selectedServerIndex >= 0)
             {
-                profiles[selectedServerIndex].alterId = Program.strToInt(textBoxAlterID.Text, 20);
+                profiles[selectedServerIndex].alterId = Program.strToInt(textBoxAlterID.Text, 0);
             }
         }
 

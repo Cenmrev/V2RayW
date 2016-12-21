@@ -8,17 +8,36 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ComponentModel;
+using System.Threading;
 
 namespace V2RayW
 {
     static class Program
     {
+
+        public static List<Profile> profiles = new List<Profile>();
+        public static int selectedServerIndex = 0;
+        public static bool proxyIsOn = false;
+        public static int proxyMode = 0;
+        public static MainForm mainForm;
+        const string v2rayVersion = "v2.11";
+        static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
+        static string v2rayoutput;
+        private static AutoResetEvent _resetEvent = new AutoResetEvent(false);
+        static bool finalAction = false;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            //backgourdworker
+            v2rayCoreWorker.WorkerSupportsCancellation = true;
+            v2rayCoreWorker.DoWork += new DoWorkEventHandler(Program.v2rayCoreWorker_DoWork);
+            v2rayCoreWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Program.RunWorkerCompleted);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //check v2ray core binary
@@ -34,7 +53,6 @@ namespace V2RayW
 
             // save settings when exiting the program
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
-
             
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
@@ -56,8 +74,8 @@ namespace V2RayW
                 {
                     continue;
                 }
-
             }
+
             Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
             Program.proxyIsOn = profiles.Count > 0 ? Properties.Settings.Default.proxyIsOn : false;
             Program.proxyMode = Properties.Settings.Default.proxyMode % 3;
@@ -65,12 +83,19 @@ namespace V2RayW
             {
                 Program.selectedServerIndex = Program.profiles.Count - 1;
             }
+
             mainForm = new MainForm();
             mainForm.updateMenu();
             Program.updateSystemProxy();
-            //Debug.WriteLine(Program.profileToStr(profiles[0]));
-            //Debug.WriteLine(Program.selectedServerIndex);
+
+            generateConfigJson();
+
             Application.Run();
+        }
+
+        private static void V2rayCoreWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         static void OnProcessExit(object sender, EventArgs e)
@@ -82,15 +107,12 @@ namespace V2RayW
             Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
             //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
             Properties.Settings.Default.Save();
+            proxyIsOn = false;
+            Debug.WriteLine("going to stop v");
+            finalAction = true;
+            updateSystemProxy();
+            _resetEvent.WaitOne();
         }
-
-
-        public static List<Profile> profiles = new List<Profile>();
-        public static int selectedServerIndex = 0;
-        public static bool proxyIsOn = false;
-        public static int proxyMode = 0;
-        public static MainForm mainForm;
-        const string v2rayVersion = "v2.11";
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
         internal static string profileToStr(Profile p)
@@ -123,17 +145,109 @@ namespace V2RayW
 
         public static void startV2Ray()
         {
-
+            v2rayCoreWorker.RunWorkerAsync();
         }
 
-        public static void stopV2Ray()
-        {
-
+        public static async Task stopV2Ray()
+        { // make sure v2ray is stopped
+            v2rayCoreWorker.CancelAsync();
+            while (v2rayCoreWorker.IsBusy)
+            {
+                await Task.Delay(100);
+            }
         }
 
-        public static void updateSystemProxy()
+        public static async void updateSystemProxy()
         {
+            if (proxyIsOn)
+            {
+                await stopV2Ray();
+                //generate config.json
 
+                v2rayCoreWorker.RunWorkerAsync();
+                //change system proxy
+            } else if (v2rayCoreWorker.IsBusy)
+            {
+                await stopV2Ray();
+                Debug.WriteLine("v stopped");
+                //change system proxy
+            }
+        }
+
+        public static bool generateConfigJson()
+        {
+            string templateStr = System.Text.Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
+            dynamic json = JObject.Parse(templateStr);
+            json.transport = JObject.Parse(Properties.Settings.Default.transportSettings);
+            json.inbound.port = Properties.Settings.Default.localPort;
+            json.inbound.settings.udp = Properties.Settings.Default.udpSupport;
+            json.inbound.allowPassive = profiles[selectedServerIndex].allowPassive;
+            json.outbound.settings.vnext[0].address = profiles[selectedServerIndex].address;
+            json.outbound.settings.vnext[0].port = profiles[selectedServerIndex].port;
+            json.outbound.settings.vnext[0].users[0].id = profiles[selectedServerIndex].userId;
+            json.outbound.settings.vnext[0].users[0].alterId = profiles[selectedServerIndex].alterId;
+            json.outbound.streamSettings.network = (new string[]{ "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network];
+            var dnsArray = Properties.Settings.Default.dns.Split(',');
+            json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
+            try
+            {
+                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "configw2.json", JsonConvert.SerializeObject(json));
+                return true;
+            } catch
+            {
+                MessageBox.Show("cannot create config files!");
+                return false;
+            }
+        }
+
+        //back_ground functions 
+        private static void v2rayCoreWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker bw = sender as BackgroundWorker;
+
+            var v2rayProcess = new Process();
+            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray";
+            v2rayProcess.StartInfo.Arguments = "-config " + AppDomain.CurrentDomain.BaseDirectory + "configw.json";
+            v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            v2rayProcess.StartInfo.UseShellExecute = false;
+            v2rayProcess.StartInfo.RedirectStandardOutput = true;
+            v2rayProcess.StartInfo.CreateNoWindow = true;
+            v2rayProcess.Start();
+            while (!bw.CancellationPending && !v2rayProcess.HasExited)
+            {
+                v2rayProcess.WaitForExit(500);
+            }
+            Debug.WriteLine("going to kill");
+            try
+            {
+                v2rayProcess.Kill();
+            }
+            catch { }
+            Debug.WriteLine("killed");
+            v2rayoutput = v2rayProcess.StandardOutput.ReadToEnd();
+            if (bw.CancellationPending)
+            {
+                e.Cancel = true;
+            }
+            if(finalAction)
+            {
+                _resetEvent.Set();
+            }
+        }
+
+        private static void RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                DialogResult res = MessageBox.Show("v2ray core exited unexpectedly! \n View log information?","Error", MessageBoxButtons.OKCancel,MessageBoxIcon.Stop);
+                if (res == DialogResult.OK)
+                {
+                    MessageBox.Show(v2rayoutput);
+                }
+                proxyIsOn = false;
+                mainForm.updateMenu();
+                updateSystemProxy();
+            }
         }
 
         private static bool checkV2RayCore()

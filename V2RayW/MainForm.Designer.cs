@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.backgroundWorkerVCore = new System.ComponentModel.BackgroundWorker();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +73,7 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 264);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 242);
             // 
             // statusToolStripMenuItem
             // 
@@ -174,8 +173,6 @@
         }
 
         #endregion
-
-        private System.ComponentModel.BackgroundWorker backgroundWorkerVCore;
         private System.Windows.Forms.NotifyIcon notifyIconMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripMain;
         private System.Windows.Forms.ToolStripMenuItem configureToolStripMenuItem;

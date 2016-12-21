@@ -44,7 +44,7 @@ namespace V2RayW
                     downlinkCapacity = Program.strToInt(textBoxKcpDc.Text, 20),
                     readBufferSize = Program.strToInt(textBoxKcpRb.Text, 2),
                     writeBufferSize = Program.strToInt(textBoxKcpWb.Text, 2),
-                    congestion = comboBoxKcpCon.Text,
+                    congestion = comboBoxKcpCon.SelectedIndex == 1,
                     header = new
                     {
                         type = comboBoxKcpHt.Text
@@ -52,11 +52,11 @@ namespace V2RayW
                 },
                 tcpSettings = new 
                 {
-                    connectionReuse = checkBoxTcpCr.Checked ? "true" : "false",
+                    connectionReuse = checkBoxTcpCr.Checked,
                 },
                 wsSettings = new
                 {
-                    connectionReuse = checkBoxWsCr.Checked ? "true" : "false",
+                    connectionReuse = checkBoxWsCr.Checked,
                     path = textBoxWsPath.Text,
                 } 
             };
