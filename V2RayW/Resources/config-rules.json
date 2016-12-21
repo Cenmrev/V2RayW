@@ -15,12 +15,10 @@
   ],
   "inbound" : {
     "listen" : "127.0.0.1",
-    "port" : 1081,
-    "protocol" : "socks",
+    "port" : 8080,
+    "protocol" : "http",
     "settings" : {
-      "auth" : "noauth",
-      "udp" : false,
-      "ip" : "127.0.0.1"
+		"timeout": 0
     },
     "allowPassive" : false
   },

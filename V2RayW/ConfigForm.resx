@@ -171,6 +171,9 @@
   <data name="checkBoxUDP.Text" xml:space="preserve">
     <value>Support UDP</value>
   </data>
+  <data name="checkBoxUDP.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;checkBoxUDP.Name" xml:space="preserve">
     <value>checkBoxUDP</value>
   </data>

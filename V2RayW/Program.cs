@@ -23,7 +23,7 @@ namespace V2RayW
         public static MainForm mainForm;
         const string v2rayVersion = "v2.11";
         static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
-        static string v2rayoutput;
+        public static string v2rayoutput;
         private static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         static bool finalAction = false;
 
@@ -163,8 +163,14 @@ namespace V2RayW
             {
                 await stopV2Ray();
                 //generate config.json
-
-                v2rayCoreWorker.RunWorkerAsync();
+                if (generateConfigJson())
+                {
+                    v2rayCoreWorker.RunWorkerAsync();
+                } else
+                {
+                    proxyIsOn = false;
+                    mainForm.updateMenu();
+                }
                 //change system proxy
             } else if (v2rayCoreWorker.IsBusy)
             {
@@ -191,7 +197,7 @@ namespace V2RayW
             json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
             try
             {
-                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "configw2.json", JsonConvert.SerializeObject(json));
+                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "configw.json", JsonConvert.SerializeObject(json));
                 return true;
             } catch
             {

@@ -114,5 +114,15 @@ namespace V2RayW
             this.updateMenu();
             Program.updateSystemProxy();
         }
+
+        private void viewLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(Program.proxyIsOn)
+            {
+                startStopToolStripMenuItem_Click(sender,e);
+            }
+            System.Threading.Thread.Sleep(500);
+            MessageBox.Show(Program.v2rayoutput);
+        }
     }
 }

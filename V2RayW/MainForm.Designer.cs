@@ -45,6 +45,7 @@
             this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusToolStripMenuItem,
             this.startStopToolStripMenuItem,
+            this.viewLogToolStripMenuItem,
             this.toolStripSeparator3,
             this.v2RayRulesToolStripMenuItem,
             this.pacModeToolStripMenuItem,
@@ -73,7 +75,7 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 242);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
             // 
             // statusToolStripMenuItem
             // 
@@ -160,6 +162,13 @@
             this.editPacFileToolStripMenuItem.Text = "Edit Pac File";
             this.editPacFileToolStripMenuItem.Visible = false;
             // 
+            // viewLogToolStripMenuItem
+            // 
+            this.viewLogToolStripMenuItem.Name = "viewLogToolStripMenuItem";
+            this.viewLogToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.viewLogToolStripMenuItem.Text = "View log";
+            this.viewLogToolStripMenuItem.Click += new System.EventHandler(this.viewLogToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -188,5 +197,6 @@
         private System.Windows.Forms.ToolStripMenuItem pacModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serversToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editPacFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewLogToolStripMenuItem;
     }
 }

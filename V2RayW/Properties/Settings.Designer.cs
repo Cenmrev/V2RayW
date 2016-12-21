@@ -25,10 +25,10 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"kcpSettings\":{\"mtu\":1350,\"tti\":50,\"uplinkCapacity\":5,\"downlinkCapacity\":20,\"rea" +
-            "dBufferSize\":2,\"writeBufferSize\":2,\"congestion\":\"false\",\"header\":{\"type\":\"none\"}" +
-            "},\"tcpSettings\":{\"connectionReuse\":\"true\"},\"wsSettings\":{\"connectionReuse\":\"true" +
-            "\",\"path\":\"\"}}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"tcpSettings\":{\"connectionReuse\":true},\"kcpSettings\":{\"mtu\":1350,\"tti\":20,\"uplin" +
+            "kCapacity\":5,\"downlinkCapacity\":20,\"congestion\":false,\"readBufferSize\":1,\"writeB" +
+            "ufferSize\":1,\"header\":{\"type\":\"none\"}},\"wsSettings\":{\"connectionReuse\":true,\"pat" +
+            "h\":\"\"}}")]
         public string transportSettings {
             get {
                 return ((string)(this["transportSettings"]));

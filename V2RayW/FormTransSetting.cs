@@ -78,11 +78,11 @@ namespace V2RayW
             textBoxKcpDc.Text = transportSettings.kcpSettings.downlinkCapacity;
             textBoxKcpRb.Text = transportSettings.kcpSettings.readBufferSize;
             textBoxKcpWb.Text = transportSettings.kcpSettings.writeBufferSize;
-            comboBoxKcpCon.SelectedIndex = transportSettings.kcpSettings.congestion == "false" ? 0 : 1;
+            comboBoxKcpCon.SelectedIndex = transportSettings.kcpSettings.congestion == false ? 0 : 1;
             var headertype = transportSettings.kcpSettings.header.type;
             comboBoxKcpHt.SelectedIndex = headertype == "srtp" ? 1 : (headertype == "utp" ? 2 : 0);
-            checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse == "true";
-            checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse == "true";
+            checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse;
+            checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse;
             textBoxWsPath.Text = transportSettings.wsSettings.path;
         }
 
