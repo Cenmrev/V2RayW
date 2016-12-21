@@ -69,8 +69,9 @@ namespace V2RayW
             if (this.configForm == null || this.configForm.IsDisposed)
             {
                 configForm = new ConfigForm();
+                configForm.Show();
             }
-            configForm.Show();
+            configForm.Focus();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
