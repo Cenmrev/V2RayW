@@ -43,6 +43,11 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sdafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,14 +66,18 @@
             this.startStopToolStripMenuItem,
             this.toolStripSeparator3,
             this.v2RayRulesToolStripMenuItem,
+            this.pacModeToolStripMenuItem,
             this.globalModeToolStripMenuItem,
             this.toolStripSeparator2,
+            this.serversToolStripMenuItem,
+            this.editPacFileToolStripMenuItem,
             this.configureToolStripMenuItem,
             this.toolStripSeparator1,
             this.helpToolStripMenuItem,
-            this.quitToolStripMenuItem});
+            this.quitToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 176);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
             // 
             // statusToolStripMenuItem
             // 
@@ -82,6 +91,7 @@
             this.startStopToolStripMenuItem.Name = "startStopToolStripMenuItem";
             this.startStopToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.startStopToolStripMenuItem.Text = "StartStop";
+            this.startStopToolStripMenuItem.Click += new System.EventHandler(this.startStopToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -93,12 +103,14 @@
             this.v2RayRulesToolStripMenuItem.Name = "v2RayRulesToolStripMenuItem";
             this.v2RayRulesToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.v2RayRulesToolStripMenuItem.Text = "V2Ray Rules";
+            this.v2RayRulesToolStripMenuItem.Click += new System.EventHandler(this.v2RayRulesToolStripMenuItem_Click);
             // 
             // globalModeToolStripMenuItem
             // 
             this.globalModeToolStripMenuItem.Name = "globalModeToolStripMenuItem";
             this.globalModeToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.globalModeToolStripMenuItem.Text = "Global Mode";
+            this.globalModeToolStripMenuItem.Click += new System.EventHandler(this.globalModeToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -131,6 +143,41 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
+            // pacModeToolStripMenuItem
+            // 
+            this.pacModeToolStripMenuItem.Name = "pacModeToolStripMenuItem";
+            this.pacModeToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.pacModeToolStripMenuItem.Text = "Pac Mode";
+            this.pacModeToolStripMenuItem.Visible = false;
+            this.pacModeToolStripMenuItem.Click += new System.EventHandler(this.pacModeToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sdafToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.testToolStripMenuItem.Text = "test";
+            // 
+            // sdafToolStripMenuItem
+            // 
+            this.sdafToolStripMenuItem.Name = "sdafToolStripMenuItem";
+            this.sdafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sdafToolStripMenuItem.Text = "sdaf";
+            // 
+            // serversToolStripMenuItem
+            // 
+            this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
+            this.serversToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.serversToolStripMenuItem.Text = "Servers";
+            // 
+            // editPacFileToolStripMenuItem
+            // 
+            this.editPacFileToolStripMenuItem.Name = "editPacFileToolStripMenuItem";
+            this.editPacFileToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.editPacFileToolStripMenuItem.Text = "Edit Pac File";
+            this.editPacFileToolStripMenuItem.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -158,5 +205,10 @@
         private System.Windows.Forms.ToolStripMenuItem v2RayRulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem globalModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem pacModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sdafToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serversToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editPacFileToolStripMenuItem;
     }
 }

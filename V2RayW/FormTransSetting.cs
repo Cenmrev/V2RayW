@@ -45,7 +45,10 @@ namespace V2RayW
                     readBufferSize = Program.strToInt(textBoxKcpRb.Text, 2),
                     writeBufferSize = Program.strToInt(textBoxKcpWb.Text, 2),
                     congestion = comboBoxKcpCon.Text,
-                    header = comboBoxKcpHt.Text
+                    header = new
+                    {
+                        type = comboBoxKcpHt.Text
+                    }
                 },
                 tcpSettings = new 
                 {
@@ -76,7 +79,7 @@ namespace V2RayW
             textBoxKcpRb.Text = transportSettings.kcpSettings.readBufferSize;
             textBoxKcpWb.Text = transportSettings.kcpSettings.writeBufferSize;
             comboBoxKcpCon.SelectedIndex = transportSettings.kcpSettings.congestion == "false" ? 0 : 1;
-            var headertype = transportSettings.kcpSettings.header;
+            var headertype = transportSettings.kcpSettings.header.type;
             comboBoxKcpHt.SelectedIndex = headertype == "srtp" ? 1 : (headertype == "utp" ? 2 : 0);
             checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse == "true";
             checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse == "true";

@@ -23,27 +23,41 @@ namespace V2RayW
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var mainForm = new MainForm();
+            
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
             //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
-            dynamic[] dProfiles = Properties.Settings.Default.profilesStr.Split('\t').Select(pstr => JObject.Parse(pstr)).ToArray();
-            foreach (dynamic dp in dProfiles)
+            //MessageBox.Show(Properties.Settings.Default.profilesStr);
+            var dProfilesStrArray = Properties.Settings.Default.profilesStr.Split('\t');
+            foreach (string pstr in dProfilesStrArray)
             {
-                var p = new Profile();
-                p.address = dp.address;
-                p.allowPassive = dp.allowPassive;
-                p.alterId = dp.alterId;
-                p.network = dp.network;
-                p.remark = dp.remark;
-                p.userId = dp.userId;
-                Program.profiles.Add(p);
+                try
+                {
+                    var p = new Profile();
+                    dynamic dp = JObject.Parse(pstr);
+                    p.address = dp.address;
+                    p.allowPassive = dp.allowPassive;
+                    p.alterId = dp.alterId;
+                    p.network = dp.network;
+                    p.remark = dp.remark;
+                    p.userId = dp.userId;
+                    Program.profiles.Add(p);
+                } catch
+                {
+                    continue;
+                }
+
             }
             Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
+            Program.proxyIsOn = profiles.Count > 0 ? Properties.Settings.Default.proxyIsOn : false;
+            Program.proxyMode = Properties.Settings.Default.proxyMode % 3;
             if (! (Program.selectedServerIndex < Program.profiles.Count) )
             {
                 Program.selectedServerIndex = Program.profiles.Count - 1;
             }
+            mainForm = new MainForm();
+            mainForm.updateMenu();
+            Program.updateSystemProxy();
             //Debug.WriteLine(Program.profileToStr(profiles[0]));
             //Debug.WriteLine(Program.selectedServerIndex);
             Application.Run();
@@ -51,6 +65,8 @@ namespace V2RayW
 
         static void OnProcessExit(object sender, EventArgs e)
         {
+            Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
+            Properties.Settings.Default.proxyMode = Program.proxyMode;
             Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
             var profileArray = Program.profiles.Select(p => profileToStr(p));
             Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
@@ -61,6 +77,9 @@ namespace V2RayW
 
         public static List<Profile> profiles = new List<Profile>();
         public static int selectedServerIndex = 0;
+        public static bool proxyIsOn = false;
+        public static int proxyMode = 0;
+        public static MainForm mainForm;
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
         internal static string profileToStr(Profile p)
@@ -78,17 +97,6 @@ namespace V2RayW
             return JsonConvert.SerializeObject(pd);
         }
 
-        public static T DeepCopy<T>(T other)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(ms, other);
-                ms.Position = 0;
-                return (T)formatter.Deserialize(ms);
-            }
-        }
-
         internal static int strToInt(string str, int defaultValue)
         {
             int result = 0;
@@ -101,6 +109,21 @@ namespace V2RayW
                 return defaultValue;
             }
         }
+
+        public static void startV2Ray()
+        {
+
+        }
+
+        public static void stopV2Ray()
+        {
+
+        }
+
+        public static void updateSystemProxy()
+        {
+
+        }
     }
     
     public class Profile
@@ -111,7 +134,7 @@ namespace V2RayW
         internal int network = 0;
         internal int port = 10086;
         internal string remark = "";
-        internal string userId = "23ad6b10-8d1a-40f7-8ad0-e3e35cd38297";
+        internal string userId = Guid.NewGuid().ToString();
         public Profile DeepCopy()
         {
             Profile p = new Profile();

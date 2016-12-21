@@ -26,9 +26,9 @@ namespace V2RayW.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{\"kcpSettings\":{\"mtu\":1350,\"tti\":50,\"uplinkCapacity\":5,\"downlinkCapacity\":20,\"rea" +
-            "dBufferSize\":2,\"writeBufferSize\":2,\"congestion\":\"false\",\"header\":\"none\"},\"tcpSet" +
-            "tings\":{\"connectionReuse\":\"true\"},\"wsSettings\":{\"connectionReuse\":\"true\",\"path\":" +
-            "\"\"}}")]
+            "dBufferSize\":2,\"writeBufferSize\":2,\"congestion\":\"false\",\"header\":{\"type\":\"none\"}" +
+            "},\"tcpSettings\":{\"connectionReuse\":\"true\"},\"wsSettings\":{\"connectionReuse\":\"true" +
+            "\",\"path\":\"\"}}")]
         public string transportSettings {
             get {
                 return ((string)(this["transportSettings"]));
@@ -108,6 +108,18 @@ namespace V2RayW.Properties {
             }
             set {
                 this["udpSupport"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int proxyMode {
+            get {
+                return ((int)(this["proxyMode"]));
+            }
+            set {
+                this["proxyMode"] = value;
             }
         }
     }

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="transportSettings" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":"none"},"tcpSettings":{"connectionReuse":"true"},"wsSettings":{"connectionReuse":"true","path":""}}</Value>
+      <Value Profile="(Default)">{"kcpSettings":{"mtu":1350,"tti":50,"uplinkCapacity":5,"downlinkCapacity":20,"readBufferSize":2,"writeBufferSize":2,"congestion":"false","header":{"type":"none"}},"tcpSettings":{"connectionReuse":"true"},"wsSettings":{"connectionReuse":"true","path":""}}</Value>
     </Setting>
     <Setting Name="dns" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost</Value>
@@ -22,6 +22,9 @@
     </Setting>
     <Setting Name="udpSupport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="proxyMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

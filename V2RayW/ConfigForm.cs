@@ -37,11 +37,19 @@ namespace V2RayW
             Properties.Settings.Default.selectedServerIndex = listBoxServers.SelectedIndex;
             Properties.Settings.Default.Save();
             Program.profiles.Clear();
-            foreach (Profile p in profiles)
+            if (profiles.Count > 0)
             {
-                Program.profiles.Add(p.DeepCopy());
+                foreach (Profile p in profiles)
+                {
+                    Program.profiles.Add(p.DeepCopy());
+                }
+            } else
+            {
+                Program.proxyIsOn = false;
             }
             Program.selectedServerIndex = selectedServerIndex;
+            Program.updateSystemProxy();
+            Program.mainForm.updateMenu();
             this.Close();
         }
 
