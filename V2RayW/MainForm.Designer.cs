@@ -44,8 +44,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sdafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
@@ -74,10 +72,9 @@
             this.configureToolStripMenuItem,
             this.toolStripSeparator1,
             this.helpToolStripMenuItem,
-            this.quitToolStripMenuItem,
-            this.testToolStripMenuItem});
+            this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 264);
             // 
             // statusToolStripMenuItem
             // 
@@ -151,20 +148,6 @@
             this.pacModeToolStripMenuItem.Visible = false;
             this.pacModeToolStripMenuItem.Click += new System.EventHandler(this.pacModeToolStripMenuItem_Click);
             // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sdafToolStripMenuItem});
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.testToolStripMenuItem.Text = "test";
-            // 
-            // sdafToolStripMenuItem
-            // 
-            this.sdafToolStripMenuItem.Name = "sdafToolStripMenuItem";
-            this.sdafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sdafToolStripMenuItem.Text = "sdaf";
-            // 
             // serversToolStripMenuItem
             // 
             this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
@@ -206,8 +189,6 @@
         private System.Windows.Forms.ToolStripMenuItem globalModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem pacModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sdafToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serversToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editPacFileToolStripMenuItem;
     }

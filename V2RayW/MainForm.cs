@@ -60,6 +60,7 @@ namespace V2RayW
                 i.Checked = false;
             }
             ((ToolStripMenuItem)serversToolStripMenuItem.DropDownItems[Program.selectedServerIndex]).Checked = true;
+            Program.updateSystemProxy();
         }
 
         private void configureToolStripMenuItem_Click(object sender, EventArgs e)

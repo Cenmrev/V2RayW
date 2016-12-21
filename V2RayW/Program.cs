@@ -19,15 +19,25 @@ namespace V2RayW
         [STAThread]
         static void Main()
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //check v2ray core binary
+            if (!checkV2RayCore())
+            {
+                DialogResult res = MessageBox.Show("Wrong or missing v2ray core file!\nDownload it right now?", "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (res == DialogResult.OK)
+                {
+                    Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
+                }
+                return;
+            }
+
+            // save settings when exiting the program
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
+
             
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
-            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
-            //MessageBox.Show(Properties.Settings.Default.profilesStr);
             var dProfilesStrArray = Properties.Settings.Default.profilesStr.Split('\t');
             foreach (string pstr in dProfilesStrArray)
             {
@@ -80,6 +90,7 @@ namespace V2RayW
         public static bool proxyIsOn = false;
         public static int proxyMode = 0;
         public static MainForm mainForm;
+        const string v2rayVersion = "v2.11";
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
         internal static string profileToStr(Profile p)
@@ -123,6 +134,27 @@ namespace V2RayW
         public static void updateSystemProxy()
         {
 
+        }
+
+        private static bool checkV2RayCore()
+        {
+            var v2rayProcess = new Process();
+            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray";
+            v2rayProcess.StartInfo.Arguments = "-version";
+            v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            v2rayProcess.StartInfo.UseShellExecute = false;
+            v2rayProcess.StartInfo.RedirectStandardOutput = true;
+            v2rayProcess.StartInfo.CreateNoWindow = true;
+            try
+            {
+                v2rayProcess.Start();
+            } catch
+            {
+                return false;
+            }
+            var versionOutput = v2rayProcess.StandardOutput.ReadToEnd();
+            v2rayProcess.WaitForExit();
+            return v2rayProcess.ExitCode == 0 && versionOutput.StartsWith("V2Ray " + v2rayVersion);
         }
     }
     
