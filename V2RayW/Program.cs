@@ -109,8 +109,6 @@ namespace V2RayW
             mainForm.updateMenu();
             Program.updateSystemProxy();
 
-            generateConfigJson();
-
             Application.Run();
         }
 
