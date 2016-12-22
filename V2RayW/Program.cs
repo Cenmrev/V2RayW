@@ -42,18 +42,36 @@ namespace V2RayW
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //check v2ray core binary
-            if (!checkV2RayCore())
+            var cr = checkV2RayCore();
+            switch (cr)
             {
-                DialogResult res = MessageBox.Show("Wrong or missing v2ray core file!\nDownload it right now?", "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                if (res == DialogResult.OK)
-                {
-                    Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
-                }
-                return;
+                case 2:
+                    {
+                        DialogResult res = MessageBox.Show("Wrong or missing v2ray core file!\nDownload it right now?", "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                        if (res == DialogResult.OK)
+                        {
+                            Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
+                        }
+                        return;
+                    }
+                case 1:
+                    {
+                        DialogResult res = MessageBox.Show("Unknown version of v2ray core. Do you want to continue to use it?", "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (res == DialogResult.OK)
+                        {
+                            break;
+                        } else
+                        {
+                            DialogResult dres = MessageBox.Show("Do you want to download official core right now?", "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            if (dres == DialogResult.OK)
+                            {
+                                Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
+                            }
+                            return;
+                        }
+                    }
+                default: break;
             }
-
-            // save settings when exiting the program
-            // AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
             
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
@@ -193,7 +211,7 @@ namespace V2RayW
         public static int runSysproxy()
         {
             var sysproxyProcess = new Process();
-            sysproxyProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + (Environment.Is64BitOperatingSystem ? "sysproxy64.exe" : "sysproxy.exe");
+            sysproxyProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "sysproxy.exe";
             if (proxyIsOn)
             {
                 if (proxyMode != 1) // not pac mode
@@ -312,7 +330,7 @@ namespace V2RayW
             }
         }
 
-        private static bool checkV2RayCore()
+        private static int checkV2RayCore() // 0: ok, 1: unknown v2ray version; 2 error or not v2ray
         {
             var v2rayProcess = new Process();
             v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray";
@@ -326,11 +344,31 @@ namespace V2RayW
                 v2rayProcess.Start();
             } catch
             {
-                return false;
+                return 2;
             }
             var versionOutput = v2rayProcess.StandardOutput.ReadToEnd();
             v2rayProcess.WaitForExit();
-            return v2rayProcess.ExitCode == 0 && versionOutput.StartsWith("V2Ray " + v2rayVersion);
+            if (v2rayProcess.ExitCode != 0)
+            {
+                return 2;
+            } else
+            {
+                if (versionOutput.StartsWith("V2Ray "))
+                {
+                    if (versionOutput.StartsWith("V2Ray " + v2rayVersion))
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 2;
+                }
+            }
         }
     }
     
