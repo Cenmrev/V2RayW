@@ -48,7 +48,9 @@ namespace V2RayW
                 }
             } else
             {
-                serversToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("no available servers."));
+                var item = new ToolStripMenuItem("no available servers.");
+                item.Enabled = false;
+                serversToolStripMenuItem.DropDownItems.Add(item);
             }
         }
 
