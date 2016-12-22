@@ -233,9 +233,9 @@ namespace V2RayW
                 registry.SetValue("ProxyServer", $"127.0.0.1:{Properties.Settings.Default.localPort}");
                 registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
             }
-            var sysServer = registry.GetValue("ProxyServer").ToString() == $"127.0.0.1:{Properties.Settings.Default.localPort}";
             var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
-            var sysOverride = registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
+            var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
+            var sysOverride = proxyIsOn ? registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*" : true;
             // They cause the OS to refresh the settings, causing IP to realy update
             settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
             refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
@@ -358,6 +358,7 @@ namespace V2RayW
             }
             if(finalAction)
             {
+                Debug.WriteLine("final action, set");
                 _resetEvent.Set();
             }
         }
