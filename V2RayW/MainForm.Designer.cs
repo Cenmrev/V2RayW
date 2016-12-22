@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +51,8 @@
             // notifyIconMain
             // 
             this.notifyIconMain.ContextMenuStrip = this.contextMenuStripMain;
-            this.notifyIconMain.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconMain.Icon")));
             this.notifyIconMain.Text = "V2RayW";
+            this.notifyIconMain.Icon = Properties.Resources.vw256;
             this.notifyIconMain.Visible = true;
             this.notifyIconMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIconMain_MouseDoubleClick);
             // 
@@ -75,7 +74,7 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 264);
             // 
             // statusToolStripMenuItem
             // 

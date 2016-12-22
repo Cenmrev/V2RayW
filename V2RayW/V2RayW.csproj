@@ -146,7 +146,6 @@
     </Compile>
     <None Include="Resources\config-rules.json" />
     <None Include="Resources\config-simple.json" />
-    <None Include="V2RayW_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

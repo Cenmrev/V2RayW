@@ -106,7 +106,6 @@ namespace V2RayW
             }
 
             mainForm = new MainForm();
-            mainForm.Icon = Properties.Resources.vw256;
             mainForm.updateMenu();
             Program.updateSystemProxy();
 
