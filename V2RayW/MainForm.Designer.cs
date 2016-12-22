@@ -34,18 +34,18 @@
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.v2RayRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +75,7 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 264);
             // 
             // statusToolStripMenuItem
             // 
@@ -91,6 +91,13 @@
             this.startStopToolStripMenuItem.Text = "StartStop";
             this.startStopToolStripMenuItem.Click += new System.EventHandler(this.startStopToolStripMenuItem_Click);
             // 
+            // viewLogToolStripMenuItem
+            // 
+            this.viewLogToolStripMenuItem.Name = "viewLogToolStripMenuItem";
+            this.viewLogToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.viewLogToolStripMenuItem.Text = "View log";
+            this.viewLogToolStripMenuItem.Click += new System.EventHandler(this.viewLogToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -103,6 +110,14 @@
             this.v2RayRulesToolStripMenuItem.Text = "V2Ray Rules";
             this.v2RayRulesToolStripMenuItem.Click += new System.EventHandler(this.v2RayRulesToolStripMenuItem_Click);
             // 
+            // pacModeToolStripMenuItem
+            // 
+            this.pacModeToolStripMenuItem.Name = "pacModeToolStripMenuItem";
+            this.pacModeToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.pacModeToolStripMenuItem.Text = "Pac Mode";
+            this.pacModeToolStripMenuItem.Visible = false;
+            this.pacModeToolStripMenuItem.Click += new System.EventHandler(this.pacModeToolStripMenuItem_Click);
+            // 
             // globalModeToolStripMenuItem
             // 
             this.globalModeToolStripMenuItem.Name = "globalModeToolStripMenuItem";
@@ -114,6 +129,19 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(150, 6);
+            // 
+            // serversToolStripMenuItem
+            // 
+            this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
+            this.serversToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.serversToolStripMenuItem.Text = "Servers";
+            // 
+            // editPacFileToolStripMenuItem
+            // 
+            this.editPacFileToolStripMenuItem.Name = "editPacFileToolStripMenuItem";
+            this.editPacFileToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.editPacFileToolStripMenuItem.Text = "Edit Pac File";
+            this.editPacFileToolStripMenuItem.Visible = false;
             // 
             // configureToolStripMenuItem
             // 
@@ -141,34 +169,6 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
-            // pacModeToolStripMenuItem
-            // 
-            this.pacModeToolStripMenuItem.Name = "pacModeToolStripMenuItem";
-            this.pacModeToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.pacModeToolStripMenuItem.Text = "Pac Mode";
-            this.pacModeToolStripMenuItem.Visible = false;
-            this.pacModeToolStripMenuItem.Click += new System.EventHandler(this.pacModeToolStripMenuItem_Click);
-            // 
-            // serversToolStripMenuItem
-            // 
-            this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
-            this.serversToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.serversToolStripMenuItem.Text = "Servers";
-            // 
-            // editPacFileToolStripMenuItem
-            // 
-            this.editPacFileToolStripMenuItem.Name = "editPacFileToolStripMenuItem";
-            this.editPacFileToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.editPacFileToolStripMenuItem.Text = "Edit Pac File";
-            this.editPacFileToolStripMenuItem.Visible = false;
-            // 
-            // viewLogToolStripMenuItem
-            // 
-            this.viewLogToolStripMenuItem.Name = "viewLogToolStripMenuItem";
-            this.viewLogToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.viewLogToolStripMenuItem.Text = "View log";
-            this.viewLogToolStripMenuItem.Click += new System.EventHandler(this.viewLogToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -176,6 +176,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.contextMenuStripMain.ResumeLayout(false);
             this.ResumeLayout(false);
 

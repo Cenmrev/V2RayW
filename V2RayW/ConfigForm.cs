@@ -61,6 +61,7 @@ namespace V2RayW
 
         private void ConfigForm_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.vw256;
             selectedServerIndex = Program.selectedServerIndex;
             profiles.Clear();
             foreach (Profile p in Program.profiles)

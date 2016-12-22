@@ -144,5 +144,10 @@ namespace V2RayW
             System.Threading.Thread.Sleep(500);
             MessageBox.Show(Program.v2rayoutput);*/
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
