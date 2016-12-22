@@ -11,6 +11,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.ComponentModel;
 using System.Threading;
 using System.Text;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace V2RayW
 {
@@ -104,6 +106,7 @@ namespace V2RayW
             }
 
             mainForm = new MainForm();
+            mainForm.Icon = Properties.Resources.vw256;
             mainForm.updateMenu();
             Program.updateSystemProxy();
 
@@ -202,12 +205,56 @@ namespace V2RayW
                 Debug.WriteLine("v stopped");
             }
             //change system proxy
-            if (!finalAction && runSysproxy() != 0)
+            if (!finalAction)
             {
-                MessageBox.Show("Fained to modify system proxy settings!");
+                var res = runSysproxy();
+                if (res == 2)
+                    MessageBox.Show("Fained to modify system proxy settings!");
+                else if (res == 1)
+                    Debug.WriteLine("Shall I tell the user to wait for a while? "); 
             }
         }
 
+        //https://social.msdn.microsoft.com/Forums/vstudio/en-US/19517edf-8348-438a-a3da-5fbe7a46b61a/how-to-change-global-windows-proxy-using-c-net-with-immediate-effect?forum=csharpgeneral
+        [DllImport("wininet.dll")]
+        static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);
+        const int INTERNET_OPTION_SETTINGS_CHANGED = 39;
+        const int INTERNET_OPTION_REFRESH = 37;
+
+        public static int runSysproxy()
+        {
+            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
+
+            bool settingsReturn, refreshReturn;
+
+            registry.SetValue("ProxyEnable", proxyIsOn ? 1 : 0);
+            if (proxyIsOn)
+            {
+                registry.SetValue("ProxyServer", $"127.0.0.1:{Properties.Settings.Default.localPort}");
+                registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
+            }
+            var sysServer = registry.GetValue("ProxyServer").ToString() == $"127.0.0.1:{Properties.Settings.Default.localPort}";
+            var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
+            var sysOverride = registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
+            // They cause the OS to refresh the settings, causing IP to realy update
+            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
+            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+            if (sysServer && sysState && sysOverride)
+            {
+                if (settingsReturn && refreshReturn)
+                {
+                    return 0;
+                } else
+                {
+                    return 1;
+                }
+            } else
+            {
+                return 2;
+            }
+        }
+
+        /*
         public static int runSysproxy()
         {
             var sysproxyProcess = new Process();
@@ -241,7 +288,7 @@ namespace V2RayW
                 return 1;
             }
         }
-
+        */
         public static bool generateConfigJson()
         {
             string templateStr = System.Text.Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
