@@ -50,7 +50,6 @@ namespace V2RayW
             {
                 serversToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("no available servers."));
             }
-
         }
 
         private void switchToServer(object sender, EventArgs e)
@@ -148,16 +147,6 @@ namespace V2RayW
             }
             System.Threading.Thread.Sleep(500);
             MessageBox.Show(Program.v2rayoutput);*/
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStripMain_Opening(object sender, CancelEventArgs e)
-        {
-
         }
     }
 }
