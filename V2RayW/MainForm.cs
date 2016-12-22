@@ -83,10 +83,15 @@ namespace V2RayW
             Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
             //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
             Properties.Settings.Default.Save();
-            Program.proxyIsOn = false;
-            Program.finalAction = true;
-            Program.updateSystemProxy();
-            Program._resetEvent.WaitOne();
+            if(Program.proxyIsOn)
+            {
+                Program.proxyIsOn = false;
+                Program.finalAction = true;
+                Debug.WriteLine("close system proxy on exit");
+                Program.updateSystemProxy();
+                Debug.WriteLine("wait quit");
+                Program._resetEvent.WaitOne();
+            }
             Application.Exit();
         }
 
@@ -146,6 +151,11 @@ namespace V2RayW
         }
 
         private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStripMain_Opening(object sender, CancelEventArgs e)
         {
 
         }

@@ -185,7 +185,11 @@ namespace V2RayW
         public static async void updateSystemProxy()
         {
             // for final action, change system proxy first and then stop v2ray;
-            if (finalAction) runSysproxy();
+            if (finalAction)
+            {
+                runSysproxy();
+                Debug.WriteLine("system proxy changed, will stop v2ray");
+            }
 
             if (proxyIsOn)
             {

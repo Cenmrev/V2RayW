@@ -75,7 +75,8 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 264);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(154, 286);
+            this.contextMenuStripMain.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMain_Opening);
             // 
             // statusToolStripMenuItem
             // 
