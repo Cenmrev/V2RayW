@@ -77,6 +77,7 @@ namespace V2RayW
             
             //Properties.Settings.Default.Reset();
             Properties.Settings.Default.Upgrade();
+            //MessageBox.Show(Properties.Settings.Default.profilesStr);
             var dProfilesStrArray = Properties.Settings.Default.profilesStr.Split('\t');
             foreach (string pstr in dProfilesStrArray)
             {
@@ -85,6 +86,7 @@ namespace V2RayW
                     var p = new Profile();
                     dynamic dp = JObject.Parse(pstr);
                     p.address = dp.address;
+                    p.port = dp.port;
                     p.allowPassive = dp.allowPassive;
                     p.alterId = dp.alterId;
                     p.network = dp.network;
