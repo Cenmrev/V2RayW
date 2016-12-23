@@ -53,6 +53,10 @@ namespace V2RayW
                 tcpSettings = new 
                 {
                     connectionReuse = checkBoxTcpCr.Checked,
+                    header = new
+                    {
+                        type = comboBoxTcpHt.Text
+                    }
                 },
                 wsSettings = new
                 {
@@ -82,6 +86,7 @@ namespace V2RayW
             var headertype = transportSettings.kcpSettings.header.type;
             comboBoxKcpHt.SelectedIndex = headertype == "srtp" ? 1 : (headertype == "utp" ? 2 : 0);
             checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse;
+            comboBoxTcpHt.SelectedIndex = transportSettings.tcpSettings.header.type == "none" ? 0 : 1;
             checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse;
             textBoxWsPath.Text = transportSettings.wsSettings.path;
         }
@@ -97,6 +102,7 @@ namespace V2RayW
             comboBoxKcpCon.SelectedIndex = 0;
             comboBoxKcpHt.SelectedIndex = 0;
             checkBoxTcpCr.Checked = true;
+            comboBoxTcpHt.SelectedIndex = 0;
             checkBoxWsCr.Checked = true;
             textBoxWsPath.Text = "";
         }

@@ -51,6 +51,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxTcpHt = new System.Windows.Forms.ComboBox();
             this.checkBoxTcpCr = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.textBoxWsPath = new System.Windows.Forms.TextBox();
@@ -297,6 +299,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.comboBoxTcpHt);
             this.tabPage2.Controls.Add(this.checkBoxTcpCr);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -307,10 +311,31 @@
             this.tabPage2.Text = "TCP";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 72);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(78, 17);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "header type";
+            // 
+            // comboBoxTcpHt
+            // 
+            this.comboBoxTcpHt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTcpHt.FormattingEnabled = true;
+            this.comboBoxTcpHt.Items.AddRange(new object[] {
+            "none",
+            "http"});
+            this.comboBoxTcpHt.Location = new System.Drawing.Point(122, 69);
+            this.comboBoxTcpHt.Name = "comboBoxTcpHt";
+            this.comboBoxTcpHt.Size = new System.Drawing.Size(121, 25);
+            this.comboBoxTcpHt.TabIndex = 1;
+            // 
             // checkBoxTcpCr
             // 
             this.checkBoxTcpCr.AutoSize = true;
-            this.checkBoxTcpCr.Location = new System.Drawing.Point(49, 60);
+            this.checkBoxTcpCr.Location = new System.Drawing.Point(52, 32);
             this.checkBoxTcpCr.Name = "checkBoxTcpCr";
             this.checkBoxTcpCr.Size = new System.Drawing.Size(126, 21);
             this.checkBoxTcpCr.TabIndex = 0;
@@ -437,5 +462,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonTsReset;
+        private System.Windows.Forms.ComboBox comboBoxTcpHt;
+        private System.Windows.Forms.Label label11;
     }
 }
