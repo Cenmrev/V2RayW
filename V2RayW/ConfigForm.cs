@@ -31,11 +31,7 @@ namespace V2RayW
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.localPort = Program.strToInt(textBoxLocalPort.Text, 8080);
-            Properties.Settings.Default.udpSupport = checkBoxUDP.Checked;
-            Properties.Settings.Default.dns = textBoxDNS.Text != "" ? textBoxDNS.Text : "localhost";
-            Properties.Settings.Default.selectedServerIndex = listBoxServers.SelectedIndex;
-            Properties.Settings.Default.Save();
+            // change profiles in memory
             Program.profiles.Clear();
             if (profiles.Count > 0)
             {
@@ -47,7 +43,16 @@ namespace V2RayW
             {
                 Program.proxyIsOn = false;
             }
-            Program.selectedServerIndex = selectedServerIndex;
+            Program.selectedServerIndex = ConfigForm.profiles.Count > 0 ? listBoxServers.SelectedIndex : -1;
+
+            // save to file
+            Properties.Settings.Default.localPort = Program.strToInt(textBoxLocalPort.Text, 8080);
+            Properties.Settings.Default.udpSupport = checkBoxUDP.Checked;
+            Properties.Settings.Default.dns = textBoxDNS.Text != "" ? textBoxDNS.Text : "localhost";
+            var profileArray = Program.profiles.Select(p => Program.profileToStr(p));
+            Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
+            Properties.Settings.Default.Save();
+
             Program.updateSystemProxy();
             Program.mainForm.updateMenu();
             this.Close();

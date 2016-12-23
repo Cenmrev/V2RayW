@@ -80,8 +80,6 @@ namespace V2RayW
             Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
             Properties.Settings.Default.proxyMode = Program.proxyMode;
             Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
-            var profileArray = Program.profiles.Select(p => Program.profileToStr(p));
-            Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
             //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
             Properties.Settings.Default.Save();
             if(Program.proxyIsOn)
