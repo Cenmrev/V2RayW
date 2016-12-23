@@ -57,6 +57,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxInP = new System.Windows.Forms.ComboBox();
             this.groupBoxServer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -252,12 +254,30 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // comboBoxInP
+            // 
+            this.comboBoxInP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInP.FormattingEnabled = true;
+            this.comboBoxInP.Items.AddRange(new object[] {
+            resources.GetString("comboBoxInP.Items"),
+            resources.GetString("comboBoxInP.Items1")});
+            resources.ApplyResources(this.comboBoxInP, "comboBoxInP");
+            this.comboBoxInP.Name = "comboBoxInP";
+            this.comboBoxInP.SelectedIndexChanged += new System.EventHandler(this.comboBoxInP_SelectedIndexChanged);
+            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonSave;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.comboBoxInP);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBoxServer);
             this.Controls.Add(this.buttonTS);
             this.Controls.Add(this.textBoxDNS);
@@ -312,5 +332,7 @@
         private System.Windows.Forms.ListBox listBoxServers;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxInP;
     }
 }

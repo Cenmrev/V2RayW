@@ -77,19 +77,15 @@ namespace V2RayW
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
-            Properties.Settings.Default.proxyMode = Program.proxyMode;
-            Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
-            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
-            Properties.Settings.Default.Save();
-            if(Program.proxyIsOn)
+            if (Program.proxyIsOn)
             {
-                Program.proxyIsOn = false;
+                Program.proxyIsOn = false; // change to false temporarily
                 Program.finalAction = true;
                 Debug.WriteLine("close system proxy on exit");
                 Program.updateSystemProxy();
                 Debug.WriteLine("wait quit");
                 Program._resetEvent.WaitOne();
+                Program.proxyIsOn = true; // recover proxy state
             }
             Application.Exit();
         }

@@ -20,12 +20,36 @@ namespace V2RayW
     {
 
         public static List<Profile> profiles = new List<Profile>();
-        public static int selectedServerIndex = 0;
-        public static bool proxyIsOn = false;
-        public static int proxyMode = 0;
+        public static int selectedServerIndex
+        {
+            get { return Properties.Settings.Default.selectedServerIndex; }
+            set
+            {
+                Properties.Settings.Default.selectedServerIndex = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        public static bool proxyIsOn
+        {
+            get { return Properties.Settings.Default.proxyIsOn; }
+            set
+            {
+                Properties.Settings.Default.proxyIsOn = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        public static int proxyMode
+        {
+            get { return Properties.Settings.Default.proxyMode % 3; }
+            set
+            {
+                Properties.Settings.Default.proxyMode = value % 3;
+                Properties.Settings.Default.Save();
+            }
+        }
         public static MainForm mainForm;
         const string v2rayVersion = "v2.11.2";
-        static BackgroundWorker v2rayCoreWorker = new System.ComponentModel.BackgroundWorker();
+        static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
         public static StringBuilder output = new StringBuilder();
@@ -40,6 +64,7 @@ namespace V2RayW
             v2rayCoreWorker.WorkerSupportsCancellation = true;
             v2rayCoreWorker.DoWork += new DoWorkEventHandler(Program.v2rayCoreWorker_DoWork);
             v2rayCoreWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Program.RunWorkerCompleted);
+            Application.ApplicationExit += new EventHandler(OnProcessExit);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -98,10 +123,10 @@ namespace V2RayW
                     continue;
                 }
             }
-
-            Program.selectedServerIndex = Properties.Settings.Default.selectedServerIndex;
-            Program.proxyIsOn = profiles.Count > 0 ? Properties.Settings.Default.proxyIsOn : false;
-            Program.proxyMode = Properties.Settings.Default.proxyMode % 3;
+            if (profiles.Count <= 0)
+            {
+                Program.proxyIsOn = false;
+            }
             if (! (Program.selectedServerIndex < Program.profiles.Count) )
             {
                 Program.selectedServerIndex = Program.profiles.Count - 1;
@@ -113,29 +138,16 @@ namespace V2RayW
 
             Application.Run();
         }
-
+        /*
         private static void V2rayCoreWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             throw new NotImplementedException();
-        }
-
-        /*
+        }*/
+        
         static void OnProcessExit(object sender, EventArgs e)
         {
-            Properties.Settings.Default.proxyIsOn = Program.proxyIsOn;
-            Properties.Settings.Default.proxyMode = Program.proxyMode;
-            Properties.Settings.Default.selectedServerIndex = Program.selectedServerIndex;
-            var profileArray = Program.profiles.Select(p => profileToStr(p));
-            Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
-            //Debug.WriteLine(String.Format("property profile {0}", Properties.Settings.Default.profilesStr));
             Properties.Settings.Default.Save();
-            proxyIsOn = false;
-            Debug.WriteLine("going to stop v");
-            finalAction = true;
-            MessageBox.Show("dsaf");
-            updateSystemProxy();
-            _resetEvent.WaitOne();
-        }*/
+        }
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
         internal static string profileToStr(Profile p)
@@ -165,11 +177,7 @@ namespace V2RayW
                 return defaultValue;
             }
         }
-
-        public static void startV2Ray()
-        {
-            v2rayCoreWorker.RunWorkerAsync();
-        }
+        
 
         public static async Task stopV2Ray()
         { // make sure v2ray is stopped
@@ -199,7 +207,7 @@ namespace V2RayW
                     v2rayCoreWorker.RunWorkerAsync();
                 } else
                 {
-                    proxyIsOn = false;
+                    Program.proxyIsOn = false;
                     mainForm.updateMenu();
                 }
             } else
@@ -233,11 +241,12 @@ namespace V2RayW
             registry.SetValue("ProxyEnable", proxyIsOn ? 1 : 0);
             if (proxyIsOn)
             {
-                registry.SetValue("ProxyServer", $"127.0.0.1:{Properties.Settings.Default.localPort}");
+                registry.SetValue("ProxyServer", (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") + $"127.0.0.1:{Properties.Settings.Default.localPort}");
                 registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
             }
             var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
-            var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
+            var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") +  $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
+            //MessageBox.Show(registry.GetValue("ProxyServer").ToString());
             var sysOverride = proxyIsOn ? registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*" : true;
             // They cause the OS to refresh the settings, causing IP to realy update
             settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
@@ -294,11 +303,24 @@ namespace V2RayW
         */
         public static bool generateConfigJson()
         {
-            string templateStr = System.Text.Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
+            string templateStr = Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
             dynamic json = JObject.Parse(templateStr);
             json.transport = JObject.Parse(Properties.Settings.Default.transportSettings);
             json.inbound.port = Properties.Settings.Default.localPort;
-            json.inbound.settings.udp = Properties.Settings.Default.udpSupport;
+            json.inbound.protocol = Properties.Settings.Default.inProtocol == 0 ? "socks" : "http";
+            if (Properties.Settings.Default.inProtocol == 0)
+            {
+                var inboundSettings = new
+                {
+                    auth = "noauth",
+                    udp = Properties.Settings.Default.udpSupport,
+                    ip = "127.0.0.1"
+                };
+                json.inbound.settings = JObject.Parse(JsonConvert.SerializeObject(inboundSettings));
+            } else
+            {
+                json.inbound.settings = JObject.Parse("{\"timeout\": 0 }");
+            }
             json.inbound.allowPassive = profiles[selectedServerIndex].allowPassive;
             json.outbound.settings.vnext[0].address = profiles[selectedServerIndex].address;
             json.outbound.settings.vnext[0].port = profiles[selectedServerIndex].port;
@@ -425,7 +447,7 @@ namespace V2RayW
     
     public class Profile
     {
-        internal string address = "v2ray.cool";
+        internal string address = "1.2.3.4";
         internal bool allowPassive = false;
         internal int alterId = 64;
         internal int network = 0;
