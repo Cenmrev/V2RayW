@@ -1,8 +1,11 @@
+![V2RayW](https://raw.githubusercontent.com/Cenmrev/V2RayW/master/V2RayW/Resources/vw256.ico)
+
 # V2RayW: A simple GUI for V2Ray on Windows
 
 ## what is V2Ray?
 
 ![](https://raw.githubusercontent.com/v2ray/manual/master/resources/favicon-152.png)
+
 [Project V2Ray](http://www.v2ray.com).
 
 ## Download V2RayW
