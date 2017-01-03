@@ -135,6 +135,7 @@ namespace V2RayW
                 textBoxRemark.Text = "";
                 checkBoxAllowP.Checked = false;
                 comboBoxNetwork.SelectedIndex = 0;
+                comboBoxSecurity.SelectedIndex = 0;
             }
         }
 
@@ -149,6 +150,7 @@ namespace V2RayW
             textBoxRemark.Text = sp.remark;
             checkBoxAllowP.Checked = sp.allowPassive;
             comboBoxNetwork.SelectedIndex = sp.network;
+            comboBoxSecurity.SelectedIndex = sp.security;
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -226,6 +228,14 @@ namespace V2RayW
         private void comboBoxInP_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkBoxUDP.Visible = comboBoxInP.SelectedIndex == 0;
+        }
+
+        private void comboBoxSecurity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selectedServerIndex >= 0)
+            {
+                profiles[selectedServerIndex].security = comboBoxSecurity.SelectedIndex;
+            }
         }
     }
 }

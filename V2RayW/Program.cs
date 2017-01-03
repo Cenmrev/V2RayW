@@ -48,7 +48,7 @@ namespace V2RayW
             }
         }
         public static MainForm mainForm;
-        const string v2rayVersion = "v2.11.2";
+        const string v2rayVersion = "v2.13.2";
         static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
@@ -83,13 +83,13 @@ namespace V2RayW
                     }
                 case 1:
                     {
-                        DialogResult res = MessageBox.Show("Unknown version of v2ray core. Do you want to continue to use it?", "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core.\n{0} is suggested. Do you want to continue to use existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                         if (res == DialogResult.OK)
                         {
                             break;
                         } else
                         {
-                            DialogResult dres = MessageBox.Show("Do you want to download official core right now?", "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            DialogResult dres = MessageBox.Show(String.Format("Do you want to download official core {0} right now?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                             if (dres == DialogResult.OK)
                             {
                                 Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
@@ -106,32 +106,30 @@ namespace V2RayW
             var dProfilesStrArray = Properties.Settings.Default.profilesStr.Split('\t');
             foreach (string pstr in dProfilesStrArray)
             {
-                try
-                {
-                    var p = new Profile();
-                    dynamic dp = JObject.Parse(pstr);
-                    p.address = dp.address;
-                    p.port = dp.port;
-                    p.allowPassive = dp.allowPassive;
-                    p.alterId = dp.alterId;
-                    p.network = dp.network;
-                    p.remark = dp.remark;
-                    p.userId = dp.userId;
-                    Program.profiles.Add(p);
-                } catch
-                {
-                    continue;
-                }
+                var p = new Profile();
+                var dp = JObject.Parse(pstr);
+                p.address = (dp["address"] ?? "").ToString();
+                p.port = (int)(dp["port"] ?? 10086);
+                p.allowPassive = (bool)(dp["allowPassive"] ?? false);
+                p.alterId = (int)(dp["alterId"] ?? 0);
+                p.network = (int)(dp["network"] ?? 0);
+                p.remark = (dp["remark"] ?? "").ToString();
+                p.userId = (dp["userId"] ?? "").ToString();
+                p.security = (int)(dp["security"] ?? 0);
+                Program.profiles.Add(p);
             }
             if (profiles.Count <= 0)
             {
                 Program.proxyIsOn = false;
             }
-            if (! (Program.selectedServerIndex < Program.profiles.Count) )
+            if (Program.selectedServerIndex >= Program.profiles.Count )
             {
                 Program.selectedServerIndex = Program.profiles.Count - 1;
             }
-
+            if (Program.profiles.Count > 0 && Program.selectedServerIndex < 0)
+            {
+                Program.selectedServerIndex = 0;
+            }
             mainForm = new MainForm();
             mainForm.updateMenu();
             Program.updateSystemProxy();
@@ -160,7 +158,8 @@ namespace V2RayW
                 alterId = p.alterId,
                 remark = p.remark,
                 allowPassive = p.allowPassive,
-                network = p.network
+                network = p.network,
+                security = p.security
             };
             return JsonConvert.SerializeObject(pd);
         }
@@ -326,7 +325,8 @@ namespace V2RayW
             json.outbound.settings.vnext[0].port = profiles[selectedServerIndex].port;
             json.outbound.settings.vnext[0].users[0].id = profiles[selectedServerIndex].userId;
             json.outbound.settings.vnext[0].users[0].alterId = profiles[selectedServerIndex].alterId;
-            json.outbound.streamSettings.network = (new string[]{ "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network];
+            json.outbound.settings.vnext[0].users[0].security = (new string[] { "aes-128-cfb", "aes-128-gcm", "chacha20-poly1305" })[profiles[selectedServerIndex].security % 3];
+            json.outbound.streamSettings.network = (new string[]{ "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
             var dnsArray = Properties.Settings.Default.dns.Split(',');
             json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
             try
@@ -449,11 +449,12 @@ namespace V2RayW
     {
         internal string address = "1.2.3.4";
         internal bool allowPassive = false;
-        internal int alterId = 64;
+        internal int alterId = 0;
         internal int network = 0;
         internal int port = 10086;
         internal string remark = "";
-        internal string userId = Guid.NewGuid().ToString();
+        internal string userId = "";
+        internal int security = 0;
         public Profile DeepCopy()
         {
             Profile p = new Profile();
@@ -464,6 +465,7 @@ namespace V2RayW
             p.port = this.port;
             p.remark = String.Copy(this.remark);
             p.userId = String.Copy(this.userId);
+            p.security = this.security;
             return p;
         }
     }

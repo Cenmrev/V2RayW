@@ -44,6 +44,8 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.listBoxServers = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxSecurity = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.comboBoxNetwork = new System.Windows.Forms.ComboBox();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
             this.textBoxAlterID = new System.Windows.Forms.TextBox();
@@ -157,6 +159,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.comboBoxSecurity);
+            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.comboBoxNetwork);
             this.panel1.Controls.Add(this.textBoxRemark);
             this.panel1.Controls.Add(this.textBoxAlterID);
@@ -173,6 +177,23 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // comboBoxSecurity
+            // 
+            this.comboBoxSecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSecurity.FormattingEnabled = true;
+            this.comboBoxSecurity.Items.AddRange(new object[] {
+            resources.GetString("comboBoxSecurity.Items"),
+            resources.GetString("comboBoxSecurity.Items1"),
+            resources.GetString("comboBoxSecurity.Items2")});
+            resources.ApplyResources(this.comboBoxSecurity, "comboBoxSecurity");
+            this.comboBoxSecurity.Name = "comboBoxSecurity";
+            this.comboBoxSecurity.SelectedIndexChanged += new System.EventHandler(this.comboBoxSecurity_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
             // 
             // comboBoxNetwork
             // 
@@ -334,5 +355,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxInP;
+        private System.Windows.Forms.ComboBox comboBoxSecurity;
+        private System.Windows.Forms.Label label10;
     }
 }

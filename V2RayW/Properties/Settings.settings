@@ -35,7 +35,7 @@
       <Value Profile="(Default)">8080</Value>
     </Setting>
     <Setting Name="profilesStr" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}</Value>
+      <Value Profile="(Default)">{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297","security":0}</Value>
     </Setting>
     <Setting Name="proxyIsOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
