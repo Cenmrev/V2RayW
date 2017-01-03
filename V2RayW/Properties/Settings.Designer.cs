@@ -85,7 +85,8 @@ namespace V2RayW.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{\"address\":\"v2ray.cool\",\"allowPassive\":0,\"alterId\":64,\"network\":0,\"port\":10086,\"r" +
-            "emark\":\"test server\",\"userId\":\"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297\"}")]
+            "emark\":\"test server\",\"userId\":\"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297\",\"security\":" +
+            "0}")]
         public string profilesStr {
             get {
                 return ((string)(this["profilesStr"]));
