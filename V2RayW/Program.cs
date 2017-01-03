@@ -48,7 +48,7 @@ namespace V2RayW
             }
         }
         public static MainForm mainForm;
-        const string v2rayVersion = "v2.13.2";
+        const string v2rayVersion = "v2.13.1";
         static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
