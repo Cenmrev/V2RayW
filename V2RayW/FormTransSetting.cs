@@ -73,7 +73,7 @@ namespace V2RayW
 
         private void FormTransSetting_Load(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Upgrade();
+            //Properties.Settings.Default.Upgrade();
             string transportSettingsStr = Properties.Settings.Default.transportSettings;
             dynamic transportSettings = JObject.Parse(transportSettingsStr);
             textBoxKcpMtu.Text = transportSettings.kcpSettings.mtu;

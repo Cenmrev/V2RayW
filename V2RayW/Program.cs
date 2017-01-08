@@ -48,7 +48,7 @@ namespace V2RayW
             }
         }
         public static MainForm mainForm;
-        const string v2rayVersion = "v2.13.1";
+        const string v2rayVersion = "v2.13.2";
         static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
@@ -83,7 +83,7 @@ namespace V2RayW
                     }
                 case 1:
                     {
-                        DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core.\n{0} is suggested. Do you want to continue to use existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core detected, which may not be compatible with V2RayW.\n{0} is suggested. Do you want to continue to use the existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                         if (res == DialogResult.OK)
                         {
                             break;
@@ -304,7 +304,7 @@ namespace V2RayW
         {
             string templateStr = Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
             dynamic json = JObject.Parse(templateStr);
-            json.transport = JObject.Parse(Properties.Settings.Default.transportSettings);
+            //json.transport = JObject.Parse(Properties.Settings.Default.transportSettings);
             json.inbound.port = Properties.Settings.Default.localPort;
             json.inbound.protocol = Properties.Settings.Default.inProtocol == 0 ? "socks" : "http";
             if (Properties.Settings.Default.inProtocol == 0)
@@ -327,6 +327,10 @@ namespace V2RayW
             json.outbound.settings.vnext[0].users[0].alterId = profiles[selectedServerIndex].alterId;
             json.outbound.settings.vnext[0].users[0].security = (new string[] { "aes-128-cfb", "aes-128-gcm", "chacha20-poly1305" })[profiles[selectedServerIndex].security % 3];
             json.outbound.streamSettings.network = (new string[]{ "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
+            var ts = JObject.Parse(Properties.Settings.Default.transportSettings);
+            json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
+            json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
+            json.outbound.streamSettings.wsSettings = ts["wsSettings"];
             var dnsArray = Properties.Settings.Default.dns.Split(',');
             json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
             try

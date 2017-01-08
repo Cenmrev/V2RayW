@@ -75,7 +75,7 @@ namespace V2RayW
                 profiles.Add(p.DeepCopy());
             }
 
-            Properties.Settings.Default.Upgrade();
+            //Properties.Settings.Default.Upgrade();
             comboBoxInP.SelectedIndex = Properties.Settings.Default.inProtocol;
             textBoxLocalPort.Text = Properties.Settings.Default.localPort.ToString();
             checkBoxUDP.Checked = Properties.Settings.Default.udpSupport;
