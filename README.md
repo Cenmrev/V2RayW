@@ -6,10 +6,12 @@
 
 ![](https://raw.githubusercontent.com/v2ray/manual/master/resources/favicon-152.png)
 
-[Project V2Ray](http://www.v2ray.com).
+[Project V2Ray](https://www.v2ray.com).
 
 ## Download V2RayW
 
+Before you start to use V2RayW, you really should carefully read offical introduction to [v2ray](https://www.v2ray.com).
+在你使用 V2RayW 之前，务必通读 v2ray 的[官方介绍](https://www.v2ray.com)
 [Releases](https://github.com/Cenmrev/V2RayW/releases)
 
 ## How deos V2RayW work
