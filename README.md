@@ -18,6 +18,11 @@ Before you start to use V2RayW, you really should carefully read offical introdu
 
 V2RayW.exe provides a GUI to generate the config file (configw.json) for v2ray-core (v2ray.exe). It also allow users to change Windows proxy settings and switch proxy servers on the system tray.
 
+### Add V2RayW to startup
+
+[English](http://tunecomp.net/add-app-to-startup/)
+[中文](http://jingyan.baidu.com/article/90895e0ff3a41f64ec6b0bc3.html)
+
 ## Donation
 
 If Project V2Ray or V2RayW helped you, you can also help us by donation in your will. To donate to Project V2Ray, you may refer to [this page](https://www.v2ray.com/chapter_00/02_donate.html). To help this GUI program, you can send gift cards to `cenmrev@tutanota.de`.
