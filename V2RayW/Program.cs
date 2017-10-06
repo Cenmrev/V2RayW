@@ -351,7 +351,7 @@ namespace V2RayW
 
             var v2rayProcess = new Process();
             v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray.exe";
-            v2rayProcess.StartInfo.Arguments = "-config " + AppDomain.CurrentDomain.BaseDirectory + "configw.json";
+            v2rayProcess.StartInfo.Arguments = "-config " + @"""" + AppDomain.CurrentDomain.BaseDirectory + "configw.json" + @"""";
             v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             v2rayProcess.StartInfo.UseShellExecute = false;
             v2rayProcess.StartInfo.RedirectStandardOutput = true;
