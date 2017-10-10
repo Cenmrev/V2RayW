@@ -147,7 +147,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelLocalPort.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="checkBoxUDP.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei, 9pt</value>
@@ -184,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBoxUDP.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -214,7 +214,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="labelDNS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -244,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDNS.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -274,7 +274,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="buttonSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -283,13 +283,13 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 393</value>
+    <value>403, 392</value>
   </data>
   <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+    <value>68, 27</value>
   </data>
   <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -307,7 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="buttonCancel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,13 +316,13 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>458, 393</value>
+    <value>477, 393</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+    <value>68, 27</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -340,7 +340,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textBoxLocalPort.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei, 9pt</value>
@@ -367,7 +367,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxLocalPort.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBoxDNS.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei, 9pt</value>
@@ -394,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxDNS.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonTS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,13 +403,13 @@
     <value>Microsoft YaHei, 9pt</value>
   </data>
   <data name="buttonTS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 393</value>
+    <value>252, 393</value>
   </data>
   <data name="buttonTS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="buttonTS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 27</value>
+    <value>145, 27</value>
   </data>
   <data name="buttonTS.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -427,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonTS.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonRemove.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -810,6 +810,9 @@
   <data name="checkBoxAllowP.Text" xml:space="preserve">
     <value>Allow Passive</value>
   </data>
+  <data name="checkBoxAllowP.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;checkBoxAllowP.Name" xml:space="preserve">
     <value>checkBoxAllowP</value>
   </data>
@@ -1030,7 +1033,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxServer.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1057,7 +1060,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="comboBoxInP.Items" xml:space="preserve">
     <value>socks</value>
@@ -1084,6 +1087,33 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxInP.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxAlarm.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxAlarm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 397</value>
+  </data>
+  <data name="checkBoxAlarm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 21</value>
+  </data>
+  <data name="checkBoxAlarm.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="checkBoxAlarm.Text" xml:space="preserve">
+    <value>Alarm if core version is unknown.</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAlarm.Name" xml:space="preserve">
+    <value>checkBoxAlarm</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAlarm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAlarm.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAlarm.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1093,7 +1123,7 @@
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>557, 435</value>
+    <value>557, 434</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei, 9pt</value>

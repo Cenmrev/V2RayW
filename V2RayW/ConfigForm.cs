@@ -52,6 +52,7 @@ namespace V2RayW
             Properties.Settings.Default.dns = textBoxDNS.Text != "" ? textBoxDNS.Text : "localhost";
             var profileArray = Program.profiles.Select(p => Program.profileToStr(p));
             Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
+            Properties.Settings.Default.alarmUnknown = checkBoxAlarm.Checked;
             Properties.Settings.Default.Save();
 
             Program.updateSystemProxy();
@@ -67,6 +68,7 @@ namespace V2RayW
 
         private void ConfigForm_Load(object sender, EventArgs e)
         {
+            checkBoxAlarm.Checked = Properties.Settings.Default.alarmUnknown;
             this.Icon = Properties.Resources.vw256;
             selectedServerIndex = Program.selectedServerIndex;
             profiles.Clear();

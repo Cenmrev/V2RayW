@@ -83,19 +83,29 @@ namespace V2RayW
                     }
                 case 1:
                     {
-                        DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core detected, which may not be compatible with V2RayW.\n{0} is suggested. Do you want to continue to use the existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                        if (res == DialogResult.OK)
+                        if (Properties.Settings.Default.alarmUnknown == true)
+                        {
+          
+                            DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core detected, which may not be compatible with V2RayW.\n{0} is suggested. Do you want to continue to use the existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                            if (res == DialogResult.OK)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                DialogResult dres = MessageBox.Show(String.Format("Do you want to download official core {0} right now?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                                if (dres == DialogResult.OK)
+                                {
+                                    Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
+                                }
+                                return;
+                            }
+                        }
+                        else
                         {
                             break;
-                        } else
-                        {
-                            DialogResult dres = MessageBox.Show(String.Format("Do you want to download official core {0} right now?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                            if (dres == DialogResult.OK)
-                            {
-                                Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
-                            }
-                            return;
                         }
+
                     }
                 default: break;
             }
