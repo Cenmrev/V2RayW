@@ -58,12 +58,23 @@
             this.textBoxWsPath = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxWsCr = new System.Windows.Forms.CheckBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBoxMuxCc = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxMuxEnable = new System.Windows.Forms.CheckBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.checkBoxTLSEnable = new System.Windows.Forms.CheckBox();
+            this.textBoxTLSSn = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.checkBoxTLSAI = new System.Windows.Forms.CheckBox();
             this.buttonTsReset = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonTSCancel
@@ -114,6 +125,8 @@
             this.tabControlMain.Controls.Add(this.tabPage1);
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
+            this.tabControlMain.Controls.Add(this.tabPage4);
+            this.tabControlMain.Controls.Add(this.tabPage5);
             this.tabControlMain.Location = new System.Drawing.Point(12, 13);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControlMain.Name = "tabControlMain";
@@ -381,6 +394,95 @@
             this.checkBoxWsCr.Text = "connection reuse";
             this.checkBoxWsCr.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.textBoxMuxCc);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.Controls.Add(this.checkBoxMuxEnable);
+            this.tabPage4.Location = new System.Drawing.Point(4, 26);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(470, 139);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Mux.Cool";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBoxMuxCc
+            // 
+            this.textBoxMuxCc.Location = new System.Drawing.Point(109, 74);
+            this.textBoxMuxCc.Name = "textBoxMuxCc";
+            this.textBoxMuxCc.Size = new System.Drawing.Size(50, 23);
+            this.textBoxMuxCc.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(22, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 17);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "concurrency:";
+            // 
+            // checkBoxMuxEnable
+            // 
+            this.checkBoxMuxEnable.AutoSize = true;
+            this.checkBoxMuxEnable.Location = new System.Drawing.Point(29, 38);
+            this.checkBoxMuxEnable.Name = "checkBoxMuxEnable";
+            this.checkBoxMuxEnable.Size = new System.Drawing.Size(74, 21);
+            this.checkBoxMuxEnable.TabIndex = 2;
+            this.checkBoxMuxEnable.Text = "enabled";
+            this.checkBoxMuxEnable.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.checkBoxTLSEnable);
+            this.tabPage5.Controls.Add(this.textBoxTLSSn);
+            this.tabPage5.Controls.Add(this.label12);
+            this.tabPage5.Controls.Add(this.checkBoxTLSAI);
+            this.tabPage5.Location = new System.Drawing.Point(4, 26);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(470, 139);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "TLS";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTLSEnable
+            // 
+            this.checkBoxTLSEnable.AutoSize = true;
+            this.checkBoxTLSEnable.Location = new System.Drawing.Point(25, 34);
+            this.checkBoxTLSEnable.Name = "checkBoxTLSEnable";
+            this.checkBoxTLSEnable.Size = new System.Drawing.Size(74, 21);
+            this.checkBoxTLSEnable.TabIndex = 15;
+            this.checkBoxTLSEnable.Text = "enabled";
+            this.checkBoxTLSEnable.UseVisualStyleBackColor = true;
+            // 
+            // textBoxTLSSn
+            // 
+            this.textBoxTLSSn.Location = new System.Drawing.Point(109, 82);
+            this.textBoxTLSSn.Name = "textBoxTLSSn";
+            this.textBoxTLSSn.Size = new System.Drawing.Size(175, 23);
+            this.textBoxTLSSn.TabIndex = 14;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 85);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(82, 17);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "serverName:";
+            // 
+            // checkBoxTLSAI
+            // 
+            this.checkBoxTLSAI.AutoSize = true;
+            this.checkBoxTLSAI.Location = new System.Drawing.Point(25, 61);
+            this.checkBoxTLSAI.Name = "checkBoxTLSAI";
+            this.checkBoxTLSAI.Size = new System.Drawing.Size(106, 21);
+            this.checkBoxTLSAI.TabIndex = 12;
+            this.checkBoxTLSAI.Text = "allowInsecure";
+            this.checkBoxTLSAI.UseVisualStyleBackColor = true;
+            // 
             // buttonTsReset
             // 
             this.buttonTsReset.AutoSize = true;
@@ -426,6 +528,10 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,5 +570,14 @@
         private System.Windows.Forms.Button buttonTsReset;
         private System.Windows.Forms.ComboBox comboBoxTcpHt;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox textBoxMuxCc;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBoxMuxEnable;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.CheckBox checkBoxTLSEnable;
+        private System.Windows.Forms.TextBox textBoxTLSSn;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox checkBoxTLSAI;
     }
 }

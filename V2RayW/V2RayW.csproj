@@ -57,7 +57,7 @@
     <ApplicationIcon>Resources\vw256.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D59E9312236992F8E229D13659389DDF0A2B208C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>C703DBF0FD6FDFEEAFBC3E20CAF1244B469CEBBD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>V2RayW_TemporaryKey.pfx</ManifestKeyFile>
@@ -146,6 +146,7 @@
     </Compile>
     <None Include="Resources\config-rules.json" />
     <None Include="Resources\config-simple.json" />
+    <None Include="V2RayW_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

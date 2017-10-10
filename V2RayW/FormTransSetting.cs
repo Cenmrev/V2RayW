@@ -35,6 +35,11 @@ namespace V2RayW
             {
                 return;
             }
+            var muxSettings = new
+            {
+                enabled = checkBoxMuxEnable.Checked,
+                concurrency = Program.strToInt(textBoxMuxCc.Text, 8)
+            };
             var transportSettings = new {
                 kcpSettings = new 
                 {
@@ -65,6 +70,7 @@ namespace V2RayW
                 } 
             };
             Properties.Settings.Default["transportSettings"] = JsonConvert.SerializeObject(transportSettings);
+            Properties.Settings.Default.mux = JsonConvert.SerializeObject(muxSettings);
             Properties.Settings.Default.Save();
             this.Close();
         }
@@ -89,6 +95,11 @@ namespace V2RayW
             comboBoxTcpHt.SelectedIndex = transportSettings.tcpSettings.header.type == "none" ? 0 : 1;
             checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse;
             textBoxWsPath.Text = transportSettings.wsSettings.path;
+
+            string muxSettingsStr = Properties.Settings.Default.mux;
+            dynamic muxSettings = JObject.Parse(muxSettingsStr);
+            checkBoxMuxEnable.Checked = muxSettings.enabled;
+            textBoxMuxCc.Text = muxSettings.concurrency;
         }
 
         private void buttonTsReset_Click(object sender, EventArgs e)
@@ -105,6 +116,9 @@ namespace V2RayW
             comboBoxTcpHt.SelectedIndex = 0;
             checkBoxWsCr.Checked = true;
             textBoxWsPath.Text = "";
+
+            checkBoxMuxEnable.Checked = false;
+            textBoxMuxCc.Text = "8";
         }
     }
 }

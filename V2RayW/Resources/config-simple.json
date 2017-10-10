@@ -79,6 +79,10 @@
     "streamSettings" : {
       "network" : "tcp"
     },
+    "mux": {
+      "enabled": true,
+	  "concurrency": 8
+    },
     "settings" : {
       "vnext" : [
         {

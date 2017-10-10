@@ -26,6 +26,12 @@ namespace V2RayW.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"{
+  ""network"": ""tcp"",
+  ""security"": ""none"",
+  ""tlsSettings"": {
+    ""serverName"": ""v2ray.com"",
+    ""allowInsecure"": false
+  },
   ""tcpSettings"": {
     ""connectionReuse"": true,
     ""header"": {
@@ -165,6 +171,18 @@ namespace V2RayW.Properties {
             }
             set {
                 this["alarmUnknown"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\r\n  \"enabled\": false,\r\n  \"concurrency\": 8\r\n}")]
+        public string mux {
+            get {
+                return ((string)(this["mux"]));
+            }
+            set {
+                this["mux"] = value;
             }
         }
     }

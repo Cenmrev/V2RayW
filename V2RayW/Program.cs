@@ -341,6 +341,7 @@ namespace V2RayW
             json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
             json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
             json.outbound.streamSettings.wsSettings = ts["wsSettings"];
+            json.outbound.mux = JObject.Parse(Properties.Settings.Default.mux);
             var dnsArray = Properties.Settings.Default.dns.Split(',');
             json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
             try

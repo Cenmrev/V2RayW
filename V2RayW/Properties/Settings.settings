@@ -4,6 +4,12 @@
   <Settings>
     <Setting Name="transportSettings" Type="System.String" Scope="User">
       <Value Profile="(Default)">{
+  "network": "tcp",
+  "security": "none",
+  "tlsSettings": {
+    "serverName": "v2ray.com",
+    "allowInsecure": false
+  },
   "tcpSettings": {
     "connectionReuse": true,
     "header": {
@@ -54,6 +60,12 @@
     </Setting>
     <Setting Name="alarmUnknown" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="mux" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{
+  "enabled": false,
+  "concurrency": 8
+}</Value>
     </Setting>
   </Settings>
 </SettingsFile>
