@@ -336,11 +336,14 @@ namespace V2RayW
             json.outbound.settings.vnext[0].users[0].id = profiles[selectedServerIndex].userId;
             json.outbound.settings.vnext[0].users[0].alterId = profiles[selectedServerIndex].alterId;
             json.outbound.settings.vnext[0].users[0].security = (new string[] { "aes-128-cfb", "aes-128-gcm", "chacha20-poly1305" })[profiles[selectedServerIndex].security % 3];
-            json.outbound.streamSettings.network = (new string[]{ "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
+            
             var ts = JObject.Parse(Properties.Settings.Default.transportSettings);
-            json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
-            json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
-            json.outbound.streamSettings.wsSettings = ts["wsSettings"];
+            //json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
+            //json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
+            //json.outbound.streamSettings.wsSettings = ts["wsSettings"];
+            json.outbound.steamSettings = ts;
+            json.outbound.streamSettings.network = (new string[] { "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
+
             json.outbound.mux = JObject.Parse(Properties.Settings.Default.mux);
             var dnsArray = Properties.Settings.Default.dns.Split(',');
             json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   

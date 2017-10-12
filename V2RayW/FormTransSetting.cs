@@ -41,6 +41,12 @@ namespace V2RayW
                 concurrency = Program.strToInt(textBoxMuxCc.Text, 8)
             };
             var transportSettings = new {
+                network = "tcp",
+                security = checkBoxTLSEnable.Checked ? "tls" : "none",
+                tlsSettings = new {
+                    serverName = textBoxTLSSn.Text,
+                    allowInsecure = checkBoxTLSAI.Checked
+                },
                 kcpSettings = new 
                 {
                     mtu = Program.strToInt(textBoxKcpMtu.Text, 1350),
@@ -96,6 +102,10 @@ namespace V2RayW
             checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse;
             textBoxWsPath.Text = transportSettings.wsSettings.path;
 
+            checkBoxTLSEnable.Checked = transportSettings.security == "tls";
+            checkBoxTLSAI.Checked = transportSettings.tlsSettings.allowInsecure;
+            textBoxTLSSn.Text = transportSettings.tlsSettings.serverName;
+
             string muxSettingsStr = Properties.Settings.Default.mux;
             dynamic muxSettings = JObject.Parse(muxSettingsStr);
             checkBoxMuxEnable.Checked = muxSettings.enabled;
@@ -119,6 +129,8 @@ namespace V2RayW
 
             checkBoxMuxEnable.Checked = false;
             textBoxMuxCc.Text = "8";
+
+            checkBoxTLSEnable.Checked = false;
         }
     }
 }
