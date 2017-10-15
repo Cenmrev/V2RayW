@@ -341,7 +341,7 @@ namespace V2RayW
             //json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
             //json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
             //json.outbound.streamSettings.wsSettings = ts["wsSettings"];
-            json.outbound.steamSettings = ts;
+            json.outbound.streamSettings = ts;
             json.outbound.streamSettings.network = (new string[] { "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
 
             json.outbound.mux = JObject.Parse(Properties.Settings.Default.mux);
