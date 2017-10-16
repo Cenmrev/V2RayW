@@ -173,7 +173,22 @@ namespace V2RayW.Properties {
                 this["alarmUnknown"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool autoSetSysProxy
+        {
+            get
+            {
+                return ((bool)(this["autoSetSysProxy"]));
+            }
+            set
+            {
+                this["autoSetSysProxy"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{\r\n  \"enabled\": false,\r\n  \"concurrency\": 8\r\n}")]

@@ -38,6 +38,15 @@ namespace V2RayW
                 Properties.Settings.Default.Save();
             }
         }
+        public static bool setSysProxy
+        {
+            get { return Properties.Settings.Default.autoSetSysProxy; }
+            set
+            {
+                Properties.Settings.Default.autoSetSysProxy = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         public static int proxyMode
         {
             get { return Properties.Settings.Default.proxyMode % 3; }
@@ -244,34 +253,44 @@ namespace V2RayW
         public static int runSysproxy()
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
-
-            bool settingsReturn, refreshReturn;
-
-            registry.SetValue("ProxyEnable", proxyIsOn ? 1 : 0);
-            if (proxyIsOn)
+            if (setSysProxy)
             {
-                registry.SetValue("ProxyServer", (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") + $"127.0.0.1:{Properties.Settings.Default.localPort}");
-                registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
-            }
-            var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
-            var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") +  $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
-            //MessageBox.Show(registry.GetValue("ProxyServer").ToString());
-            var sysOverride = proxyIsOn ? registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*" : true;
-            // They cause the OS to refresh the settings, causing IP to realy update
-            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
-            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
-            if (sysServer && sysState && sysOverride)
-            {
-                if (settingsReturn && refreshReturn)
+
+                bool settingsReturn, refreshReturn;
+
+                registry.SetValue("ProxyEnable", proxyIsOn ? 1 : 0);
+                if (proxyIsOn)
                 {
-                    return 0;
-                } else
-                {
-                    return 1;
+                    registry.SetValue("ProxyServer", (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") + $"127.0.0.1:{Properties.Settings.Default.localPort}");
+                    registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
                 }
-            } else
+                var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
+                var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") + $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
+                //MessageBox.Show(registry.GetValue("ProxyServer").ToString());
+                var sysOverride = proxyIsOn ? registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*" : true;
+                // They cause the OS to refresh the settings, causing IP to realy update
+                settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
+                refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+                if (sysServer && sysState && sysOverride)
+                {
+                    if (settingsReturn && refreshReturn)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+            else
             {
-                return 2;
+                registry.SetValue("ProxyEnable", 0);
+                return 0;
             }
         }
 

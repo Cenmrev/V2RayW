@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelLocalPort.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="labelLocalPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>231, 21</value>
@@ -147,10 +147,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelLocalPort.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="checkBoxUDP.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="checkBoxUDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -184,13 +184,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBoxUDP.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 8pt</value>
+    <value>Microsoft YaHei UI, 8pt</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 47</value>
@@ -214,13 +214,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="labelDNS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelDNS.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="labelDNS.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 88</value>
@@ -244,13 +244,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDNS.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 112</value>
@@ -274,13 +274,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="buttonSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="buttonSave.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>403, 394</value>
@@ -307,13 +307,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="buttonCancel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>477, 394</value>
@@ -340,10 +340,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="textBoxLocalPort.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxLocalPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 18</value>
@@ -367,10 +367,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxLocalPort.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textBoxDNS.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxDNS.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 85</value>
@@ -394,13 +394,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxDNS.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="buttonTS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="buttonTS.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="buttonTS.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 394</value>
@@ -427,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonTS.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;buttonRemove.Name" xml:space="preserve">
     <value>buttonRemove</value>
@@ -478,7 +478,7 @@
     <value>3</value>
   </data>
   <data name="groupBoxServer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="groupBoxServer.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 152</value>
@@ -508,13 +508,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxServer.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonRemove.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="buttonRemove.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="buttonRemove.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -550,7 +550,7 @@
     <value>True</value>
   </data>
   <data name="buttonAdd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="buttonAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -790,7 +790,7 @@
     <value>14</value>
   </data>
   <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 28</value>
@@ -913,7 +913,7 @@
     <value>2</value>
   </data>
   <data name="textBoxRemark.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxRemark.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 132</value>
@@ -940,7 +940,7 @@
     <value>3</value>
   </data>
   <data name="textBoxAlterID.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxAlterID.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 68</value>
@@ -967,7 +967,7 @@
     <value>4</value>
   </data>
   <data name="textBoxUserId.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxUserId.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 37</value>
@@ -994,7 +994,7 @@
     <value>5</value>
   </data>
   <data name="textBoxPort.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 6</value>
@@ -1021,7 +1021,7 @@
     <value>6</value>
   </data>
   <data name="textBoxAddress.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="textBoxAddress.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 6</value>
@@ -1288,7 +1288,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comboBoxInP.Items" xml:space="preserve">
     <value>socks</value>
@@ -1315,7 +1315,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxInP.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="checkBoxAlarm.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1342,6 +1342,33 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBoxAlarm.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxSysProxy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxSysProxy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 112</value>
+  </data>
+  <data name="checkBoxSysProxy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 21</value>
+  </data>
+  <data name="checkBoxSysProxy.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="checkBoxSysProxy.Text" xml:space="preserve">
+    <value>Auto set Windows Proxy</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSysProxy.Name" xml:space="preserve">
+    <value>checkBoxSysProxy</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSysProxy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSysProxy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSysProxy.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1354,7 +1381,7 @@
     <value>557, 434</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei, 9pt</value>
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
