@@ -486,7 +486,7 @@ namespace V2RayW
     {
         internal string address = "1.2.3.4";
         internal bool allowPassive = false;
-        internal int alterId = 0;
+        internal int alterId = 64;
         internal int network = 0;
         internal int port = 10086;
         internal string remark = "";
