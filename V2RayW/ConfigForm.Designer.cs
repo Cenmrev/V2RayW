@@ -62,6 +62,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxInP = new System.Windows.Forms.ComboBox();
             this.checkBoxAlarm = new System.Windows.Forms.CheckBox();
+            this.checkBoxSysProxy = new System.Windows.Forms.CheckBox();
             this.groupBoxServer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -298,12 +299,19 @@
             this.checkBoxAlarm.Name = "checkBoxAlarm";
             this.checkBoxAlarm.UseVisualStyleBackColor = true;
             // 
+            // checkBoxSysProxy
+            // 
+            resources.ApplyResources(this.checkBoxSysProxy, "checkBoxSysProxy");
+            this.checkBoxSysProxy.Name = "checkBoxSysProxy";
+            this.checkBoxSysProxy.UseVisualStyleBackColor = true;
+            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonSave;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.checkBoxSysProxy);
             this.Controls.Add(this.checkBoxAlarm);
             this.Controls.Add(this.comboBoxInP);
             this.Controls.Add(this.label2);
@@ -366,5 +374,6 @@
         private System.Windows.Forms.ComboBox comboBoxSecurity;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox checkBoxAlarm;
+        private System.Windows.Forms.CheckBox checkBoxSysProxy;
     }
 }

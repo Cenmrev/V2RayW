@@ -53,6 +53,7 @@ namespace V2RayW
             var profileArray = Program.profiles.Select(p => Program.profileToStr(p));
             Properties.Settings.Default.profilesStr = String.Join("\t", profileArray);
             Properties.Settings.Default.alarmUnknown = checkBoxAlarm.Checked;
+            Properties.Settings.Default.autoSetSysProxy = checkBoxSysProxy.Checked;
             Properties.Settings.Default.Save();
 
             Program.updateSystemProxy();
@@ -69,6 +70,7 @@ namespace V2RayW
         private void ConfigForm_Load(object sender, EventArgs e)
         {
             checkBoxAlarm.Checked = Properties.Settings.Default.alarmUnknown;
+            checkBoxSysProxy.Checked = Properties.Settings.Default.autoSetSysProxy;
             this.Icon = Properties.Resources.vw256;
             selectedServerIndex = Program.selectedServerIndex;
             profiles.Clear();
@@ -239,5 +241,6 @@ namespace V2RayW
                 profiles[selectedServerIndex].security = comboBoxSecurity.SelectedIndex;
             }
         }
+
     }
 }
