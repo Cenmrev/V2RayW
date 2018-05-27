@@ -53,7 +53,6 @@
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBoxAllowP = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -62,6 +61,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxInP = new System.Windows.Forms.ComboBox();
             this.checkBoxAlarm = new System.Windows.Forms.CheckBox();
+            this.buttonImport = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBoxServer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -164,12 +167,12 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.comboBoxNetwork);
             this.panel1.Controls.Add(this.textBoxRemark);
+            this.panel1.Controls.Add(this.buttonTS);
             this.panel1.Controls.Add(this.textBoxAlterID);
             this.panel1.Controls.Add(this.textBoxUserId);
             this.panel1.Controls.Add(this.textBoxPort);
             this.panel1.Controls.Add(this.textBoxAddress);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.checkBoxAllowP);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
@@ -244,13 +247,6 @@
             this.label9.Name = "label9";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // checkBoxAllowP
-            // 
-            resources.ApplyResources(this.checkBoxAllowP, "checkBoxAllowP");
-            this.checkBoxAllowP.Name = "checkBoxAllowP";
-            this.checkBoxAllowP.UseVisualStyleBackColor = true;
-            this.checkBoxAllowP.CheckedChanged += new System.EventHandler(this.checkBoxAllowP_CheckedChanged);
-            // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
@@ -298,17 +294,51 @@
             this.checkBoxAlarm.Name = "checkBoxAlarm";
             this.checkBoxAlarm.UseVisualStyleBackColor = true;
             // 
+            // buttonImport
+            // 
+            resources.ApplyResources(this.buttonImport, "buttonImport");
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1"),
+            resources.GetString("comboBox1.Items2"),
+            resources.GetString("comboBox1.Items3"),
+            resources.GetString("comboBox1.Items4")});
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.Name = "comboBox1";
+            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonSave;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.checkBoxAlarm);
             this.Controls.Add(this.comboBoxInP);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBoxServer);
-            this.Controls.Add(this.buttonTS);
             this.Controls.Add(this.textBoxDNS);
             this.Controls.Add(this.textBoxLocalPort);
             this.Controls.Add(this.buttonCancel);
@@ -352,7 +382,6 @@
         private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBoxAllowP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -366,5 +395,9 @@
         private System.Windows.Forms.ComboBox comboBoxSecurity;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox checkBoxAlarm;
+        private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
