@@ -28,41 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.listBoxCusConfig = new System.Windows.Forms.ListBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonFinish = new System.Windows.Forms.Button();
+            this.dialog = new System.Windows.Forms.OpenFileDialog();
+            this.labelIndicator = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listBox1
+            // listBoxCusConfig
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 17;
-            this.listBox1.Location = new System.Drawing.Point(12, 13);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(500, 157);
-            this.listBox1.TabIndex = 0;
+            this.listBoxCusConfig.FormattingEnabled = true;
+            this.listBoxCusConfig.ItemHeight = 17;
+            this.listBoxCusConfig.Location = new System.Drawing.Point(12, 13);
+            this.listBoxCusConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCusConfig.Name = "listBoxCusConfig";
+            this.listBoxCusConfig.Size = new System.Drawing.Size(500, 157);
+            this.listBoxCusConfig.TabIndex = 0;
+            this.listBoxCusConfig.SelectedValueChanged += new System.EventHandler(this.listBoxCusConfig_SelectedValueChanged);
             // 
-            // button1
+            // buttonAdd
             // 
-            this.button1.Location = new System.Drawing.Point(12, 177);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 27);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonAdd.Location = new System.Drawing.Point(12, 177);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(59, 27);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // button2
+            // buttonRemove
             // 
-            this.button2.Location = new System.Drawing.Point(77, 177);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 27);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Remove";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonRemove.Location = new System.Drawing.Point(77, 177);
+            this.buttonRemove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(87, 27);
+            this.buttonRemove.TabIndex = 2;
+            this.buttonRemove.Text = "Remove";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // buttonFinish
             // 
@@ -70,9 +75,25 @@
             this.buttonFinish.Name = "buttonFinish";
             this.buttonFinish.Size = new System.Drawing.Size(75, 27);
             this.buttonFinish.TabIndex = 3;
-            this.buttonFinish.Text = "Finish";
+            this.buttonFinish.Text = "Save";
             this.buttonFinish.UseVisualStyleBackColor = true;
             this.buttonFinish.Click += new System.EventHandler(this.buttonFinish_Click);
+            // 
+            // dialog
+            // 
+            this.dialog.FileName = "config.json";
+            this.dialog.Filter = "Json|*.json";
+            this.dialog.RestoreDirectory = true;
+            this.dialog.Title = "Choose config.json";
+            // 
+            // labelIndicator
+            // 
+            this.labelIndicator.AutoSize = true;
+            this.labelIndicator.Location = new System.Drawing.Point(332, 182);
+            this.labelIndicator.Name = "labelIndicator";
+            this.labelIndicator.Size = new System.Drawing.Size(43, 17);
+            this.labelIndicator.TabIndex = 4;
+            this.labelIndicator.Text = "label1";
             // 
             // FormImport
             // 
@@ -80,10 +101,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 213);
             this.ControlBox = false;
+            this.Controls.Add(this.labelIndicator);
             this.Controls.Add(this.buttonFinish);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.buttonRemove);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.listBoxCusConfig);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
@@ -91,15 +113,19 @@
             this.Name = "FormImport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Import customized config.json";
+            this.Load += new System.EventHandler(this.FormImport_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBoxCusConfig;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonFinish;
+        private System.Windows.Forms.OpenFileDialog dialog;
+        private System.Windows.Forms.Label labelIndicator;
     }
 }

@@ -67,5 +67,8 @@
   "concurrency": 8
 }</Value>
     </Setting>
+    <Setting Name="cusProfiles" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
