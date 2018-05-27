@@ -81,7 +81,7 @@
             // 
             this.buttonTSCancel.AutoSize = true;
             this.buttonTSCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonTSCancel.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTSCancel.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.buttonTSCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonTSCancel.Location = new System.Drawing.Point(399, 186);
             this.buttonTSCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -95,7 +95,7 @@
             // buttonTSSave
             // 
             this.buttonTSSave.AutoSize = true;
-            this.buttonTSSave.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTSSave.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.buttonTSSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonTSSave.Location = new System.Drawing.Point(306, 186);
             this.buttonTSSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -109,7 +109,7 @@
             // buttonTSHelp
             // 
             this.buttonTSHelp.AutoSize = true;
-            this.buttonTSHelp.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTSHelp.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.buttonTSHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonTSHelp.Location = new System.Drawing.Point(12, 186);
             this.buttonTSHelp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -486,7 +486,7 @@
             // buttonTsReset
             // 
             this.buttonTsReset.AutoSize = true;
-            this.buttonTsReset.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.buttonTsReset.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.buttonTsReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonTsReset.Location = new System.Drawing.Point(213, 186);
             this.buttonTsReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -504,12 +504,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonTSCancel;
             this.ClientSize = new System.Drawing.Size(504, 226);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonTsReset);
             this.Controls.Add(this.buttonTSSave);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonTSHelp);
             this.Controls.Add(this.buttonTSCancel);
-            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;

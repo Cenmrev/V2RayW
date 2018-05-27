@@ -135,7 +135,6 @@ namespace V2RayW
                 textBoxUserId.Text = "";
                 textBoxAlterID.Text = "";
                 textBoxRemark.Text = "";
-                checkBoxAllowP.Checked = false;
                 comboBoxNetwork.SelectedIndex = 0;
                 comboBoxSecurity.SelectedIndex = 0;
             }
@@ -150,7 +149,6 @@ namespace V2RayW
             textBoxUserId.Text = sp.userId;
             textBoxAlterID.Text = sp.alterId.ToString();
             textBoxRemark.Text = sp.remark;
-            checkBoxAllowP.Checked = sp.allowPassive;
             comboBoxNetwork.SelectedIndex = sp.network;
             comboBoxSecurity.SelectedIndex = sp.security;
         }
@@ -210,14 +208,7 @@ namespace V2RayW
                 loadProfiles();
             }
         }
-
-        private void checkBoxAllowP_CheckedChanged(object sender, EventArgs e)
-        {
-            if (selectedServerIndex >= 0)
-            {
-                profiles[selectedServerIndex].allowPassive = checkBoxAllowP.Checked;
-            }
-        }
+        
 
         private void comboBoxNetwork_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -238,6 +229,12 @@ namespace V2RayW
             {
                 profiles[selectedServerIndex].security = comboBoxSecurity.SelectedIndex;
             }
+        }
+
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            var importWindow = new FormImport();
+            importWindow.ShowDialog(this);
         }
     }
 }
