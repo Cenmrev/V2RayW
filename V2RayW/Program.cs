@@ -338,10 +338,12 @@ namespace V2RayW
             json.outbound.settings.vnext[0].users[0].security = (new string[] { "aes-128-cfb", "aes-128-gcm", "chacha20-poly1305" })[profiles[selectedServerIndex].security % 3];
             
             var ts = JObject.Parse(Properties.Settings.Default.transportSettings);
-            //json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
-            //json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
-            //json.outbound.streamSettings.wsSettings = ts["wsSettings"];
-            json.outbound.streamSettings = ts;
+            json.outbound.streamSettings.security = ts["security"];
+            json.outbound.streamSettings.tlsSettings = ts["tlsSettings"];
+            json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
+            json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
+            json.outbound.streamSettings.wsSettings = ts["wsSettings"];
+            //json.outbound.streamSettings = ts;
             json.outbound.streamSettings.network = (new string[] { "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
 
             json.outbound.mux = JObject.Parse(Properties.Settings.Default.mux);
