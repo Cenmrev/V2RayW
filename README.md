@@ -1,17 +1,19 @@
-![V2RayW](https://raw.githubusercontent.com/Cenmrev/V2RayW/master/V2RayW/Resources/vw256.ico)
-
 # V2RayW: A simple GUI for V2Ray on Windows
 
 ## what is V2Ray?
-
-![](https://raw.githubusercontent.com/v2ray/manual/master/resources/favicon-152.png)
 
 [Project V2Ray](https://www.v2ray.com).
 
 ## Download V2RayW
 
-Before you start to use V2RayW, you really should carefully read offical introduction to [v2ray](https://www.v2ray.com).
-在你使用 V2RayW 之前，务必通读 v2ray 的[官方介绍](https://www.v2ray.com)
+Before you start to use V2RayW, you really should carefully read offical introduction to [v2ray](https://www.v2ray.com/en/).
+
+あなたがそれを使用し始める前に、[公式の紹介](https://www.v2ray.com/en/)を注意深く読むべきです。
+
+在你使用 V2RayW 之前，务必通读 v2ray 的[官方介绍](https://www.v2ray.com).
+
+在開始使用 V2RayW 之前，您應該仔細閱讀[官方介紹](https://www.v2ray.com).
+
 [Releases](https://github.com/Cenmrev/V2RayW/releases)
 
 ## How deos V2RayW work
@@ -20,12 +22,8 @@ V2RayW.exe provides a GUI to generate the config file (configw.json) for v2ray-c
 
 ### Add V2RayW to startup
 
-[English](http://tunecomp.net/add-app-to-startup/)
+[English](http://tunecomp.net/add-app-to-startup/) 
 [中文](http://jingyan.baidu.com/article/90895e0ff3a41f64ec6b0bc3.html)
-
-## Donation
-
-If Project V2Ray or V2RayW helped you, you can also help us by donation in your will. To donate to Project V2Ray, you may refer to [this page](https://www.v2ray.com/chapter_00/02_donate.html). To help this GUI program, you can send gift cards to `cenmrev@tutanota.de`.
 
 ## Disclaimer
 
