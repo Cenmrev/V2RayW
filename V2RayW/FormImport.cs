@@ -31,7 +31,7 @@ namespace V2RayW
                     ProcessStartInfo info = new ProcessStartInfo();
                     string v2rayBin = AppDomain.CurrentDomain.BaseDirectory + "v2ray.exe";
                     info.FileName = v2rayBin;
-                    info.Arguments = "-test -config " + jsonpath;
+                    info.Arguments = "-test -config " + "\""+ jsonpath + "\"";
                     info.WindowStyle = ProcessWindowStyle.Hidden;
                     Process proBach = Process.Start(info);
                     proBach.WaitForExit();
