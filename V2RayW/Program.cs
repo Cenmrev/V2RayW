@@ -59,7 +59,7 @@ namespace V2RayW
         [STAThread]
         static void Main()
         {
-            
+            //Properties.Settings.Default.Reset();
             //backgourdworker
             v2rayCoreWorker.WorkerSupportsCancellation = true;
             v2rayCoreWorker.DoWork += new DoWorkEventHandler(Program.v2rayCoreWorker_DoWork);
@@ -166,12 +166,8 @@ namespace V2RayW
 
         public static void loadV2ray()
         {
-            if (!useMultipleServer && useCusProfile)
+            if (!useCusProfile && selectedServerIndex >= 0 && selectedServerIndex < profiles.Count)
             {
-                ; // using customized profile
-            } else
-            {
-                //single or multi servers
                 generateConfigJson();
             }
             v2rayCoreWorker.RunWorkerAsync();
@@ -195,31 +191,9 @@ namespace V2RayW
                     }
                     MessageBox.Show("No available servers!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                updateSystemProxy();
             }
-            updateSystemProxy();
             mainForm.updateMenu();
-        }
-
-        public static async void updateSystemProxy()
-        {
-            if (coreLoaded)
-            {
-                await stopV2Ray();
-                //generate config.json
-                if (generateConfigJson())
-                {
-                    v2rayCoreWorker.RunWorkerAsync();
-                } else
-                {
-                    Program.coreLoaded = false;
-                    mainForm.updateMenu();
-                }
-            } else
-            {
-                await stopV2Ray();
-                Debug.WriteLine("v stopped");
-            }
-            runSysproxy();
         }
 
         //https://social.msdn.microsoft.com/Forums/vstudio/en-US/19517edf-8348-438a-a3da-5fbe7a46b61a/how-to-change-global-windows-proxy-using-c-net-with-immediate-effect?forum=csharpgeneral
@@ -246,7 +220,7 @@ namespace V2RayW
             InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
         }
 
-        public static int runSysproxy()
+        public static int updateSystemProxy()
         {
             // manual mode 
             if (Program.proxyMode == 3)
@@ -311,7 +285,22 @@ namespace V2RayW
             }
             foreach(var p in defaults.profilesStr.Split('\t'))
             {
-                profiles.Add(js.Deserialize<ServerProfile>(p));
+                var aP = js.Deserialize<ServerProfile>(p);
+                if (aP is null)
+                {
+                    continue;
+                }
+                profiles.Add(aP);
+            }
+            if(profiles.Count() == 0)
+            {
+                profiles.Add(new ServerProfile { remark = "sample" });
+                selectedServerIndex = 0;
+            }
+            if(cusProfiles.Count() == 0)
+            {
+                useCusProfile = false;
+                selectedCusServerIndex = -1;
             }
             mainInboundType = defaults.mainInboundType;
             alarmUnknown = defaults.alarmUnknown;

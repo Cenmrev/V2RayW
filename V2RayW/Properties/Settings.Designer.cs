@@ -49,7 +49,7 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8080")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1081")]
         public int localPort {
             get {
                 return ((int)(this["localPort"]));
@@ -145,7 +145,7 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8081")]
         public int httpPort {
             get {
                 return ((int)(this["httpPort"]));

@@ -65,7 +65,11 @@ namespace V2RayW
                     Program.selectedCusServerIndex = 0;
                 } else
                 {
-                    Program.selectedCusServerIndex = -1;
+                    if(Program.coreLoaded && Program.useCusProfile)
+                    {
+                        Program.coreLoaded = false;
+                    }
+                    Program.useCusProfile = false;
                 }
             }
             Program.configurationDidChange();

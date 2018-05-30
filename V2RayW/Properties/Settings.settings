@@ -9,7 +9,7 @@
       <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="localPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">8080</Value>
+      <Value Profile="(Default)">1081</Value>
     </Setting>
     <Setting Name="profilesStr" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -33,7 +33,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="httpPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">8081</Value>
     </Setting>
     <Setting Name="shareOverLan" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

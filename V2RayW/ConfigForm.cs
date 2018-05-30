@@ -171,6 +171,10 @@ namespace V2RayW
                 selectedServerIndex < profiles.Count())
             {
                 this.profiles.RemoveAt(this.selectedServerIndex);
+                if(this.profiles.Count() == 0)
+                {
+                    this.profiles.Add(new ServerProfile { remark = "placeholder" });
+                }
                 selectedServerIndex -= 1;
                 if(selectedServerIndex == -1 && this.profiles.Count() > 0 )
                 {
