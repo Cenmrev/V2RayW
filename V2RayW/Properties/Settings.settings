@@ -2,48 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="V2RayW.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="transportSettings" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{
-  "network": "tcp",
-  "security": "none",
-  "tlsSettings": {
-    "serverName": "v2ray.com",
-    "allowInsecure": false
-  },
-  "tcpSettings": {
-    "connectionReuse": true,
-    "header": {
-      "type": "none"
-    }
-  },
-  "kcpSettings": {
-    "mtu": 1350,
-    "tti": 20,
-    "uplinkCapacity": 5,
-    "downlinkCapacity": 20,
-    "congestion": false,
-    "readBufferSize": 1,
-    "writeBufferSize": 1,
-    "header": {
-      "type": "none"
-    }
-  },
-  "wsSettings": {
-    "connectionReuse": true,
-    "path": ""
-  }
-}</Value>
+    <Setting Name="logLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="dns" Type="System.String" Scope="User">
+    <Setting Name="dnsString" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="localPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8080</Value>
     </Setting>
     <Setting Name="profilesStr" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297","security":0}</Value>
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="proxyIsOn" Type="System.Boolean" Scope="User">
+    <Setting Name="coreLoaded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="selectedServerIndex" Type="System.Int32" Scope="User">
@@ -55,20 +26,29 @@
     <Setting Name="proxyMode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="inProtocol" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="alarmUnknown" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="mux" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{
-  "enabled": false,
-  "concurrency": 8
-}</Value>
-    </Setting>
-    <Setting Name="cusProfiles" Type="System.String" Scope="User">
+    <Setting Name="cusProfilesStr" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="httpPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="shareOverLan" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="selectedCusServerIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="useCusProfile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="useMultipleServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="mainInboundType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

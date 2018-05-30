@@ -62,9 +62,11 @@
             this.comboBoxInP = new System.Windows.Forms.ComboBox();
             this.checkBoxAlarm = new System.Windows.Forms.CheckBox();
             this.buttonImport = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxShareOverLan = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxLog = new System.Windows.Forms.ComboBox();
+            this.labelHttpPort = new System.Windows.Forms.Label();
+            this.textBoxHttpPort = new System.Windows.Forms.TextBox();
             this.groupBoxServer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,7 @@
             resources.ApplyResources(this.checkBoxUDP, "checkBoxUDP");
             this.checkBoxUDP.Name = "checkBoxUDP";
             this.checkBoxUDP.UseVisualStyleBackColor = true;
+            this.checkBoxUDP.CheckedChanged += new System.EventHandler(this.checkBoxUDP_CheckedChanged);
             // 
             // label1
             // 
@@ -94,7 +97,6 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // buttonSave
             // 
@@ -115,11 +117,13 @@
             // 
             resources.ApplyResources(this.textBoxLocalPort, "textBoxLocalPort");
             this.textBoxLocalPort.Name = "textBoxLocalPort";
+            this.textBoxLocalPort.TextChanged += new System.EventHandler(this.textBoxLocalPort_TextChanged);
             // 
             // textBoxDNS
             // 
             resources.ApplyResources(this.textBoxDNS, "textBoxDNS");
             this.textBoxDNS.Name = "textBoxDNS";
+            this.textBoxDNS.TextChanged += new System.EventHandler(this.textBoxDNS_TextChanged);
             // 
             // buttonTS
             // 
@@ -137,7 +141,6 @@
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
-            this.groupBoxServer.Enter += new System.EventHandler(this.groupBoxServer_Enter);
             // 
             // buttonRemove
             // 
@@ -163,6 +166,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.comboBoxSecurity);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.comboBoxNetwork);
@@ -180,7 +184,6 @@
             this.panel1.Controls.Add(this.label4);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // comboBoxSecurity
             // 
@@ -189,7 +192,9 @@
             this.comboBoxSecurity.Items.AddRange(new object[] {
             resources.GetString("comboBoxSecurity.Items"),
             resources.GetString("comboBoxSecurity.Items1"),
-            resources.GetString("comboBoxSecurity.Items2")});
+            resources.GetString("comboBoxSecurity.Items2"),
+            resources.GetString("comboBoxSecurity.Items3"),
+            resources.GetString("comboBoxSecurity.Items4")});
             resources.ApplyResources(this.comboBoxSecurity, "comboBoxSecurity");
             this.comboBoxSecurity.Name = "comboBoxSecurity";
             this.comboBoxSecurity.SelectedIndexChanged += new System.EventHandler(this.comboBoxSecurity_SelectedIndexChanged);
@@ -206,7 +211,8 @@
             this.comboBoxNetwork.Items.AddRange(new object[] {
             resources.GetString("comboBoxNetwork.Items"),
             resources.GetString("comboBoxNetwork.Items1"),
-            resources.GetString("comboBoxNetwork.Items2")});
+            resources.GetString("comboBoxNetwork.Items2"),
+            resources.GetString("comboBoxNetwork.Items3")});
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
             this.comboBoxNetwork.SelectedIndexChanged += new System.EventHandler(this.comboBoxNetwork_SelectedIndexChanged);
@@ -245,7 +251,6 @@
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -293,6 +298,7 @@
             resources.ApplyResources(this.checkBoxAlarm, "checkBoxAlarm");
             this.checkBoxAlarm.Name = "checkBoxAlarm";
             this.checkBoxAlarm.UseVisualStyleBackColor = true;
+            this.checkBoxAlarm.CheckedChanged += new System.EventHandler(this.checkBoxAlarm_CheckedChanged);
             // 
             // buttonImport
             // 
@@ -301,29 +307,42 @@
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
-            // checkBox1
+            // checkBoxShareOverLan
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.checkBoxShareOverLan, "checkBoxShareOverLan");
+            this.checkBoxShareOverLan.Name = "checkBoxShareOverLan";
+            this.checkBoxShareOverLan.UseVisualStyleBackColor = true;
+            this.checkBoxShareOverLan.CheckedChanged += new System.EventHandler(this.checkBoxShareOverLan_CheckedChanged);
             // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
-            // comboBox1
+            // comboBoxLog
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2"),
-            resources.GetString("comboBox1.Items3"),
-            resources.GetString("comboBox1.Items4")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.comboBoxLog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLog.FormattingEnabled = true;
+            this.comboBoxLog.Items.AddRange(new object[] {
+            resources.GetString("comboBoxLog.Items"),
+            resources.GetString("comboBoxLog.Items1"),
+            resources.GetString("comboBoxLog.Items2"),
+            resources.GetString("comboBoxLog.Items3"),
+            resources.GetString("comboBoxLog.Items4")});
+            resources.ApplyResources(this.comboBoxLog, "comboBoxLog");
+            this.comboBoxLog.Name = "comboBoxLog";
+            this.comboBoxLog.SelectedIndexChanged += new System.EventHandler(this.comboBoxLog_SelectedIndexChanged);
+            // 
+            // labelHttpPort
+            // 
+            resources.ApplyResources(this.labelHttpPort, "labelHttpPort");
+            this.labelHttpPort.Name = "labelHttpPort";
+            // 
+            // textBoxHttpPort
+            // 
+            resources.ApplyResources(this.textBoxHttpPort, "textBoxHttpPort");
+            this.textBoxHttpPort.Name = "textBoxHttpPort";
+            this.textBoxHttpPort.TextChanged += new System.EventHandler(this.textBoxHttpPort_TextChanged);
             // 
             // ConfigForm
             // 
@@ -331,9 +350,11 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.textBoxHttpPort);
+            this.Controls.Add(this.labelHttpPort);
+            this.Controls.Add(this.comboBoxLog);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBoxShareOverLan);
             this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.checkBoxAlarm);
             this.Controls.Add(this.comboBoxInP);
@@ -396,8 +417,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox checkBoxAlarm;
         private System.Windows.Forms.Button buttonImport;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxShareOverLan;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxLog;
+        private System.Windows.Forms.Label labelHttpPort;
+        private System.Windows.Forms.TextBox textBoxHttpPort;
     }
 }

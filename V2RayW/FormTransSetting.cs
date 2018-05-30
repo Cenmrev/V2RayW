@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 namespace V2RayW
 {
     public partial class FormTransSetting : Form
     {
+        private ServerProfile currentProfile;
+
         public FormTransSetting()
         {
             InitializeComponent();
@@ -35,49 +36,51 @@ namespace V2RayW
             {
                 return;
             }
-            var muxSettings = new
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            //mux
+            currentProfile.muxSettings["enabled"] = checkBoxMuxEnable.Checked;
+            currentProfile.muxSettings["concurrency"] = Program.strToInt(textBoxMuxCc.Text, 8);
+            //proxy
+            //currentProfile.proxyOutboundJson = checkBoxProxy.Checked ? textBoxOutProxyJson.Text : "";
+            //streamSettings
+            currentProfile.streamSettings["security"] = checkBoxTLSEnable.Checked ? "tls" : "none";
+            //tls
+            currentProfile.streamSettings["tlsSettings"] = new Dictionary<string, object> {
+                    { "serverName", textBoxTLSSn.Text },
+                    { "allowInsecure", checkBoxTLSAI.Checked },
+                    };
+            currentProfile.streamSettings["kcpSettings"] = new Dictionary<string, object> {
+                    { "mtu", Program.strToInt(textBoxKcpMtu.Text, 1350) },
+                    { "tti", Program.strToInt(textBoxKcpTti.Text, 20) },
+                    { "uplinkCapacity", Program.strToInt(textBoxKcpUc.Text, 5) },
+                    { "downlinkCapacity", Program.strToInt(textBoxKcpDc.Text, 20) },
+                    { "congestion", comboBoxKcpCon.SelectedIndex == 1 },
+                    { "readBufferSize", Program.strToInt(textBoxKcpRb.Text, 1) },
+                    { "writeBufferSize", Program.strToInt(textBoxKcpWb.Text, 1) },
+                    { "header", new Dictionary<string, object> {
+                        { "type", comboBoxKcpHt.SelectedItem.ToString() }
+                    } } };
+            currentProfile.streamSettings["tcpSettings"] = new Dictionary<string, object> {
+                    { "header", checkBoxTcpHeader.Checked ?
+                    js.Deserialize<object>(textBoxTcpHeader.Text)
+                    : new Dictionary<string, string> { { "type", "none" } } } };
+            currentProfile.streamSettings["wsSettings"] = new Dictionary<string, object> {
+                    { "path", textBoxWsPath.Text },
+                    { "headers", js.Deserialize<object>(textBoxWsHeader.Text) } };
+            var hosts = textBoxHttp2Hosts.Text.Split(',');
+            var hosts_filtered = new System.Collections.ArrayList();
+            foreach(var h in hosts)
             {
-                enabled = checkBoxMuxEnable.Checked,
-                concurrency = Program.strToInt(textBoxMuxCc.Text, 8)
-            };
-            var transportSettings = new {
-                network = "tcp",
-                security = checkBoxTLSEnable.Checked ? "tls" : "none",
-                tlsSettings = new {
-                    serverName = textBoxTLSSn.Text,
-                    allowInsecure = checkBoxTLSAI.Checked
-                },
-                kcpSettings = new 
+                var h_trimed = h.Trim();
+                if (h_trimed.Length > 0)
                 {
-                    mtu = Program.strToInt(textBoxKcpMtu.Text, 1350),
-                    tti = Program.strToInt(textBoxKcpTti.Text, 50),
-                    uplinkCapacity = Program.strToInt(textBoxKcpUc.Text, 5),
-                    downlinkCapacity = Program.strToInt(textBoxKcpDc.Text, 20),
-                    readBufferSize = Program.strToInt(textBoxKcpRb.Text, 2),
-                    writeBufferSize = Program.strToInt(textBoxKcpWb.Text, 2),
-                    congestion = comboBoxKcpCon.SelectedIndex == 1,
-                    header = new
-                    {
-                        type = comboBoxKcpHt.Text
-                    }
-                },
-                tcpSettings = new 
-                {
-                    connectionReuse = checkBoxTcpCr.Checked,
-                    header = new
-                    {
-                        type = comboBoxTcpHt.Text
-                    }
-                },
-                wsSettings = new
-                {
-                    connectionReuse = checkBoxWsCr.Checked,
-                    path = textBoxWsPath.Text,
-                } 
-            };
-            Properties.Settings.Default["transportSettings"] = JsonConvert.SerializeObject(transportSettings);
-            Properties.Settings.Default.mux = JsonConvert.SerializeObject(muxSettings);
-            Properties.Settings.Default.Save();
+                    hosts_filtered.Add(h_trimed);
+                }
+            }
+            currentProfile.streamSettings["httpSettings"] = new Dictionary<string, object> {
+                    { "host", hosts_filtered },
+                    { "path", textBoxHttp2Path.Text.Trim() }
+                };
             this.Close();
         }
 
@@ -85,52 +88,71 @@ namespace V2RayW
 
         private void FormTransSetting_Load(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.Upgrade();
-            string transportSettingsStr = Properties.Settings.Default.transportSettings;
-            dynamic transportSettings = JObject.Parse(transportSettingsStr);
-            textBoxKcpMtu.Text = transportSettings.kcpSettings.mtu;
-            textBoxKcpTti.Text = transportSettings.kcpSettings.tti;
-            textBoxKcpUc.Text = transportSettings.kcpSettings.uplinkCapacity;
-            textBoxKcpDc.Text = transportSettings.kcpSettings.downlinkCapacity;
-            textBoxKcpRb.Text = transportSettings.kcpSettings.readBufferSize;
-            textBoxKcpWb.Text = transportSettings.kcpSettings.writeBufferSize;
-            comboBoxKcpCon.SelectedIndex = transportSettings.kcpSettings.congestion == false ? 0 : 1;
-            var headertype = transportSettings.kcpSettings.header.type;
-            comboBoxKcpHt.SelectedIndex = headertype == "srtp" ? 1 : (headertype == "utp" ? 2 : 0);
-            checkBoxTcpCr.Checked = transportSettings.tcpSettings.connectionReuse;
-            comboBoxTcpHt.SelectedIndex = transportSettings.tcpSettings.header.type == "none" ? 0 : 1;
-            checkBoxWsCr.Checked = transportSettings.wsSettings.connectionReuse;
-            textBoxWsPath.Text = transportSettings.wsSettings.path;
+            currentProfile = Program.mainForm.configForm.SelectedProfile();
+            JavaScriptSerializer js = new JavaScriptSerializer();
 
-            checkBoxTLSEnable.Checked = transportSettings.security == "tls";
-            checkBoxTLSAI.Checked = transportSettings.tlsSettings.allowInsecure;
-            textBoxTLSSn.Text = transportSettings.tlsSettings.serverName;
+            // load current settings to view
+            //kcp
+            dynamic streamSettings = currentProfile.streamSettings;
+            textBoxKcpMtu.Text = streamSettings["kcpSettings"]["mtu"].ToString();
+            textBoxKcpTti.Text = streamSettings["kcpSettings"]["tti"].ToString();
+            textBoxKcpUc.Text = streamSettings["kcpSettings"]["uplinkCapacity"].ToString();
+            textBoxKcpDc.Text = streamSettings["kcpSettings"]["downlinkCapacity"].ToString();
+            textBoxKcpRb.Text = streamSettings["kcpSettings"]["readBufferSize"].ToString();
+            textBoxKcpWb.Text = streamSettings["kcpSettings"]["writeBufferSize"].ToString();
+            comboBoxKcpCon.SelectedIndex = streamSettings["kcpSettings"]["congestion"] == false ? 0 : 1;
+            var headertype = streamSettings["kcpSettings"]["header"]["type"].ToString();
+            comboBoxKcpHt.SelectedIndex = headertype == "wechat-video" ? 3 : (int)Enum.Parse(typeof(KcpHeaderType), headertype);
 
-            string muxSettingsStr = Properties.Settings.Default.mux;
-            dynamic muxSettings = JObject.Parse(muxSettingsStr);
-            checkBoxMuxEnable.Checked = muxSettings.enabled;
-            textBoxMuxCc.Text = muxSettings.concurrency;
+            //tcp
+            checkBoxTcpHeader.Checked = streamSettings["tcpSettings"]["header"]["type"] == "none" ? false : true;
+            if(checkBoxTcpHeader.Checked)
+            {
+                textBoxTcpHeader.Text = js.Serialize(streamSettings["tcpSettings"]["header"]);
+            } else
+            {
+                textBoxTcpHeader.Text = "{\"type\": \"none\"}";
+            }
+
+            // ws
+            textBoxWsPath.Text = streamSettings["wsSettings"]["path"];
+            textBoxWsHeader.Text = js.Serialize(streamSettings["wsSettings"]["headers"]);
+
+            //http2
+            textBoxHttp2Path.Text = streamSettings["httpSettings"]["path"];
+            System.Collections.ArrayList httpHosts = streamSettings["httpSettings"]["host"];
+            List<string> hostList = new List<string>();
+            foreach(var h in httpHosts)
+            {
+                hostList.Add(h.ToString());
+            }
+            if(hostList.Count > 0)
+            {
+                textBoxHttp2Hosts.Text = String.Join(",", hostList);
+            } else
+            {
+                textBoxHttp2Hosts.Text = "";
+            }
+
+            // tls
+            checkBoxTLSEnable.Checked = streamSettings["security"] == "tls";
+            checkBoxTLSAI.Checked = streamSettings["tlsSettings"]["allowInsecure"];
+            textBoxTLSSn.Text = streamSettings["tlsSettings"]["serverName"];
+
+            // mux
+            dynamic muxSettings = currentProfile.muxSettings;
+            checkBoxMuxEnable.Checked = muxSettings["enabled"];
+            textBoxMuxCc.Text = muxSettings["concurrency"].ToString();
+
+            // proxy
+            //checkBoxProxy.Checked = currentProfile.proxyOutboundJson.Length > 0;
+            //textBoxOutProxyJson.Text = currentProfile.proxyOutboundJson;
+
         }
 
+        // not finished
         private void buttonTsReset_Click(object sender, EventArgs e)
         {
-            textBoxKcpMtu.Text = "1350";
-            textBoxKcpTti.Text = "20";
-            textBoxKcpUc.Text = "5";
-            textBoxKcpDc.Text = "20";
-            textBoxKcpRb.Text = "2";
-            textBoxKcpWb.Text = "2";
-            comboBoxKcpCon.SelectedIndex = 0;
-            comboBoxKcpHt.SelectedIndex = 0;
-            checkBoxTcpCr.Checked = true;
-            comboBoxTcpHt.SelectedIndex = 0;
-            checkBoxWsCr.Checked = true;
-            textBoxWsPath.Text = "";
-
-            checkBoxMuxEnable.Checked = false;
-            textBoxMuxCc.Text = "8";
-
-            checkBoxTLSEnable.Checked = false;
         }
     }
 }

@@ -1,102 +1,82 @@
 {
-  "dns" : {
-    "servers" : [
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
       "localhost"
     ]
   },
-  "outboundDetour" : [
-    {
-      "protocol" : "freedom",
-      "tag" : "direct",
-      "settings" : {
 
-      }
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbound": {
+    "port": 1080,
+    "listen": "127.0.0.1",
+    "protocol": "socks",
+    "settings": {
+      "auth": "noauth",
+      "udp": false,
+      "ip": "127.0.0.1"
+    }
+  },
+  "inboundDetour": [
+    {
+      "protocol": "http",
+      "port": 8080,
+      "listen": "127.0.0.1",
+      "allocate": {
+        "strategy": "always",
+        "refresh": 5,
+        "concurrency": 3
+      },
+      "settings": {},
+      "streamSettings": {},
+      "domainOverride": [ "http", "tls" ]
     }
   ],
-  "inbound" : {
-    "listen" : "127.0.0.1",
-    "port" : 8080,
-    "protocol" : "http",
-    "settings" : {
-		"timeout": 0
-    },
-    "allowPassive" : false
-  },
-  "routing" : {
-    "strategy" : "rules",
-    "settings" : {
-      "domainStrategy" : "IPIfNonMatch",
-      "rules" : [
-        {
-          "port" : "1-52",
-          "type" : "field",
-          "outboundTag" : "direct"
-        },
-        {
-          "port" : "54-79",
-          "type" : "field",
-          "outboundTag" : "direct"
-        },
-        {
-          "port" : "81-442",
-          "type" : "field",
-          "outboundTag" : "direct"
-        },
-        {
-          "port" : "444-65535",
-          "type" : "field",
-          "outboundTag" : "direct"
-        },
-        {
-          "type" : "field",
-          "ip" : [
-            "0.0.0.0\/8",
-            "10.0.0.0\/8",
-            "100.64.0.0\/10",
-            "127.0.0.0\/8",
-            "169.254.0.0\/16",
-            "172.16.0.0\/12",
-            "192.0.0.0\/24",
-            "192.0.2.0\/24",
-            "192.168.0.0\/16",
-            "198.18.0.0\/15",
-            "198.51.100.0\/24",
-            "203.0.113.0\/24",
-            "::1\/128",
-            "fc00::\/7",
-            "fe80::\/10"
-          ],
-          "outboundTag" : "direct"
-        }
-      ]
+  "outbound": {
+    "protocol": "freedom",
+    "settings": {
+
     }
   },
-  "log" : {
-    "loglevel" : "warning"
+  "outboundDetour": [
+    {
+      "protocol": "freedom",
+      "settings": {
+
+      },
+      "tag": "direct"
+    }
+  ],
+  "policy": {
+    "levels": {
+      "0": {
+        "uplinkOnly": 0
+      }
+    }
   },
-  "outbound" : {
-    "protocol" : "vmess",
-    "streamSettings" : {
-      "network" : "tcp"
-    },
-    "mux": {
-      "enabled": true,
-	  "concurrency": 8
-    },
-    "settings" : {
-      "vnext" : [
+  "routing": {
+    "settings": {
+      "domainStrategy": "IPIfNonMatch",
+      "rules": [
         {
-          "address" : "172.16.113.246",
-          "port" : 10086,
-          "users" : [
-            {
-              "id" : "23ad6b10-8d1a-40f7-8ad0-e3e35cd38297",
-              "alterId" : 64,
-			  "security": "aes-128-cfb"
-            }
+          "type": "field",
+          "outboundTag": "direct",
+          "domain": [
+            "localhost"
+          ]
+        },
+        {
+          "type": "field",
+          "outboundTag": "direct",
+          "ip": [
+            "geoip:private"
           ]
         }
       ]
-    }
+    },
+    "strategy": "rules"
   }
 }

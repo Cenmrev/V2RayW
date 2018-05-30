@@ -38,6 +38,7 @@
             this.v2RayRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPacFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manualModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,45 +76,45 @@
             this.helpToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(181, 308);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(159, 286);
             // 
             // statusToolStripMenuItem
             // 
             this.statusToolStripMenuItem.Enabled = false;
             this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
-            this.statusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.statusToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.statusToolStripMenuItem.Text = "Status";
             // 
             // startStopToolStripMenuItem
             // 
             this.startStopToolStripMenuItem.Name = "startStopToolStripMenuItem";
-            this.startStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startStopToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.startStopToolStripMenuItem.Text = "StartStop";
             this.startStopToolStripMenuItem.Click += new System.EventHandler(this.startStopToolStripMenuItem_Click);
             // 
             // viewLogToolStripMenuItem
             // 
             this.viewLogToolStripMenuItem.Name = "viewLogToolStripMenuItem";
-            this.viewLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewLogToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.viewLogToolStripMenuItem.Text = "View log";
             this.viewLogToolStripMenuItem.Click += new System.EventHandler(this.viewLogToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
             // 
             // v2RayRulesToolStripMenuItem
             // 
             this.v2RayRulesToolStripMenuItem.Name = "v2RayRulesToolStripMenuItem";
-            this.v2RayRulesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.v2RayRulesToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.v2RayRulesToolStripMenuItem.Text = "V2Ray Rules";
             this.v2RayRulesToolStripMenuItem.Click += new System.EventHandler(this.v2RayRulesToolStripMenuItem_Click);
             // 
             // pacModeToolStripMenuItem
             // 
             this.pacModeToolStripMenuItem.Name = "pacModeToolStripMenuItem";
-            this.pacModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pacModeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pacModeToolStripMenuItem.Text = "Pac Mode";
             this.pacModeToolStripMenuItem.Visible = false;
             this.pacModeToolStripMenuItem.Click += new System.EventHandler(this.pacModeToolStripMenuItem_Click);
@@ -122,59 +122,60 @@
             // globalModeToolStripMenuItem
             // 
             this.globalModeToolStripMenuItem.Name = "globalModeToolStripMenuItem";
-            this.globalModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.globalModeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.globalModeToolStripMenuItem.Text = "Global Mode";
             this.globalModeToolStripMenuItem.Click += new System.EventHandler(this.globalModeToolStripMenuItem_Click);
+            // 
+            // manualModeToolStripMenuItem
+            // 
+            this.manualModeToolStripMenuItem.Name = "manualModeToolStripMenuItem";
+            this.manualModeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.manualModeToolStripMenuItem.Text = "Manual Mode";
+            this.manualModeToolStripMenuItem.Click += new System.EventHandler(this.manualModeToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(155, 6);
             // 
             // serversToolStripMenuItem
             // 
             this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
-            this.serversToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serversToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.serversToolStripMenuItem.Text = "Servers";
             // 
             // editPacFileToolStripMenuItem
             // 
             this.editPacFileToolStripMenuItem.Name = "editPacFileToolStripMenuItem";
-            this.editPacFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editPacFileToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.editPacFileToolStripMenuItem.Text = "Edit Pac File";
             this.editPacFileToolStripMenuItem.Visible = false;
             // 
             // configureToolStripMenuItem
             // 
             this.configureToolStripMenuItem.Name = "configureToolStripMenuItem";
-            this.configureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configureToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.configureToolStripMenuItem.Text = "Configure...";
             this.configureToolStripMenuItem.Click += new System.EventHandler(this.configureToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // manualModeToolStripMenuItem
-            // 
-            this.manualModeToolStripMenuItem.Name = "manualModeToolStripMenuItem";
-            this.manualModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manualModeToolStripMenuItem.Text = "Manual Mode";
             // 
             // MainForm
             // 

@@ -25,54 +25,25 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{
-  ""network"": ""tcp"",
-  ""security"": ""none"",
-  ""tlsSettings"": {
-    ""serverName"": ""v2ray.com"",
-    ""allowInsecure"": false
-  },
-  ""tcpSettings"": {
-    ""connectionReuse"": true,
-    ""header"": {
-      ""type"": ""none""
-    }
-  },
-  ""kcpSettings"": {
-    ""mtu"": 1350,
-    ""tti"": 20,
-    ""uplinkCapacity"": 5,
-    ""downlinkCapacity"": 20,
-    ""congestion"": false,
-    ""readBufferSize"": 1,
-    ""writeBufferSize"": 1,
-    ""header"": {
-      ""type"": ""none""
-    }
-  },
-  ""wsSettings"": {
-    ""connectionReuse"": true,
-    ""path"": """"
-  }
-}")]
-        public string transportSettings {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int logLevel {
             get {
-                return ((string)(this["transportSettings"]));
+                return ((int)(this["logLevel"]));
             }
             set {
-                this["transportSettings"] = value;
+                this["logLevel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
-        public string dns {
+        public string dnsString {
             get {
-                return ((string)(this["dns"]));
+                return ((string)(this["dnsString"]));
             }
             set {
-                this["dns"] = value;
+                this["dnsString"] = value;
             }
         }
         
@@ -90,9 +61,7 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"address\":\"v2ray.cool\",\"allowPassive\":0,\"alterId\":64,\"network\":0,\"port\":10086,\"r" +
-            "emark\":\"test server\",\"userId\":\"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297\",\"security\":" +
-            "0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string profilesStr {
             get {
                 return ((string)(this["profilesStr"]));
@@ -105,12 +74,12 @@ namespace V2RayW.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool proxyIsOn {
+        public bool coreLoaded {
             get {
-                return ((bool)(this["proxyIsOn"]));
+                return ((bool)(this["coreLoaded"]));
             }
             set {
-                this["proxyIsOn"] = value;
+                this["coreLoaded"] = value;
             }
         }
         
@@ -152,18 +121,6 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int inProtocol {
-            get {
-                return ((int)(this["inProtocol"]));
-            }
-            set {
-                this["inProtocol"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool alarmUnknown {
             get {
@@ -176,25 +133,85 @@ namespace V2RayW.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\r\n  \"enabled\": false,\r\n  \"concurrency\": 8\r\n}")]
-        public string mux {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cusProfilesStr {
             get {
-                return ((string)(this["mux"]));
+                return ((string)(this["cusProfilesStr"]));
             }
             set {
-                this["mux"] = value;
+                this["cusProfilesStr"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cusProfiles {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int httpPort {
             get {
-                return ((string)(this["cusProfiles"]));
+                return ((int)(this["httpPort"]));
             }
             set {
-                this["cusProfiles"] = value;
+                this["httpPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool shareOverLan {
+            get {
+                return ((bool)(this["shareOverLan"]));
+            }
+            set {
+                this["shareOverLan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int selectedCusServerIndex {
+            get {
+                return ((int)(this["selectedCusServerIndex"]));
+            }
+            set {
+                this["selectedCusServerIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool useCusProfile {
+            get {
+                return ((bool)(this["useCusProfile"]));
+            }
+            set {
+                this["useCusProfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool useMultipleServer {
+            get {
+                return ((bool)(this["useMultipleServer"]));
+            }
+            set {
+                this["useMultipleServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int mainInboundType {
+            get {
+                return ((int)(this["mainInboundType"]));
+            }
+            set {
+                this["mainInboundType"] = value;
             }
         }
     }

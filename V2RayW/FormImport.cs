@@ -13,7 +13,8 @@ namespace V2RayW
 {
     public partial class FormImport : Form
     {
-        public static List<String> configJsonPaths = new List<string>();
+        private List<string> configJsonPaths = new List<string>();
+        private int selectedCusServerIndex = 1;
 
         public FormImport()
         {
@@ -23,7 +24,7 @@ namespace V2RayW
         private void buttonFinish_Click(object sender, EventArgs e)
         {
             labelIndicator.Text = "verifying...";
-            foreach(var jsonpath in configJsonPaths)
+            foreach (var jsonpath in configJsonPaths)
             {
                 try
                 {
@@ -35,7 +36,7 @@ namespace V2RayW
                     Process proBach = Process.Start(info);
                     proBach.WaitForExit();
                     int returnValue = proBach.ExitCode;
-                    if(returnValue != 0)
+                    if (returnValue != 0)
                     {
                         MessageBox.Show(jsonpath + " is not a valid v2ray config file!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         labelIndicator.Text = "";
@@ -49,7 +50,25 @@ namespace V2RayW
                     return;
                 }
             }
-            Properties.Settings.Default["cusProfiles"] = string.Join("*", configJsonPaths);
+            Program.cusProfiles.Clear();
+            foreach(var p in this.configJsonPaths)
+            {
+                Program.cusProfiles.Add(p.Trim());
+            }
+            if(this.selectedCusServerIndex >= 0 && this.selectedCusServerIndex < this.configJsonPaths.Count())
+            {
+                Program.selectedCusServerIndex = this.selectedCusServerIndex;
+            } else
+            {
+                if (this.configJsonPaths.Count > 0)
+                {
+                    Program.selectedCusServerIndex = 0;
+                } else
+                {
+                    Program.selectedCusServerIndex = -1;
+                }
+            }
+            Program.configurationDidChange();
             this.Close();
         }
 
@@ -78,28 +97,38 @@ namespace V2RayW
             {
                 listBoxCusConfig.Items.Add(path);
             }
+
             listBoxCusConfig_SelectedValueChanged(sender, e);
         }
 
         private void FormImport_Load(object sender, EventArgs e)
         {
             labelIndicator.Text = "";
-            string[] savedProfiles = Properties.Settings.Default["cusProfiles"].ToString().Split('*');
             configJsonPaths.Clear();
-            foreach(var p in savedProfiles)
+            foreach (var p in Program.cusProfiles)
             {
-                if(p.Trim().Length > 0)
+                if (p.Trim().Length > 0)
                 {
-                    configJsonPaths.Add(p);
-                    listBoxCusConfig.Items.Add(p);
+                    configJsonPaths.Add(p.Trim());
+                    listBoxCusConfig.Items.Add(p.Trim());
                 }
             }
-            listBoxCusConfig_SelectedValueChanged(sender, e);
+            this.selectedCusServerIndex = Program.selectedCusServerIndex;
+            if (this.selectedCusServerIndex >= 0 && this.selectedCusServerIndex < configJsonPaths.Count())
+            {
+                this.listBoxCusConfig.SelectedIndex = this.selectedCusServerIndex;
+                listBoxCusConfig_SelectedValueChanged(sender, e);
+            }
         }
 
         private void listBoxCusConfig_SelectedValueChanged(object sender, EventArgs e)
         {
             buttonRemove.Enabled = listBoxCusConfig.SelectedIndex < configJsonPaths.Count && listBoxCusConfig.SelectedIndex >= 0;
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

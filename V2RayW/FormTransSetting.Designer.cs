@@ -32,7 +32,7 @@
             this.buttonTSSave = new System.Windows.Forms.Button();
             this.buttonTSHelp = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageKcp = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxKcpCon = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -50,31 +50,38 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBoxTcpHt = new System.Windows.Forms.ComboBox();
-            this.checkBoxTcpCr = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageTcp = new System.Windows.Forms.TabPage();
+            this.textBoxTcpHeader = new System.Windows.Forms.TextBox();
+            this.checkBoxTcpHeader = new System.Windows.Forms.CheckBox();
+            this.tabPageWs = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBoxWsHeader = new System.Windows.Forms.TextBox();
             this.textBoxWsPath = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBoxWsCr = new System.Windows.Forms.CheckBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPageHttp = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxHttp2Path = new System.Windows.Forms.TextBox();
+            this.labelHttp2Path = new System.Windows.Forms.Label();
+            this.textBoxHttp2Hosts = new System.Windows.Forms.TextBox();
+            this.labelHttp2Hosts = new System.Windows.Forms.Label();
+            this.tabPageMux = new System.Windows.Forms.TabPage();
             this.textBoxMuxCc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.checkBoxMuxEnable = new System.Windows.Forms.CheckBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPageTLS = new System.Windows.Forms.TabPage();
             this.checkBoxTLSEnable = new System.Windows.Forms.CheckBox();
             this.textBoxTLSSn = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.checkBoxTLSAI = new System.Windows.Forms.CheckBox();
             this.buttonTsReset = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageKcp.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tabPageTcp.SuspendLayout();
+            this.tabPageWs.SuspendLayout();
+            this.tabPageHttp.SuspendLayout();
+            this.tabPageMux.SuspendLayout();
+            this.tabPageTLS.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonTSCancel
@@ -122,11 +129,12 @@
             // 
             // tabControlMain
             // 
-            this.tabControlMain.Controls.Add(this.tabPage1);
-            this.tabControlMain.Controls.Add(this.tabPage2);
-            this.tabControlMain.Controls.Add(this.tabPage3);
-            this.tabControlMain.Controls.Add(this.tabPage4);
-            this.tabControlMain.Controls.Add(this.tabPage5);
+            this.tabControlMain.Controls.Add(this.tabPageKcp);
+            this.tabControlMain.Controls.Add(this.tabPageTcp);
+            this.tabControlMain.Controls.Add(this.tabPageWs);
+            this.tabControlMain.Controls.Add(this.tabPageHttp);
+            this.tabControlMain.Controls.Add(this.tabPageMux);
+            this.tabControlMain.Controls.Add(this.tabPageTLS);
             this.tabControlMain.Location = new System.Drawing.Point(12, 13);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControlMain.Name = "tabControlMain";
@@ -134,17 +142,17 @@
             this.tabControlMain.Size = new System.Drawing.Size(478, 169);
             this.tabControlMain.TabIndex = 10;
             // 
-            // tabPage1
+            // tabPageKcp
             // 
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(470, 139);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "KCP";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageKcp.Controls.Add(this.panel1);
+            this.tabPageKcp.Location = new System.Drawing.Point(4, 26);
+            this.tabPageKcp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPageKcp.Name = "tabPageKcp";
+            this.tabPageKcp.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPageKcp.Size = new System.Drawing.Size(470, 139);
+            this.tabPageKcp.TabIndex = 0;
+            this.tabPageKcp.Text = "KCP";
+            this.tabPageKcp.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -198,7 +206,9 @@
             this.comboBoxKcpHt.Items.AddRange(new object[] {
             "none",
             "srtp",
-            "utp"});
+            "utp",
+            "wechat-video",
+            "dtls"});
             this.comboBoxKcpHt.Location = new System.Drawing.Point(346, 91);
             this.comboBoxKcpHt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxKcpHt.Name = "comboBoxKcpHt";
@@ -310,67 +320,71 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "mtu";
             // 
-            // tabPage2
+            // tabPageTcp
             // 
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.comboBoxTcpHt);
-            this.tabPage2.Controls.Add(this.checkBoxTcpCr);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(470, 139);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "TCP";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageTcp.Controls.Add(this.textBoxTcpHeader);
+            this.tabPageTcp.Controls.Add(this.checkBoxTcpHeader);
+            this.tabPageTcp.Location = new System.Drawing.Point(4, 26);
+            this.tabPageTcp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPageTcp.Name = "tabPageTcp";
+            this.tabPageTcp.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPageTcp.Size = new System.Drawing.Size(470, 139);
+            this.tabPageTcp.TabIndex = 1;
+            this.tabPageTcp.Text = "TCP";
+            this.tabPageTcp.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // textBoxTcpHeader
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(38, 72);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 17);
-            this.label11.TabIndex = 29;
-            this.label11.Text = "header type";
+            this.textBoxTcpHeader.Location = new System.Drawing.Point(19, 52);
+            this.textBoxTcpHeader.Multiline = true;
+            this.textBoxTcpHeader.Name = "textBoxTcpHeader";
+            this.textBoxTcpHeader.Size = new System.Drawing.Size(412, 80);
+            this.textBoxTcpHeader.TabIndex = 1;
             // 
-            // comboBoxTcpHt
+            // checkBoxTcpHeader
             // 
-            this.comboBoxTcpHt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTcpHt.FormattingEnabled = true;
-            this.comboBoxTcpHt.Items.AddRange(new object[] {
-            "none",
-            "http"});
-            this.comboBoxTcpHt.Location = new System.Drawing.Point(122, 69);
-            this.comboBoxTcpHt.Name = "comboBoxTcpHt";
-            this.comboBoxTcpHt.Size = new System.Drawing.Size(121, 25);
-            this.comboBoxTcpHt.TabIndex = 1;
+            this.checkBoxTcpHeader.AutoSize = true;
+            this.checkBoxTcpHeader.Location = new System.Drawing.Point(19, 25);
+            this.checkBoxTcpHeader.Name = "checkBoxTcpHeader";
+            this.checkBoxTcpHeader.Size = new System.Drawing.Size(163, 21);
+            this.checkBoxTcpHeader.TabIndex = 0;
+            this.checkBoxTcpHeader.Text = "Customize Http Header";
+            this.checkBoxTcpHeader.UseVisualStyleBackColor = true;
             // 
-            // checkBoxTcpCr
+            // tabPageWs
             // 
-            this.checkBoxTcpCr.AutoSize = true;
-            this.checkBoxTcpCr.Location = new System.Drawing.Point(52, 32);
-            this.checkBoxTcpCr.Name = "checkBoxTcpCr";
-            this.checkBoxTcpCr.Size = new System.Drawing.Size(126, 21);
-            this.checkBoxTcpCr.TabIndex = 0;
-            this.checkBoxTcpCr.Text = "connection reuse";
-            this.checkBoxTcpCr.UseVisualStyleBackColor = true;
+            this.tabPageWs.Controls.Add(this.label13);
+            this.tabPageWs.Controls.Add(this.textBoxWsHeader);
+            this.tabPageWs.Controls.Add(this.textBoxWsPath);
+            this.tabPageWs.Controls.Add(this.label9);
+            this.tabPageWs.Location = new System.Drawing.Point(4, 26);
+            this.tabPageWs.Name = "tabPageWs";
+            this.tabPageWs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWs.Size = new System.Drawing.Size(470, 139);
+            this.tabPageWs.TabIndex = 2;
+            this.tabPageWs.Text = "WebSocket";
+            this.tabPageWs.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // label13
             // 
-            this.tabPage3.Controls.Add(this.textBoxWsPath);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.checkBoxWsCr);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(470, 139);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "WebSocket";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 51);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 17);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "Headers:";
+            // 
+            // textBoxWsHeader
+            // 
+            this.textBoxWsHeader.Location = new System.Drawing.Point(23, 72);
+            this.textBoxWsHeader.Multiline = true;
+            this.textBoxWsHeader.Name = "textBoxWsHeader";
+            this.textBoxWsHeader.Size = new System.Drawing.Size(412, 56);
+            this.textBoxWsHeader.TabIndex = 10;
             // 
             // textBoxWsPath
             // 
-            this.textBoxWsPath.Location = new System.Drawing.Point(65, 69);
+            this.textBoxWsPath.Location = new System.Drawing.Point(63, 21);
             this.textBoxWsPath.Name = "textBoxWsPath";
             this.textBoxWsPath.Size = new System.Drawing.Size(376, 23);
             this.textBoxWsPath.TabIndex = 9;
@@ -378,34 +392,81 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(22, 72);
+            this.label9.Location = new System.Drawing.Point(20, 24);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 17);
             this.label9.TabIndex = 2;
             this.label9.Text = "path:";
             // 
-            // checkBoxWsCr
+            // tabPageHttp
             // 
-            this.checkBoxWsCr.AutoSize = true;
-            this.checkBoxWsCr.Location = new System.Drawing.Point(25, 28);
-            this.checkBoxWsCr.Name = "checkBoxWsCr";
-            this.checkBoxWsCr.Size = new System.Drawing.Size(126, 21);
-            this.checkBoxWsCr.TabIndex = 1;
-            this.checkBoxWsCr.Text = "connection reuse";
-            this.checkBoxWsCr.UseVisualStyleBackColor = true;
+            this.tabPageHttp.Controls.Add(this.label11);
+            this.tabPageHttp.Controls.Add(this.textBoxHttp2Path);
+            this.tabPageHttp.Controls.Add(this.labelHttp2Path);
+            this.tabPageHttp.Controls.Add(this.textBoxHttp2Hosts);
+            this.tabPageHttp.Controls.Add(this.labelHttp2Hosts);
+            this.tabPageHttp.Location = new System.Drawing.Point(4, 26);
+            this.tabPageHttp.Name = "tabPageHttp";
+            this.tabPageHttp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHttp.Size = new System.Drawing.Size(470, 139);
+            this.tabPageHttp.TabIndex = 5;
+            this.tabPageHttp.Text = "HTTP/2";
+            this.tabPageHttp.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // label11
             // 
-            this.tabPage4.Controls.Add(this.textBoxMuxCc);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.Controls.Add(this.checkBoxMuxEnable);
-            this.tabPage4.Location = new System.Drawing.Point(4, 26);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(470, 139);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Mux.Cool";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(78, 51);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(147, 17);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "seperated by comma (,)";
+            // 
+            // textBoxHttp2Path
+            // 
+            this.textBoxHttp2Path.Location = new System.Drawing.Point(78, 84);
+            this.textBoxHttp2Path.Name = "textBoxHttp2Path";
+            this.textBoxHttp2Path.Size = new System.Drawing.Size(366, 23);
+            this.textBoxHttp2Path.TabIndex = 3;
+            // 
+            // labelHttp2Path
+            // 
+            this.labelHttp2Path.AutoSize = true;
+            this.labelHttp2Path.Location = new System.Drawing.Point(28, 87);
+            this.labelHttp2Path.Name = "labelHttp2Path";
+            this.labelHttp2Path.Size = new System.Drawing.Size(36, 17);
+            this.labelHttp2Path.TabIndex = 2;
+            this.labelHttp2Path.Text = "Path:";
+            // 
+            // textBoxHttp2Hosts
+            // 
+            this.textBoxHttp2Hosts.Location = new System.Drawing.Point(78, 25);
+            this.textBoxHttp2Hosts.Name = "textBoxHttp2Hosts";
+            this.textBoxHttp2Hosts.Size = new System.Drawing.Size(366, 23);
+            this.textBoxHttp2Hosts.TabIndex = 1;
+            // 
+            // labelHttp2Hosts
+            // 
+            this.labelHttp2Hosts.AutoSize = true;
+            this.labelHttp2Hosts.Location = new System.Drawing.Point(28, 28);
+            this.labelHttp2Hosts.Name = "labelHttp2Hosts";
+            this.labelHttp2Hosts.Size = new System.Drawing.Size(44, 17);
+            this.labelHttp2Hosts.TabIndex = 0;
+            this.labelHttp2Hosts.Text = "Hosts:";
+            // 
+            // tabPageMux
+            // 
+            this.tabPageMux.Controls.Add(this.textBoxMuxCc);
+            this.tabPageMux.Controls.Add(this.label4);
+            this.tabPageMux.Controls.Add(this.checkBoxMuxEnable);
+            this.tabPageMux.Location = new System.Drawing.Point(4, 26);
+            this.tabPageMux.Name = "tabPageMux";
+            this.tabPageMux.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMux.Size = new System.Drawing.Size(470, 139);
+            this.tabPageMux.TabIndex = 3;
+            this.tabPageMux.Text = "Mux.Cool";
+            this.tabPageMux.UseVisualStyleBackColor = true;
             // 
             // textBoxMuxCc
             // 
@@ -433,19 +494,19 @@
             this.checkBoxMuxEnable.Text = "enabled";
             this.checkBoxMuxEnable.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // tabPageTLS
             // 
-            this.tabPage5.Controls.Add(this.checkBoxTLSEnable);
-            this.tabPage5.Controls.Add(this.textBoxTLSSn);
-            this.tabPage5.Controls.Add(this.label12);
-            this.tabPage5.Controls.Add(this.checkBoxTLSAI);
-            this.tabPage5.Location = new System.Drawing.Point(4, 26);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(470, 139);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "TLS";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabPageTLS.Controls.Add(this.checkBoxTLSEnable);
+            this.tabPageTLS.Controls.Add(this.textBoxTLSSn);
+            this.tabPageTLS.Controls.Add(this.label12);
+            this.tabPageTLS.Controls.Add(this.checkBoxTLSAI);
+            this.tabPageTLS.Location = new System.Drawing.Point(4, 26);
+            this.tabPageTLS.Name = "tabPageTLS";
+            this.tabPageTLS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTLS.Size = new System.Drawing.Size(470, 139);
+            this.tabPageTLS.TabIndex = 4;
+            this.tabPageTLS.Text = "TLS";
+            this.tabPageTLS.UseVisualStyleBackColor = true;
             // 
             // checkBoxTLSEnable
             // 
@@ -459,7 +520,7 @@
             // 
             // textBoxTLSSn
             // 
-            this.textBoxTLSSn.Location = new System.Drawing.Point(109, 82);
+            this.textBoxTLSSn.Location = new System.Drawing.Point(109, 71);
             this.textBoxTLSSn.Name = "textBoxTLSSn";
             this.textBoxTLSSn.Size = new System.Drawing.Size(175, 23);
             this.textBoxTLSSn.TabIndex = 14;
@@ -467,7 +528,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 85);
+            this.label12.Location = new System.Drawing.Point(22, 74);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(82, 17);
             this.label12.TabIndex = 13;
@@ -476,7 +537,7 @@
             // checkBoxTLSAI
             // 
             this.checkBoxTLSAI.AutoSize = true;
-            this.checkBoxTLSAI.Location = new System.Drawing.Point(25, 61);
+            this.checkBoxTLSAI.Location = new System.Drawing.Point(132, 34);
             this.checkBoxTLSAI.Name = "checkBoxTLSAI";
             this.checkBoxTLSAI.Size = new System.Drawing.Size(106, 21);
             this.checkBoxTLSAI.TabIndex = 12;
@@ -503,7 +564,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonTSCancel;
-            this.ClientSize = new System.Drawing.Size(504, 226);
+            this.ClientSize = new System.Drawing.Size(488, 225);
             this.ControlBox = false;
             this.Controls.Add(this.buttonTsReset);
             this.Controls.Add(this.buttonTSSave);
@@ -522,17 +583,19 @@
             this.Text = "Transport Settings";
             this.Load += new System.EventHandler(this.FormTransSetting_Load);
             this.tabControlMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabPageKcp.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.tabPageTcp.ResumeLayout(false);
+            this.tabPageTcp.PerformLayout();
+            this.tabPageWs.ResumeLayout(false);
+            this.tabPageWs.PerformLayout();
+            this.tabPageHttp.ResumeLayout(false);
+            this.tabPageHttp.PerformLayout();
+            this.tabPageMux.ResumeLayout(false);
+            this.tabPageMux.PerformLayout();
+            this.tabPageTLS.ResumeLayout(false);
+            this.tabPageTLS.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,13 +607,11 @@
         private System.Windows.Forms.Button buttonTSSave;
         private System.Windows.Forms.Button buttonTSHelp;
         private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.CheckBox checkBoxTcpCr;
+        private System.Windows.Forms.TabPage tabPageKcp;
+        private System.Windows.Forms.TabPage tabPageTcp;
+        private System.Windows.Forms.TabPage tabPageWs;
         private System.Windows.Forms.TextBox textBoxWsPath;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBoxWsCr;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBoxKcpCon;
         private System.Windows.Forms.Label label10;
@@ -569,16 +630,24 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonTsReset;
-        private System.Windows.Forms.ComboBox comboBoxTcpHt;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageMux;
         private System.Windows.Forms.TextBox textBoxMuxCc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkBoxMuxEnable;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPageTLS;
         private System.Windows.Forms.CheckBox checkBoxTLSEnable;
         private System.Windows.Forms.TextBox textBoxTLSSn;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBoxTLSAI;
+        private System.Windows.Forms.TabPage tabPageHttp;
+        private System.Windows.Forms.TextBox textBoxTcpHeader;
+        private System.Windows.Forms.CheckBox checkBoxTcpHeader;
+        private System.Windows.Forms.TextBox textBoxWsHeader;
+        private System.Windows.Forms.Label labelHttp2Hosts;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxHttp2Path;
+        private System.Windows.Forms.Label labelHttp2Path;
+        private System.Windows.Forms.TextBox textBoxHttp2Hosts;
+        private System.Windows.Forms.Label label13;
     }
 }

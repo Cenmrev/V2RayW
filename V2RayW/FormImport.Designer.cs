@@ -34,6 +34,7 @@
             this.buttonFinish = new System.Windows.Forms.Button();
             this.dialog = new System.Windows.Forms.OpenFileDialog();
             this.labelIndicator = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxCusConfig
@@ -71,9 +72,9 @@
             // 
             // buttonFinish
             // 
-            this.buttonFinish.Location = new System.Drawing.Point(437, 177);
+            this.buttonFinish.Location = new System.Drawing.Point(402, 177);
             this.buttonFinish.Name = "buttonFinish";
-            this.buttonFinish.Size = new System.Drawing.Size(75, 27);
+            this.buttonFinish.Size = new System.Drawing.Size(52, 27);
             this.buttonFinish.TabIndex = 3;
             this.buttonFinish.Text = "Save";
             this.buttonFinish.UseVisualStyleBackColor = true;
@@ -89,11 +90,21 @@
             // labelIndicator
             // 
             this.labelIndicator.AutoSize = true;
-            this.labelIndicator.Location = new System.Drawing.Point(332, 182);
+            this.labelIndicator.Location = new System.Drawing.Point(289, 182);
             this.labelIndicator.Name = "labelIndicator";
             this.labelIndicator.Size = new System.Drawing.Size(43, 17);
             this.labelIndicator.TabIndex = 4;
             this.labelIndicator.Text = "label1";
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(460, 177);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(52, 27);
+            this.buttonClose.TabIndex = 5;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // FormImport
             // 
@@ -101,6 +112,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 213);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.labelIndicator);
             this.Controls.Add(this.buttonFinish);
             this.Controls.Add(this.buttonRemove);
@@ -127,5 +139,6 @@
         private System.Windows.Forms.Button buttonFinish;
         private System.Windows.Forms.OpenFileDialog dialog;
         private System.Windows.Forms.Label labelIndicator;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

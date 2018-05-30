@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,40 +11,38 @@ using System.Threading;
 using System.Text;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using System.Web.Script.Serialization;
 
 namespace V2RayW
 {
+
     static class Program
     {
+        public const int N_MODES = 4;
+        public const int RULES_MODE = 0;
+        public const int PAC_MODE = 1;
+        public const int GLOBAL_MODE = 2;
+        public const int MANUAL_MODE = 3;
 
-        public static List<Profile> profiles = new List<Profile>();
-        public static int selectedServerIndex
-        {
-            get { return Properties.Settings.Default.selectedServerIndex; }
-            set
-            {
-                Properties.Settings.Default.selectedServerIndex = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-        public static bool proxyIsOn
-        {
-            get { return Properties.Settings.Default.proxyIsOn; }
-            set
-            {
-                Properties.Settings.Default.proxyIsOn = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-        public static int proxyMode
-        {
-            get { return Properties.Settings.Default.proxyMode % 3; }
-            set
-            {
-                Properties.Settings.Default.proxyMode = value % 3;
-                Properties.Settings.Default.Save();
-            }
-        }
+        public static Dictionary<string, string> proxyBackup = new Dictionary<string, string>();
+
+        public static bool coreLoaded = false;
+        public static int proxyMode = RULES_MODE;
+        public static int localPort = 1081;
+        public static int httpPort = 8081;
+        public static bool udpSupport = false;
+        public static bool shareOverLan = false;
+        public static string dnsString = "localhost";
+        public static LogLevel logLevel = LogLevel.none;
+        public static bool useCusProfile = false;
+        public static List<ServerProfile> profiles = new List<ServerProfile>();
+        public static int selectedServerIndex = 1;
+        public static List<string> cusProfiles = new List<string>();
+        public static int selectedCusServerIndex = 1;
+        public static bool useMultipleServer = false;
+        public static int mainInboundType = 0;
+        public static bool alarmUnknown = true;
+
         public static MainForm mainForm;
         const string v2rayVersion = "v3.23";
         static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
@@ -54,12 +50,16 @@ namespace V2RayW
         public static bool finalAction = false;
         public static StringBuilder output = new StringBuilder();
         private static int lineCount = 0;
+
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            
             //backgourdworker
             v2rayCoreWorker.WorkerSupportsCancellation = true;
             v2rayCoreWorker.DoWork += new DoWorkEventHandler(Program.v2rayCoreWorker_DoWork);
@@ -109,70 +109,36 @@ namespace V2RayW
                     }
                 default: break;
             }
+
             
-            //Properties.Settings.Default.Reset();
-            Properties.Settings.Default.Upgrade();
-            //MessageBox.Show(Properties.Settings.Default.profilesStr);
-            var dProfilesStrArray = Properties.Settings.Default.profilesStr.Split('\t');
-            foreach (string pstr in dProfilesStrArray)
-            {
-                var p = new Profile();
-                var dp = JObject.Parse(pstr);
-                p.address = (dp["address"] ?? "").ToString();
-                p.port = (int)(dp["port"] ?? 10086);
-                p.allowPassive = (bool)(dp["allowPassive"] ?? false);
-                p.alterId = (int)(dp["alterId"] ?? 0);
-                p.network = (int)(dp["network"] ?? 0);
-                p.remark = (dp["remark"] ?? "").ToString();
-                p.userId = (dp["userId"] ?? "").ToString();
-                p.security = (int)(dp["security"] ?? 0);
-                Program.profiles.Add(p);
-            }
-            if (profiles.Count <= 0)
-            {
-                Program.proxyIsOn = false;
-            }
-            if (Program.selectedServerIndex >= Program.profiles.Count )
-            {
-                Program.selectedServerIndex = Program.profiles.Count - 1;
-            }
-            if (Program.profiles.Count > 0 && Program.selectedServerIndex < 0)
-            {
-                Program.selectedServerIndex = 0;
-            }
             mainForm = new MainForm();
-            mainForm.updateMenu();
-            Program.updateSystemProxy();
+            readSettings();
+            if (coreLoaded == true && proxyMode != 3)
+            {
+                Program.backUpProxy();
+            }
+            configurationDidChange();
 
             Application.Run();
         }
-        /*
-        private static void V2rayCoreWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
-        }*/
         
         static void OnProcessExit(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
+            finalAction = true;
+            if (Program.coreLoaded)
+            {
+                Program.stopV2Ray();
+                Properties.Settings.Default.Save();
+                Program._resetEvent.WaitOne();
+            }
+            if (coreLoaded && proxyMode != MANUAL_MODE)
+            {
+                restoreProxy();
+            }
+            Program.saveSettings();
         }
 
         //{"address":"v2ray.cool","allowPassive":0,"alterId":64,"network":0,"port":10086,"remark":"test server","userId":"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"}
-        internal static string profileToStr(Profile p)
-        {
-            var pd = new
-            {
-                address = p.address,
-                port = p.port,
-                userId = p.userId,
-                alterId = p.alterId,
-                remark = p.remark,
-                allowPassive = p.allowPassive,
-                network = p.network,
-                security = p.security
-            };
-            return JsonConvert.SerializeObject(pd);
-        }
 
         internal static int strToInt(string str, int defaultValue)
         {
@@ -198,16 +164,45 @@ namespace V2RayW
             }
         }
 
+        public static void loadV2ray()
+        {
+            if (!useMultipleServer && useCusProfile)
+            {
+                ; // using customized profile
+            } else
+            {
+                //single or multi servers
+                generateConfigJson();
+            }
+            v2rayCoreWorker.RunWorkerAsync();
+        }
+
+        public static async void configurationDidChange()
+        {
+            await stopV2Ray();
+            if(coreLoaded)
+            {
+                if ((selectedServerIndex >= 0 && selectedServerIndex < profiles.Count) ||
+                    (selectedCusServerIndex >= 0 && selectedCusServerIndex < cusProfiles.Count))
+                {
+                    loadV2ray();
+                } else
+                {
+                    coreLoaded = false;
+                    if (proxyMode != 3)
+                    {
+                        restoreProxy();
+                    }
+                    MessageBox.Show("No available servers!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            updateSystemProxy();
+            mainForm.updateMenu();
+        }
+
         public static async void updateSystemProxy()
         {
-            // for final action, change system proxy first and then stop v2ray;
-            if (finalAction)
-            {
-                runSysproxy();
-                Debug.WriteLine("system proxy changed, will stop v2ray");
-            }
-
-            if (proxyIsOn)
+            if (coreLoaded)
             {
                 await stopV2Ray();
                 //generate config.json
@@ -216,7 +211,7 @@ namespace V2RayW
                     v2rayCoreWorker.RunWorkerAsync();
                 } else
                 {
-                    Program.proxyIsOn = false;
+                    Program.coreLoaded = false;
                     mainForm.updateMenu();
                 }
             } else
@@ -224,15 +219,7 @@ namespace V2RayW
                 await stopV2Ray();
                 Debug.WriteLine("v stopped");
             }
-            //change system proxy
-            if (!finalAction)
-            {
-                var res = runSysproxy();
-                if (res == 2)
-                    MessageBox.Show("Fained to modify system proxy settings!");
-                else if (res == 1)
-                    Debug.WriteLine("Shall I tell the user to wait for a while? "); 
-            }
+            runSysproxy();
         }
 
         //https://social.msdn.microsoft.com/Forums/vstudio/en-US/19517edf-8348-438a-a3da-5fbe7a46b61a/how-to-change-global-windows-proxy-using-c-net-with-immediate-effect?forum=csharpgeneral
@@ -241,23 +228,46 @@ namespace V2RayW
         const int INTERNET_OPTION_SETTINGS_CHANGED = 39;
         const int INTERNET_OPTION_REFRESH = 37;
 
+        public static void backUpProxy()
+        {
+            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
+            proxyBackup["ProxyEnable"] = registry.GetValue("ProxyEnable").ToString();
+            proxyBackup["ProxyServer"] = registry.GetValue("ProxyServer").ToString();
+            proxyBackup["ProxyOverride"] = registry.GetValue("ProxyOverride").ToString();
+        }
+
+        public static void restoreProxy()
+        {
+            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
+            registry.SetValue("ProxyEnable", Program.proxyBackup["ProxyEnable"] == "0" ? 0 : 1);
+            registry.SetValue("ProxyServer", Program.proxyBackup["ProxyServer"]);
+            registry.SetValue("ProxyOverride", Program.proxyBackup["ProxyOverride"]);
+            InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
+            InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+        }
+
         public static int runSysproxy()
         {
+            // manual mode 
+            if (Program.proxyMode == 3)
+            {
+                return 0;
+            }
             RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
 
             bool settingsReturn, refreshReturn;
 
-            registry.SetValue("ProxyEnable", proxyIsOn ? 1 : 0);
-            if (proxyIsOn)
+            registry.SetValue("ProxyEnable", coreLoaded ? 1 : 0);
+            var proxyServer = (mainInboundType == 1 ? "socks=" : "http://") + $"127.0.0.1:{(mainInboundType == 1 ? localPort : httpPort)}";
+            var proxyOverride = "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
+            if (coreLoaded)
             {
-                registry.SetValue("ProxyServer", (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") + $"127.0.0.1:{Properties.Settings.Default.localPort}");
-                registry.SetValue("ProxyOverride", "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*");
+                registry.SetValue("ProxyServer", proxyServer);
+                registry.SetValue("ProxyOverride", proxyOverride);
             }
-            var sysState = registry.GetValue("ProxyEnable").ToString() == (proxyIsOn ? "1" : "0");
-            var sysServer = proxyIsOn ? registry.GetValue("ProxyServer").ToString() == (Properties.Settings.Default.inProtocol == 0 ? "socks=" : "http://") +  $"127.0.0.1:{Properties.Settings.Default.localPort}" : true;
-            //MessageBox.Show(registry.GetValue("ProxyServer").ToString());
-            var sysOverride = proxyIsOn ? registry.GetValue("ProxyOverride").ToString() == "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*" : true;
-            // They cause the OS to refresh the settings, causing IP to realy update
+            var sysState = registry.GetValue("ProxyEnable").ToString() == (coreLoaded ? "1" : "0");
+            var sysServer = coreLoaded ? registry.GetValue("ProxyServer").ToString() == proxyServer : true;
+            var sysOverride = coreLoaded ? registry.GetValue("ProxyOverride").ToString() == proxyOverride : true;
             settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
             refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
             if (sysServer && sysState && sysOverride)
@@ -275,83 +285,115 @@ namespace V2RayW
             }
         }
 
-        /*
-        public static int runSysproxy()
+        private static void readSettings()
         {
-            var sysproxyProcess = new Process();
-            sysproxyProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "sysproxy.exe";
-            if (proxyIsOn)
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var defaults = Properties.Settings.Default;
+            defaults.Upgrade();
+            logLevel = (LogLevel)defaults.logLevel;
+            coreLoaded = defaults.coreLoaded;
+            proxyMode = defaults.proxyMode;
+            selectedServerIndex = defaults.selectedServerIndex;
+            localPort = defaults.localPort;
+            httpPort = defaults.httpPort;
+            udpSupport = defaults.udpSupport;
+            shareOverLan = defaults.shareOverLan;
+            dnsString = defaults.dnsString;
+            selectedCusServerIndex = defaults.selectedCusServerIndex;
+            useCusProfile = defaults.useCusProfile;
+            useMultipleServer = defaults.useMultipleServer;
+            foreach(var p in defaults.cusProfilesStr.Split('\t'))
             {
-                if (proxyMode != 1) // not pac mode
+                if (p.Trim().Length > 0)
                 {
-                    sysproxyProcess.StartInfo.Arguments = $"global 127.0.0.1:{Properties.Settings.Default.localPort} <local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
-                } else // pacmode 
-                {
-                    ;
+                    cusProfiles.Add(p.Trim());
                 }
-                
-            } else
-            {
-                sysproxyProcess.StartInfo.Arguments = "off";
             }
-            sysproxyProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            sysproxyProcess.StartInfo.UseShellExecute = false;
-            sysproxyProcess.StartInfo.RedirectStandardOutput = true;
-            sysproxyProcess.StartInfo.CreateNoWindow = true;
-            try
+            foreach(var p in defaults.profilesStr.Split('\t'))
             {
-                sysproxyProcess.Start();
-                sysproxyProcess.WaitForExit();
-                return sysproxyProcess.ExitCode;
-            } catch (Exception e)
-            {
-                MessageBox.Show($"error!\n{ e.ToString() }");
-                return 1;
+                profiles.Add(js.Deserialize<ServerProfile>(p));
             }
+            mainInboundType = defaults.mainInboundType;
+            alarmUnknown = defaults.alarmUnknown;
         }
-        */
+
+        public static void saveSettings()
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var defaults = Properties.Settings.Default;
+            defaults.logLevel = (int)logLevel;
+            defaults.coreLoaded = coreLoaded;
+            defaults.proxyMode = proxyMode;
+            defaults.selectedServerIndex = selectedServerIndex;
+            defaults.localPort = localPort;
+            defaults.httpPort = httpPort;
+            defaults.udpSupport = udpSupport;
+            defaults.shareOverLan = shareOverLan;
+            defaults.dnsString = dnsString;
+            defaults.selectedCusServerIndex = selectedCusServerIndex;
+            defaults.useCusProfile = useCusProfile;
+            defaults.useMultipleServer = useMultipleServer;
+            defaults.profilesStr = String.Join("\t", profiles.Select(p => js.Serialize(p)));
+            defaults.cusProfilesStr = cusProfiles.Count > 0 ? String.Join("\t", cusProfiles) : "";
+            defaults.mainInboundType = mainInboundType;
+            defaults.alarmUnknown = alarmUnknown;
+            defaults.Save();
+        }
+        
         public static bool generateConfigJson()
         {
-            string templateStr = Encoding.UTF8.GetString(proxyMode == 0 ? Properties.Resources.config_rules : Properties.Resources.config_simple);
-            dynamic json = JObject.Parse(templateStr);
-            //json.transport = JObject.Parse(Properties.Settings.Default.transportSettings);
-            json.inbound.port = Properties.Settings.Default.localPort;
-            json.inbound.protocol = Properties.Settings.Default.inProtocol == 0 ? "socks" : "http";
-            if (Properties.Settings.Default.inProtocol == 0)
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string templateStr = Encoding.UTF8.GetString(Properties.Resources.config_simple);
+            dynamic fullConfig = js.Deserialize<dynamic>(templateStr);
+            fullConfig["log"]["loglevel"] = logLevel.ToString();
+            fullConfig["inbound"]["port"] = localPort;
+            fullConfig["inbound"]["listen"] = shareOverLan ? "0.0.0.0" : "127.0.0.1";
+            fullConfig["inboundDetour"][0]["listen"] = shareOverLan ? "0.0.0.0" : "127.0.0.1";
+            fullConfig["inboundDetour"][0]["port"] = httpPort;
+            fullConfig["inbound"]["settings"]["udp"] = udpSupport;
+            fullConfig["outbound"] = profiles[selectedServerIndex].OutboundProfile();
+            if (useMultipleServer)
             {
-                var inboundSettings = new
+                List<Dictionary<string, object>> vpoints = new List<Dictionary<string, object>>();
+                foreach (var p in profiles)
                 {
-                    auth = "noauth",
-                    udp = Properties.Settings.Default.udpSupport,
-                    ip = "127.0.0.1"
-                };
-                json.inbound.settings = JObject.Parse(JsonConvert.SerializeObject(inboundSettings));
+                    dynamic op = p.OutboundProfile();
+                    vpoints.Add(op["settings"]["vnext"][0]);
+                }
+                fullConfig["outbound"]["settings"]["vnext"] = vpoints;
+            }
+            string[] dnsArray = dnsString.Split(',');
+            if(dnsArray.Count() > 0)
+            {
+                fullConfig["dns"]["servers"] = dnsArray;
             } else
             {
-                json.inbound.settings = JObject.Parse("{\"timeout\": 0 }");
+                fullConfig["dns"]["servers"] = new string[] { "localhost " };
             }
-            json.inbound.allowPassive = profiles[selectedServerIndex].allowPassive;
-            json.outbound.settings.vnext[0].address = profiles[selectedServerIndex].address;
-            json.outbound.settings.vnext[0].port = profiles[selectedServerIndex].port;
-            json.outbound.settings.vnext[0].users[0].id = profiles[selectedServerIndex].userId;
-            json.outbound.settings.vnext[0].users[0].alterId = profiles[selectedServerIndex].alterId;
-            json.outbound.settings.vnext[0].users[0].security = (new string[] { "aes-128-cfb", "aes-128-gcm", "chacha20-poly1305" })[profiles[selectedServerIndex].security % 3];
-            
-            var ts = JObject.Parse(Properties.Settings.Default.transportSettings);
-            json.outbound.streamSettings.security = ts["security"];
-            json.outbound.streamSettings.tlsSettings = ts["tlsSettings"];
-            json.outbound.streamSettings.tcpSettings = ts["tcpSettings"];
-            json.outbound.streamSettings.kcpSettings = ts["kcpSettings"];
-            json.outbound.streamSettings.wsSettings = ts["wsSettings"];
-            //json.outbound.streamSettings = ts;
-            json.outbound.streamSettings.network = (new string[] { "tcp", "kcp", "ws" })[profiles[selectedServerIndex].network % 3];
 
-            json.outbound.mux = JObject.Parse(Properties.Settings.Default.mux);
-            var dnsArray = Properties.Settings.Default.dns.Split(',');
-            json.dns = JObject.Parse(dnsArray.Count() > 0 ? JsonConvert.SerializeObject( new { servers = dnsArray }) : "{\"servers\":[\"localhost\"]}");   
+            if(proxyMode == RULES_MODE)
+            {
+                List<object> domainRuls = new List<object>();
+                foreach(var p in fullConfig["routing"]["settings"]["rules"][0]["domain"])
+                {
+                    domainRuls.Add(p);
+                }
+                domainRuls.Add("geosite:cn");
+                fullConfig["routing"]["settings"]["rules"][0]["domain"] = domainRuls;
+                List<object> ipRuls = new List<object>();
+                foreach(var p in fullConfig["routing"]["settings"]["rules"][1]["ip"])
+                {
+                    ipRuls.Add(p);
+                }
+                ipRuls.Add("geoip:cn");
+                fullConfig["routing"]["settings"]["rules"][1]["ip"] = ipRuls;
+            } else if (proxyMode == MANUAL_MODE)
+            {
+                fullConfig["routing"]["settings"]["rules"] = new object[] { };
+            } 
             try
             {
-                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "configw.json", JsonConvert.SerializeObject(json));
+                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "configw.json", js.Serialize(fullConfig));
                 return true;
             } catch
             {
@@ -367,7 +409,8 @@ namespace V2RayW
 
             var v2rayProcess = new Process();
             v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "v2ray.exe";
-            v2rayProcess.StartInfo.Arguments = "-config " + @"""" + AppDomain.CurrentDomain.BaseDirectory + "configw.json" + @"""";
+            v2rayProcess.StartInfo.Arguments = "-config " + @"""" + 
+                (useCusProfile ? cusProfiles[selectedCusServerIndex] : (AppDomain.CurrentDomain.BaseDirectory + "configw.json") )+ @"""";
             v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             v2rayProcess.StartInfo.UseShellExecute = false;
             v2rayProcess.StartInfo.RedirectStandardOutput = true;
@@ -417,7 +460,7 @@ namespace V2RayW
                 {
                     mainForm.viewLogToolStripMenuItem_Click(sender, e);
                 }
-                proxyIsOn = false;
+                coreLoaded = false;
                 mainForm.updateMenu();
                 updateSystemProxy();
             }
@@ -464,29 +507,13 @@ namespace V2RayW
             }
         }
     }
-    
-    public class Profile
+
+    public enum LogLevel
     {
-        internal string address = "1.2.3.4";
-        internal bool allowPassive = false;
-        internal int alterId = 0;
-        internal int network = 0;
-        internal int port = 10086;
-        internal string remark = "";
-        internal string userId = "";
-        internal int security = 0;
-        public Profile DeepCopy()
-        {
-            Profile p = new Profile();
-            p.address = String.Copy(this.address);
-            p.allowPassive = this.allowPassive;
-            p.alterId = this.alterId;
-            p.network = this.network;
-            p.port = this.port;
-            p.remark = String.Copy(this.remark);
-            p.userId = String.Copy(this.userId);
-            p.security = this.security;
-            return p;
-        }
-    }
+        none = 0,
+        error = 1,
+        warning = 2,
+        info = 3,
+        debug = 4
+    };
 }
