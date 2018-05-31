@@ -119,10 +119,10 @@ namespace V2RayW
             }
             configurationDidChange();
 
-            Application.Run();
+            Application.Run(mainForm);
         }
-        
-        static void OnProcessExit(object sender, EventArgs e)
+
+        public static void OnProcessExit(object sender, EventArgs e)
         {
             finalAction = true;
             if (Program.coreLoaded)

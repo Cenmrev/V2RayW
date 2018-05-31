@@ -189,5 +189,24 @@ namespace V2RayW
             }
             outputForm.Focus();
         }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_ENDSESSION = 0x0016;
+            const int WM_QUERYENDSESSION = 0x0011;
+            if (m.Msg == WM_ENDSESSION || m.Msg == WM_QUERYENDSESSION)
+            {
+                if (Program.coreLoaded && Program.proxyMode != Program.MANUAL_MODE)
+                {
+                    Program.restoreProxy();
+                }
+            }
+            base.WndProc(ref m);
+        }
     }
 }

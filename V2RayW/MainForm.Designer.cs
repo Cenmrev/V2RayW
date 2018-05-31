@@ -184,6 +184,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.contextMenuStripMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
