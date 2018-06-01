@@ -59,6 +59,14 @@ namespace V2RayW
         [STAThread]
         static void Main()
         {
+            if (AlreadyStart())
+            {
+                MessageBox.Show("V2RayW already Running\r\nYou can find it in your tray.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                Environment.Exit(0);
+            }
+
             //Properties.Settings.Default.Reset();
             //backgourdworker
             v2rayCoreWorker.WorkerSupportsCancellation = true;
@@ -496,6 +504,21 @@ namespace V2RayW
                     return 2;
                 }
             }
+        }
+        private static bool AlreadyStart()
+        {
+            int count = 0;
+
+            string path = Process.GetCurrentProcess().MainModule.FileName;
+            Process[] processes = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
+            foreach (Process p in processes)
+            {
+                if (p.MainModule.FileName == path)
+                {
+                    count++;
+                }
+            }
+            return count >= 2;
         }
     }
 
