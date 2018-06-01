@@ -34,6 +34,7 @@ namespace V2RayW
         public ConfigForm()
         {
             InitializeComponent();
+            I18N.InitControl(this);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

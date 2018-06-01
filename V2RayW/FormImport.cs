@@ -19,6 +19,7 @@ namespace V2RayW
         public FormImport()
         {
             InitializeComponent();
+            I18N.InitControl(this);
         }
 
         private void buttonFinish_Click(object sender, EventArgs e)
@@ -38,7 +39,7 @@ namespace V2RayW
                     int returnValue = proBach.ExitCode;
                     if (returnValue != 0)
                     {
-                        MessageBox.Show(jsonpath + " is not a valid v2ray config file!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(jsonpath + I18N.GetValue(" is not a valid v2ray config file!"), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         labelIndicator.Text = "";
                         return;
                     }
