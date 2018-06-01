@@ -206,8 +206,10 @@ namespace V2RayW
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
             proxyBackup["ProxyEnable"] = registry.GetValue("ProxyEnable").ToString();
-            proxyBackup["ProxyServer"] = registry.GetValue("ProxyServer").ToString();
-            proxyBackup["ProxyOverride"] = registry.GetValue("ProxyOverride").ToString();
+            object tempVal = registry.GetValue("ProxyServer");
+            proxyBackup["ProxyServer"] = (tempVal == null) ? "" : tempVal.ToString();
+            tempVal = registry.GetValue("ProxyOverride");
+            proxyBackup["ProxyOverride"] = (tempVal == null) ? "" : tempVal.ToString();
         }
 
         public static void restoreProxy()
