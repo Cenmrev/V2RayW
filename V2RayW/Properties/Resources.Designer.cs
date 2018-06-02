@@ -71,7 +71,19 @@ namespace V2RayW.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        ///   查找类似 V2RayW already Running=V2RayW�Ѿ�����
+        ///You can find it in your tray.=���������������ҵ���.
+        ///Wrong or missing v2ray core file!=��ʧ���Ǵ����V2Ray�����ļ�
+        ///Download it right now?=Ҫ������ȷ�ĺ�����? 的本地化字符串。
+        /// </summary>
+        internal static string Lang_zh_cn {
+            get {
+                return ResourceManager.GetString("Lang_zh_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon vw256 {
             get {

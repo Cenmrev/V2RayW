@@ -20,6 +20,16 @@ namespace V2RayW
         public MainForm()
         {
             InitializeComponent();
+            viewLogToolStripMenuItem.Text = I18N.GetValue(viewLogToolStripMenuItem.Text);
+            v2RayRulesToolStripMenuItem.Text = I18N.GetValue(v2RayRulesToolStripMenuItem.Text);
+            pacModeToolStripMenuItem.Text = I18N.GetValue(pacModeToolStripMenuItem.Text);
+            globalModeToolStripMenuItem.Text = I18N.GetValue(globalModeToolStripMenuItem.Text);
+            manualModeToolStripMenuItem.Text = I18N.GetValue(manualModeToolStripMenuItem.Text);
+            serversToolStripMenuItem.Text = I18N.GetValue(serversToolStripMenuItem.Text);
+            editPacFileToolStripMenuItem.Text = I18N.GetValue(editPacFileToolStripMenuItem.Text);
+            configureToolStripMenuItem.Text = I18N.GetValue(configureToolStripMenuItem.Text);
+            helpToolStripMenuItem.Text = I18N.GetValue(helpToolStripMenuItem.Text);
+            quitToolStripMenuItem.Text = I18N.GetValue(quitToolStripMenuItem.Text);
         }
 
         public void updateMenu()
@@ -47,7 +57,7 @@ namespace V2RayW
             serversToolStripMenuItem.DropDownItems.Clear();
             if (Program.profiles.Count == 0 && Program.cusProfiles.Count == 0)
             {
-                ToolStripMenuItem noServer = new ToolStripMenuItem("no available servers.");
+                ToolStripMenuItem noServer = new ToolStripMenuItem(I18N.GetValue("no available servers."));
                 serversToolStripMenuItem.DropDownItems.Add(noServer);
                 return;
             }
@@ -76,6 +86,14 @@ namespace V2RayW
             {
                 serversToolStripMenuItem.DropDownItems.AddRange(cusServerMenuItems);
             }
+
+            UpdateMenuText();
+        }
+
+        private void UpdateMenuText()
+        {
+            statusToolStripMenuItem.Text = I18N.GetValue(statusToolStripMenuItem.Text);
+            startStopToolStripMenuItem.Text = I18N.GetValue(startStopToolStripMenuItem.Text);
         }
 
         private void switchToServer(object sender, EventArgs e)
