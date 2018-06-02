@@ -61,8 +61,8 @@ namespace V2RayW
         {
             if (AlreadyStart())
             {
-                MessageBox.Show("V2RayW already Running\r\nYou can find it in your tray.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(I18N.GetValue("V2RayW already Running") + "\n" + I18N.GetValue("You can find it in your tray."),
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 Environment.Exit(0);
             }
@@ -82,7 +82,7 @@ namespace V2RayW
             {
                 case 2:
                     {
-                        DialogResult res = MessageBox.Show("Wrong or missing v2ray core file!\nDownload it right now?", "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                        DialogResult res = MessageBox.Show(I18N.GetValue("Wrong or missing v2ray core file!") + "\n" + I18N.GetValue("Download it right now?"), "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
                         if (res == DialogResult.OK)
                         {
                             Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
@@ -93,15 +93,17 @@ namespace V2RayW
                     {
                         if (Properties.Settings.Default.alarmUnknown == true)
                         {
-          
-                            DialogResult res = MessageBox.Show(String.Format("Unknown version of v2ray core detected, which may not be compatible with V2RayW.\n{0} is suggested. Do you want to continue to use the existing core?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                            DialogResult res = MessageBox.Show(I18N.GetValue("Unknown version of v2ray core detected, which may not be compatible with V2RayW.") + "\n" +
+                                v2rayVersion + I18N.GetValue("is suggested. Do you want to continue to use the existing core?"),
+                                "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                             if (res == DialogResult.OK)
                             {
                                 break;
                             }
                             else
                             {
-                                DialogResult dres = MessageBox.Show(String.Format("Do you want to download official core {0} right now?", Program.v2rayVersion), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                                DialogResult dres = MessageBox.Show(I18N.GetValue("Do you want to download official core") + v2rayVersion + I18N.GetValue("right now?"), "Unknown v2ray.exe!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                                 if (dres == DialogResult.OK)
                                 {
                                     Process.Start(String.Format(@"https://github.com/v2ray/v2ray-core/releases/tag/{0}", v2rayVersion));
@@ -197,7 +199,7 @@ namespace V2RayW
                     {
                         restoreProxy();
                     }
-                    MessageBox.Show("No available servers!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(I18N.GetValue("No available servers!"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 updateSystemProxy();
             }
@@ -454,7 +456,7 @@ namespace V2RayW
         {
             if (!e.Cancelled)
             {
-                DialogResult res = MessageBox.Show("v2ray core exited unexpectedly! \n View log information?","Error", MessageBoxButtons.OKCancel,MessageBoxIcon.Stop);
+                DialogResult res = MessageBox.Show(I18N.GetValue("v2ray core exited unexpectedly!") + "\n" + I18N.GetValue("View log information?"), "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
                 if (res == DialogResult.OK)
                 {
                     mainForm.viewLogToolStripMenuItem_Click(sender, e);

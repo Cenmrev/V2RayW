@@ -17,6 +17,7 @@ namespace V2RayW
         public FormTransSetting()
         {
             InitializeComponent();
+            I18N.InitControl(this);
         }
 
         private void buttonTSCancel_Click(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace V2RayW
 
         private void buttonTSSave_Click(object sender, EventArgs e)
         {
-            var res = MessageBox.Show("Make sure you have read the help before clicking OK!", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            var res = MessageBox.Show(I18N.GetValue("Make sure you have read the help before clicking OK!"), "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (res != DialogResult.OK)
             {
                 return;

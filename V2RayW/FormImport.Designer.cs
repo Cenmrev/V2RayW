@@ -40,11 +40,11 @@
             // listBoxCusConfig
             // 
             this.listBoxCusConfig.FormattingEnabled = true;
-            this.listBoxCusConfig.ItemHeight = 17;
+            this.listBoxCusConfig.ItemHeight = 20;
             this.listBoxCusConfig.Location = new System.Drawing.Point(12, 13);
             this.listBoxCusConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxCusConfig.Name = "listBoxCusConfig";
-            this.listBoxCusConfig.Size = new System.Drawing.Size(500, 157);
+            this.listBoxCusConfig.Size = new System.Drawing.Size(500, 144);
             this.listBoxCusConfig.TabIndex = 0;
             this.listBoxCusConfig.SelectedValueChanged += new System.EventHandler(this.listBoxCusConfig_SelectedValueChanged);
             // 
@@ -53,7 +53,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(12, 177);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(59, 27);
+            this.buttonAdd.Size = new System.Drawing.Size(85, 30);
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -61,10 +61,10 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(77, 177);
+            this.buttonRemove.Location = new System.Drawing.Point(103, 177);
             this.buttonRemove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(87, 27);
+            this.buttonRemove.Size = new System.Drawing.Size(85, 30);
             this.buttonRemove.TabIndex = 2;
             this.buttonRemove.Text = "Remove";
             this.buttonRemove.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@
             // 
             // buttonFinish
             // 
-            this.buttonFinish.Location = new System.Drawing.Point(402, 177);
+            this.buttonFinish.Location = new System.Drawing.Point(394, 177);
             this.buttonFinish.Name = "buttonFinish";
-            this.buttonFinish.Size = new System.Drawing.Size(52, 27);
+            this.buttonFinish.Size = new System.Drawing.Size(60, 30);
             this.buttonFinish.TabIndex = 3;
             this.buttonFinish.Text = "Save";
             this.buttonFinish.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             this.labelIndicator.AutoSize = true;
             this.labelIndicator.Location = new System.Drawing.Point(289, 182);
             this.labelIndicator.Name = "labelIndicator";
-            this.labelIndicator.Size = new System.Drawing.Size(43, 17);
+            this.labelIndicator.Size = new System.Drawing.Size(53, 20);
             this.labelIndicator.TabIndex = 4;
             this.labelIndicator.Text = "label1";
             // 
@@ -100,7 +100,7 @@
             // 
             this.buttonClose.Location = new System.Drawing.Point(460, 177);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(52, 27);
+            this.buttonClose.Size = new System.Drawing.Size(60, 30);
             this.buttonClose.TabIndex = 5;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@
             // 
             // FormImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 213);
             this.ControlBox = false;

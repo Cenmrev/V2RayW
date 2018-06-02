@@ -1,0 +1,71 @@
+﻿#简体中文
+
+V2RayW already Running=V2RayW已经运行
+You can find it in your tray.=您可以在托盘中找到它.
+Wrong or missing v2ray core file!=V2Ray核心文件丢失或错误
+Download it right now?=要下载正确的核心吗?
+
+#ConfigForm
+Main inbound:=主inbound:
+Share Over LAN=通过LAN分享
+Socks5 Port:=Socks5端口:
+Support UDP=支持UDP
+Http Port:=Http端口:
+If the protocol or port is changed, the pac file also needs manual modification.=如果协议或端口被修改，PAC文件也需要手动修改。
+seperated by comma(,)=使用英文逗号分隔(,)
+V2Ray Servers=V2Ray服务器
+Address:=服务器地址:
+Security:=加密协议:
+transport settings...=传输设置...
+Network:=网络:
+Add=添加
+Remove=移除
+Import customized config.json=导入自定义的.Json
+Alarm if core version is unknown.=当核心版本未知时报警
+Log level:=日志级别:
+Save=保存
+Cancel=取消
+
+#FormImport
+Import customized config.json=导入自定义的.Json
+Close=关闭
+ is not a valid v2ray config file!=不是一个V2Ray配置文件!
+
+#FormTransSetting
+Transport Settings=传输设置
+Help=帮助
+Reset=重置
+Customize Http Header=自定义HTTP头
+enabled=启用
+allowInsecure=允许非安全
+Make sure you have read the help before clicking OK!=请确保您已仔细阅读了帮助!
+
+
+#Menu
+Status=状态
+Pac Mode=Pac模式
+Quit=退出
+V2Ray: loaded=V2Ray已加载
+V2Ray: unloaded=V2Ray已停止
+Unload V2Ray=终止V2Ray
+Load V2Ray=加载V2Ray
+View log=查看日志
+V2Ray Rules=V2Ray规则
+Pac Mode=Pac模式
+Global Mode=全局模式
+Manual Mode=手动模式
+Servers=服务器
+Edit Pac File=编辑PAC文件
+Configure...=配置...
+Help=帮助
+Quit=退出
+no available servers.=无可用服务器
+
+#Program
+v2ray core exited unexpectedly!=V2Ray核心异常退出!
+View log information?=查看日志信息?
+No available servers!=无可用服务器
+Unknown version of v2ray core detected, which may not be compatible with V2RayW.=未知的V2Ray核心版, 可能会导致不兼容
+is suggested. Do you want to continue to use the existing core?=是建议版本. 您想继续使用当前核心吗?
+Do you want to download official core=您是否想立即下载官方核心:
+right now?=?
