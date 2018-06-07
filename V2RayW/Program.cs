@@ -44,7 +44,7 @@ namespace V2RayW
         public static bool alarmUnknown = true;
 
         public static MainForm mainForm;
-        const string v2rayVersion = "v3.23";
+        const string v2rayVersion = "v3.25";
         static BackgroundWorker v2rayCoreWorker = new BackgroundWorker();
         public static AutoResetEvent _resetEvent = new AutoResetEvent(false);
         public static bool finalAction = false;
@@ -204,6 +204,7 @@ namespace V2RayW
                 updateSystemProxy();
             }
             mainForm.updateMenu();
+            saveSettings();
         }
 
         //https://social.msdn.microsoft.com/Forums/vstudio/en-US/19517edf-8348-438a-a3da-5fbe7a46b61a/how-to-change-global-windows-proxy-using-c-net-with-immediate-effect?forum=csharpgeneral
