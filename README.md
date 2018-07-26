@@ -25,6 +25,17 @@ V2RayW.exe provides a GUI to generate the config file (configw.json) for v2ray-c
 [English](http://tunecomp.net/add-app-to-startup/) 
 [中文](http://jingyan.baidu.com/article/90895e0ff3a41f64ec6b0bc3.html)
 
+### Reset V2RayW
+
+New versions of V2RayW may not be compatible with existing settings. To totally
+reset settings, 
+
+* quit V2RayW
+* delete `configw.json`
+* delete contents of `X:\Users\YYY\AppData\Local\Cenmrev`, where `X` is your Windows drive and `YYY` is your username.
+
+For details, refer to [#36](https://github.com/Cenmrev/V2RayW/issues/36).
+
 ## Disclaimer
 
 The developer does not major in CS nor Software Engineer and currently is busy with grad school courses. So V2rayW will not be updated frequently. The developer may not have enough time to add more features to V2RayW, nor to merge pull requests. However, forking and releasing your own version are always welcome.
