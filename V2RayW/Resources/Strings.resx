@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="advanced" xml:space="preserve">
+    <value>Advanced...</value>
+  </data>
+  <data name="alterId" xml:space="preserve">
+    <value>Alter ID:</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="configure" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="coreloaded" xml:space="preserve">
+    <value>v2ray-core: loaded</value>
+  </data>
+  <data name="coreunloaded" xml:space="preserve">
+    <value>v2ray-core: unloaded</value>
+  </data>
+  <data name="editpac" xml:space="preserve">
+    <value>Edit PAC</value>
+  </data>
+  <data name="exportbackup" xml:space="preserve">
+    <value>Export/Backup</value>
+  </data>
+  <data name="globalmode" xml:space="preserve">
+    <value>Global Mode</value>
+  </data>
+  <data name="help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="level" xml:space="preserve">
+    <value>Level:</value>
+  </data>
+  <data name="loadcore" xml:space="preserve">
+    <value>Load Core</value>
+  </data>
+  <data name="LocalHTTPPort" xml:space="preserve">
+    <value>Local HTTP Port:</value>
+  </data>
+  <data name="LocalSocks5Port" xml:space="preserve">
+    <value>Local Socks5 Port:</value>
+  </data>
+  <data name="loglevel" xml:space="preserve">
+    <value>Log level:</value>
+  </data>
+  <data name="manualmode" xml:space="preserve">
+    <value>Manual Mode</value>
+  </data>
+  <data name="network" xml:space="preserve">
+    <value>Network:</value>
+  </data>
+  <data name="pacmode" xml:space="preserve">
+    <value>PAC Mode</value>
+  </data>
+  <data name="quit" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="resetpacfile" xml:space="preserve">
+    <value>Reset pac file</value>
+  </data>
+  <data name="RestoreTurnOff" xml:space="preserve">
+    <value>Turn off system proxy</value>
+  </data>
+  <data name="RestoreTurnOn" xml:space="preserve">
+    <value>Restore system proxy to original states</value>
+  </data>
+  <data name="routingrule" xml:space="preserve">
+    <value>V2Ray's Routing rule...</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="security" xml:space="preserve">
+    <value>Security:</value>
+  </data>
+  <data name="server" xml:space="preserve">
+    <value>Server...</value>
+  </data>
+  <data name="ServerInfo" xml:space="preserve">
+    <value>Server Information</value>
+  </data>
+  <data name="ShareOverLan" xml:space="preserve">
+    <value>Share Over LAN</value>
+  </data>
+  <data name="showlog" xml:space="preserve">
+    <value>Show Log</value>
+  </data>
+  <data name="transportsettings" xml:space="preserve">
+    <value>Transport settings...</value>
+  </data>
+  <data name="UDPSupport" xml:space="preserve">
+    <value>UDP Support</value>
+  </data>
+  <data name="unloadcore" xml:space="preserve">
+    <value>Unload Core</value>
+  </data>
+  <data name="updatesubscription" xml:space="preserve">
+    <value>Update subscription</value>
+  </data>
+  <data name="useall" xml:space="preserve">
+    <value>Use All</value>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>User ID:</value>
+  </data>
+  <data name="V2RayHomePage" xml:space="preserve">
+    <value>https://v2ray.com/en/index.html</value>
+  </data>
+  <data name="viewconfig" xml:space="preserve">
+    <value>View current config.json</value>
+  </data>
+  <data name="VMessServers" xml:space="preserve">
+    <value>VMess Servers</value>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="configWindowName" xml:space="preserve">
+    <value>V2RayW Configure</value>
+  </data>
+  <data name="DNSInstruction" xml:space="preserve">
+    <value>If local ports are changed, PAC files also need modifications.</value>
+  </data>
+  <data name="domainIp" xml:space="preserve">
+    <value>domain/IP</value>
+  </data>
+  <data name="DomainStrategy" xml:space="preserve">
+    <value>Domain Strategy:</value>
+  </data>
+  <data name="ListInstruction" xml:space="preserve">
+    <value>Multiple values should be seperated by comma(,). No spaces.</value>
+  </data>
+  <data name="Outbounds" xml:space="preserve">
+    <value>Outbounds</value>
+  </data>
+  <data name="routeto" xml:space="preserve">
+    <value>route to:</value>
+  </data>
+  <data name="rulenamebypass" xml:space="preserve">
+    <value>bypass cn&amp;private</value>
+  </data>
+  <data name="rulenamedirect" xml:space="preserve">
+    <value>all to direct</value>
+  </data>
+  <data name="rulenameglobal" xml:space="preserve">
+    <value>all to main</value>
+  </data>
+  <data name="rulenetwork" xml:space="preserve">
+    <value>network</value>
+  </data>
+  <data name="ruleport" xml:space="preserve">
+    <value>port</value>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
+  <data name="rulseSetName" xml:space="preserve">
+    <value>Rule Set Name:</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
+  <data name="tag" xml:space="preserve">
+    <value>Tag:</value>
+  </data>
+  <data name="V2RayCore" xml:space="preserve">
+    <value>V2Ray Core</value>
+  </data>
+  <data name="congestion" xml:space="preserve">
+    <value>Congestion:</value>
+  </data>
+  <data name="customizehttpheader" xml:space="preserve">
+    <value>Customize HTTP Header</value>
+  </data>
+  <data name="dowlonkcapacity" xml:space="preserve">
+    <value>Downlink capacity:</value>
+  </data>
+  <data name="enableMux" xml:space="preserve">
+    <value>Enable Mux</value>
+  </data>
+  <data name="Example" xml:space="preserve">
+    <value>Example:</value>
+  </data>
+  <data name="ForceTcpFastOpen" xml:space="preserve">
+    <value>Force TCP Fast Open</value>
+  </data>
+  <data name="header" xml:space="preserve">
+    <value>Header:</value>
+  </data>
+  <data name="headertype" xml:space="preserve">
+    <value>Header type:</value>
+  </data>
+  <data name="host" xml:space="preserve">
+    <value>Host:</value>
+  </data>
+  <data name="key" xml:space="preserve">
+    <value>Key:</value>
+  </data>
+  <data name="mtu" xml:space="preserve">
+    <value>MTU:</value>
+  </data>
+  <data name="Muxconcurrency" xml:space="preserve">
+    <value>Mux concurrency:</value>
+  </data>
+  <data name="path" xml:space="preserve">
+    <value>Path:</value>
+  </data>
+  <data name="quicstatement" xml:space="preserve">
+    <value>QUIC is now an experiment in V2Ray. It implements IETF specification. As the spec is still being standardized, compatibility can't be guaranteed.</value>
+  </data>
+  <data name="readsize" xml:space="preserve">
+    <value>Read buffer size</value>
+  </data>
+  <data name="resetall" xml:space="preserve">
+    <value>Reset All</value>
+  </data>
+  <data name="seeexample" xml:space="preserve">
+    <value>See example</value>
+  </data>
+  <data name="TLSallowInsecure" xml:space="preserve">
+    <value>Allow insecure certificates</value>
+  </data>
+  <data name="TLSallowInsecureCiphers" xml:space="preserve">
+    <value>Allow insecure ciphers</value>
+  </data>
+  <data name="tlsalpn" xml:space="preserve">
+    <value>ALPN:</value>
+  </data>
+  <data name="TLSserverName" xml:space="preserve">
+    <value>Server name:</value>
+  </data>
+  <data name="tti" xml:space="preserve">
+    <value>TTI:</value>
+  </data>
+  <data name="uplinkcapacity" xml:space="preserve">
+    <value>Uplink capacity:</value>
+  </data>
+  <data name="usetls" xml:space="preserve">
+    <value>Use TLS</value>
+  </data>
+  <data name="writesize" xml:space="preserve">
+    <value>Write buffer size</value>
+  </data>
+  <data name="browseconfig" xml:space="preserve">
+    <value>Browse config folder...</value>
+  </data>
+  <data name="configHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/overview.html</value>
+  </data>
+  <data name="configInstruction" xml:space="preserve">
+    <value>To fully take control of the V2Ray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe.</value>
+  </data>
+  <data name="coreHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/welcome/install.html</value>
+  </data>
+  <data name="messagecorequit" xml:space="preserve">
+    <value>V2Ray exits unexpectedly!</value>
+  </data>
+  <data name="messagedircreatefail" xml:space="preserve">
+    <value>Cannot create folder(s)!</value>
+  </data>
+  <data name="messagedownloadfail" xml:space="preserve">
+    <value>V2RayW cannot download V2Ray core!</value>
+  </data>
+  <data name="messagedownloading" xml:space="preserve">
+    <value>V2RayW is downloading V2Ray core from GitHub.</value>
+  </data>
+  <data name="messagedownloadsuccess" xml:space="preserve">
+    <value>V2RayW got V2Ray core from GitHub.</value>
+  </data>
+  <data name="messagefilecreatefail" xml:space="preserve">
+    <value>Cannot create file(s)!</value>
+  </data>
+  <data name="messagenocore" xml:space="preserve">
+    <value>Let V2RayW doanload V2Ray from GitHub?
+“Yes”：V2RayW will try downloading V2Ray from GitHub。
+“No”：Manually download V2Ray and put files into folder v2ray-core.
+“Cancel”：Quit V2RayW。
+
+Folder v2ray-core should be put in the same folder as V2RayW.exe. The following files should be contained in v2ray-core:
+v2ray-core\v2ray.exe
+v2ray-core\v2ctl.exe
+v2ray-core\geoip.dat
+v2ray-core\geosite.dat</value>
+  </data>
+  <data name="messagenocoretitle" xml:space="preserve">
+    <value>Cannot find V2Ray!</value>
+  </data>
+  <data name="messagenotvalidjson" xml:space="preserve">
+    <value>Not a valid JSON!</value>
+  </data>
+  <data name="messagetagrequired" xml:space="preserve">
+    <value>"tag" is requried!</value>
+  </data>
+  <data name="muxHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/mux.html</value>
+  </data>
+  <data name="outboundHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/overview.html#outboundobject</value>
+  </data>
+  <data name="outboundInstruction" xml:space="preserve">
+    <value>To use outbounds of other protocols apart from vmess, directly provide the corresponding OutboundObject below. Click Help to see instructions.</value>
+  </data>
+  <data name="refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ruleHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/routing.html</value>
+  </data>
+  <data name="tcpHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/transport/tcp.html#httpheaderobject</value>
+  </data>
+  <data name="transportHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/configuration/transport.html</value>
+  </data>
+  <data name="validConfig" xml:space="preserve">
+    <value>Valid config files:</value>
+  </data>
+  <data name="messagenoserver" xml:space="preserve">
+    <value>No available servers.</value>
+  </data>
+  <data name="messagereaddefaultserror" xml:space="preserve">
+    <value>V2RayW encounters errors while reading settings.</value>
+  </data>
+  <data name="paclist" xml:space="preserve">
+    <value>PAC list</value>
+  </data>
+</root>

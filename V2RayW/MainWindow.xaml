@@ -1,0 +1,43 @@
+﻿<Window x:Class="V2RayW.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:V2RayW"
+        xmlns:res="clr-namespace:V2RayW.Resources"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+    </Grid>
+
+    <Window.Resources>
+        <MenuItem x:Key="editPacMenuItem" Header="{x:Static res:Strings.editpac}" Click="EditPacMenuItem_Click"/>
+        <MenuItem x:Key="updateSubscriptionMenuItem" Header="{x:Static res:Strings.updatesubscription}" Click="UpdateSubscription"/>
+        <MenuItem x:Key="resetPacButton" Click="ResetPacButton_Click" Header="{x:Static res:Strings.resetpacfile}"/>
+        <ContextMenu x:Key="TrayMenu">
+            <MenuItem Header="_core status" IsEnabled="False"/>
+            <MenuItem Header="load core" IsEnabled="False" Click="OverallChanged"/>
+            <MenuItem Header="{x:Static res:Strings.viewconfig}" Click="ViewCurrentConfig"/>
+            <MenuItem Header="{x:Static res:Strings.showlog}" Click="ShowLogMenuItem_Click" />
+            <Separator />
+            <MenuItem Header="{x:Static res:Strings.pacmode}" Tag="0" Click="ModeChanged"/>
+            <MenuItem Header="{x:Static res:Strings.globalmode}" Tag="1" Click="ModeChanged"/>
+            <MenuItem Header="{x:Static res:Strings.manualmode}" Tag="2" Click="ModeChanged"/>
+            <Separator />
+            <MenuItem Header="{x:Static res:Strings.server}"/>
+            <MenuItem Header="{x:Static res:Strings.routingrule}"/>
+            <MenuItem Header="{x:Static res:Strings.paclist}"/>
+            <MenuItem Header="{x:Static res:Strings.configure}" Click="ShowConfigWindow" />
+            <MenuItem Visibility="Collapsed" Header="{x:Static res:Strings.exportbackup}"/>
+            <Separator />
+            <MenuItem Header="{x:Static res:Strings.help}" Click="ShowHelp" />
+            <MenuItem Header="{x:Static res:Strings.quit}" Click="QuitV2RayW"/>
+        </ContextMenu>
+        <!-- the application's NotifyIcon - started from App.xaml.cs. Declares its own view model. -->
+        <tb:TaskbarIcon x:Key="NotifyIcon"
+                    IconSource="/vw256.ico"
+                    ContextMenu="{StaticResource TrayMenu}">
+        </tb:TaskbarIcon>
+    </Window.Resources>
+</Window>

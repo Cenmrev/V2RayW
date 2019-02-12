@@ -1,0 +1,68 @@
+﻿<Window x:Class="V2RayW.ConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:V2RayW.Resources"
+        xmlns:local="clr-namespace:V2RayW"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        x:Name="configWindow"
+        Title="{x:Static res:Strings.configWindowName}" Height="508" Width="525">
+    <Grid>
+
+        <Label Content="{x:Static res:Strings.LocalSocks5Port}" HorizontalContentAlignment="Right"  HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
+        <Label Content="{x:Static res:Strings.LocalHTTPPort}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="29,41,0,0" VerticalAlignment="Top" Height="26" Width="96"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="localPortBox" HorizontalAlignment="Left" Height="23" Margin="133,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.188,-0.13" VerticalContentAlignment="Center"/>
+        <TextBox  PreviewTextInput="NumberValidationTextBox" x:Name="httpPortBox" HorizontalAlignment="Left" Height="23" Margin="133,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Center" RenderTransformOrigin="0.312,-0.348"/>
+        <ListBox x:Name="vmessListBox" HorizontalAlignment="Left" Height="173" Margin="18,188,0,0" VerticalAlignment="Top" Width="107" SelectionMode="Single"
+                 >
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Clone" Click="CloneMenuItem_Click"></MenuItem>
+                    <MenuItem Header="Share" Click="ShareMenuItem_Click" Visibility="Collapsed"></MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <Button Content="{x:Static res:Strings.cancel}" HorizontalAlignment="Left" Margin="327,439,0,0" VerticalAlignment="Top" Width="76" Click="HideWindow"/>
+        <Button x:Name="saveConfigButton" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="421,439,0,0" VerticalAlignment="Top" Width="74" Click="HideWindow"/>
+        <Button Content="{x:Static res:Strings.advanced}" HorizontalAlignment="Left" Margin="386,401,0,0" VerticalAlignment="Top" Width="109" Click="ShowAdvancedWindow"/>
+        <CheckBox x:Name="udpSupportBox" Content="{x:Static res:Strings.UDPSupport}" HorizontalAlignment="Left" Margin="314,16,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="shareOverLanBox" Content="{x:Static res:Strings.ShareOverLan}" HorizontalAlignment="Left" Margin="314,47,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static res:Strings.DNSInstruction}" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <Label Content="DNS:" HorizontalAlignment="Left" Margin="21,102,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="dnsBox" HorizontalAlignment="Left" Height="23" Margin="62,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="427" VerticalContentAlignment="Center"/>
+        <Label Content="{x:Static res:Strings.ListInstruction}" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <Label Content="{x:Static res:Strings.VMessServers}" HorizontalAlignment="Left" Margin="18,162,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="{x:Static res:Strings.ServerInfo}" HorizontalAlignment="Left" Height="213" Margin="145,175,0,0" VerticalAlignment="Top" Width="350">
+            <Grid>
+                <Label Content="{x:Static res:Strings.Address}"  HorizontalAlignment="Right" Margin="0,10,260,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.UserID}"  HorizontalAlignment="Right" Margin="0,40,260,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.alterId}" HorizontalAlignment="Right" Margin="10,70,260,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.level}" HorizontalAlignment="Right" Margin="0,70,81,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.security}" HorizontalAlignment="Right" Margin="10,100,260,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.tag}" HorizontalAlignment="Right" Margin="10,130,260,0" VerticalAlignment="Top"/>
+                <Label Content=":" HorizontalAlignment="Left" Margin="249,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static res:Strings.network}"  HorizontalAlignment="Right" Margin="4,160,260,0" VerticalAlignment="Top"/>
+                <TextBox  PreviewTextInput="NumberValidationTextBox" TextChanged="TextBox_TextChanged" x:Name="portBox" HorizontalAlignment="Left" Height="23" Margin="266,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+                <TextBox TextChanged="TextBox_TextChanged" x:Name="addressBox" HorizontalAlignment="Left" Height="23" Margin="83,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" VerticalContentAlignment="Center"/>
+                <TextBox TextChanged="TextBox_TextChanged" x:Name="idBox" HorizontalAlignment="Left" Height="23" Margin="83,41,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center"/>
+                <TextBox  PreviewTextInput="NumberValidationTextBox" TextChanged="TextBox_TextChanged" x:Name="alterIdBox" HorizontalAlignment="Left" Height="23" Margin="83,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" VerticalContentAlignment="Center"/>
+                <TextBox  PreviewTextInput="NumberValidationTextBox" TextChanged="TextBox_TextChanged" x:Name="levelBox" HorizontalAlignment="Left" Height="23" Margin="266,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+                <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="securityComboBox" HorizontalAlignment="Left" Margin="83,100,0,0" VerticalAlignment="Top" Width="174"/>
+                <TextBox LostFocus="TagBox_LostFocus" TextChanged="TextBox_TextChanged" x:Name="tagBox" HorizontalAlignment="Left" Height="23" Margin="83,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center"/>
+                <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="networkBox" HorizontalAlignment="Left" Margin="83,161,0,0" VerticalAlignment="Top" Width="81"/>
+                <Button Content="{x:Static res:Strings.transportsettings}" HorizontalAlignment="Left" Margin="190,163,0,0" VerticalAlignment="Top" Width="138" Click="ShowTransportWindow"/>
+            </Grid>
+        </GroupBox>
+        <Label x:Name="versionLabel" Content="core version" Margin="18,398,0,0" VerticalAlignment="Top" Width="235" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="{x:Static res:Strings.loglevel}" HorizontalAlignment="Left" Margin="18,436,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="logLevelBox" HorizontalAlignment="Left" Margin="82,438,0,0" VerticalAlignment="Top" Width="69" SelectedIndex="0">
+            <ComboBoxItem>debug</ComboBoxItem>
+        </ComboBox>
+        <Button Click="ShowLogButton_Click" Content="{x:Static res:Strings.showlog}" HorizontalAlignment="Left" Margin="168,439,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button Click="AddVmess" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="18,366,0,0" VerticalAlignment="Top" Width="50"/>
+        <Button Click="RemoveVmess" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="73,366,0,0" VerticalAlignment="Top" Width="52"/>
+
+    </Grid>
+</Window>

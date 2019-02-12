@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="config_simple" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\config-simple.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="simplepac" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\simplepac.txt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Lang_zh_cn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lang_zh_cn.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="vmessjson" xml:space="preserve">
+    <value>{"sendThrough":"0.0.0.0","mux":{"enabled":false,"concurrency":8},"protocol":"vmess","settings":{"vnext":[{"address":"server.cc","users":[{"id":"12345678-1234-1234-1234-12345678abcd","alterId":0,"security":"auto","level":0}],"port":12345}]},"tag":"vmess outbound","streamSettings":{"wsSettings":{"path":"","headers":{}},"quicSettings":{"key":"key","security":"none","header":{"type":"none"}},"tlsSettings":{"allowInsecure":false,"alpn":["http\/1.1"],"serverName":"server.cc","allowInsecureCiphers":false},"httpSettings":{"path":""},"kcpSettings":{"header":{"type":"none"},"mtu":1350,"congestion":false,"tti":50,"uplinkCapacity":5,"writeBufferSize":2,"readBufferSize":2,"downlinkCapacity":20},"tcpSettings":{"header":{"type":"none"}},"security":"none","network":"tcp","sockopt":{}}}</value>
   </data>
   <data name="vw256" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vw256.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\vw256.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

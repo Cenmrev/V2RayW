@@ -1,0 +1,82 @@
+# version format
+version: 1.0.{build}
+
+# branches to build
+branches:
+  only:
+    - master
+
+# Maximum number of concurrent jobs for the project
+max_jobs: 1
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Build worker image (VM template)
+image: Visual Studio 2017
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+platform: Any CPU
+configuration: Release
+
+# scripts to run before build
+before_build:
+  - cmd: nuget restore
+
+build:
+  project: V2RayW.sln      # path to Visual Studio solution or project
+  verbosity: minimal
+
+after_build:
+  - cmd: 7z a V2RayW.zip %APPVEYOR_BUILD_FOLDER%\V2RayW\bin\Release\V2RayW.exe %APPVEYOR_BUILD_FOLDER%\V2RayW\bin\Release\zh-CN
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+ 
+artifacts:
+  - path: V2RayW.zip
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+before_deploy:
+  - ps: echo $env:APPVEYOR_REPO_TAG_NAME
+  - ps: $env:isbeta = (git describe --abbrev=0 --tags |  Select-String -Pattern "beta").length -ne 0
+  - ps: echo $env:isbeta
+  - ps: $env:releasenote = (git tag -l --format='%(contents)' $env:APPVEYOR_REPO_TAG_NAME)
+  - ps: echo $env:releasenote
+
+deploy:
+
+  - provider: GitHub
+    release: V2RayW $(APPVEYOR_REPO_TAG_NAME)
+    description: $(releasenote)
+    auth_token: 
+      secure: RsMjUapfJ/SjOmZ/WO8LGnyM1Xxr11QoY4QQbQQW+Utdgmw39sAx9EjmC1vhEkji
+    artifact: V2RayW.zip           
+    draft: false
+    prerelease: false
+    on:
+      branch: master                # release from master branch only
+      APPVEYOR_REPO_TAG: true       # deploy on tag push only
+      isbeta: false
+
+  - provider: GitHub
+    release: V2RayW $(APPVEYOR_REPO_TAG_NAME)
+    description: $(releasenote)
+    auth_token: 
+      secure: RsMjUapfJ/SjOmZ/WO8LGnyM1Xxr11QoY4QQbQQW+Utdgmw39sAx9EjmC1vhEkji
+    artifact: V2RayW.zip         
+    draft: false
+    prerelease: true
+    on:
+      branch: master                # release from master branch only
+      APPVEYOR_REPO_TAG: true       # deploy on tag push only
+      isbeta: true

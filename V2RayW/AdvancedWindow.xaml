@@ -1,0 +1,90 @@
+﻿<Window x:Class="V2RayW.AdvancedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:V2RayW"
+        xmlns:res="clr-namespace:V2RayW.Resources"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Title="Advanced Settings" Height="450" Width="500">
+    <Grid>
+        <TabControl x:Name="mainTabControl" HorizontalAlignment="Left" Height="361" Margin="10,10,0,0" VerticalAlignment="Top" Width="474">
+            <TabItem Header="{x:Static res:Strings.Outbounds}">
+                <Grid Background="#FFE5E5E5">
+                    <Label Width="448" HorizontalAlignment="Left" Margin="10,10,0,281">
+                        <AccessText TextWrapping="WrapWithOverflow" Width="438" Text="{x:Static res:Strings.outboundInstruction}"/>
+                    </Label>
+                    <ListBox SelectionChanged="OutboundListBox_SelectionChanged" x:Name="outboundListBox" HorizontalAlignment="Left" Height="241" Margin="10,57,0,0" VerticalAlignment="Top" Width="121"/>
+                    <Button Click="AddOutboundButton_Click" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" Width="52"/>
+                    <Button Click="RemoveOutboundButton_Click" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="79,303,0,0" VerticalAlignment="Top" Width="52"/>
+                    <Button x:Name="saveOutboundButton" IsEnabled="False" Click="SaveOutboundButton_Click" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="383,303,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBox AcceptsReturn="True" TextChanged="OutboundContentBox_TextChanged" x:Name="outboundContentBox" Padding="4" HorizontalAlignment="Left" Height="241" Margin="136,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="322" FontFamily="Lucida Console" FontSize="13"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.Subscription}" Visibility="Collapsed">
+
+                <Grid Background="#FFE5E5E5">
+                    <Label Width="448" HorizontalAlignment="Left" Margin="10,10,0,281">
+                        <AccessText TextWrapping="WrapWithOverflow" Width="438">Save your airport subscription link here and refresh config from server list in menubar icon.
+                        </AccessText>
+                    </Label>
+                    <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="subscriptionBox" HorizontalAlignment="Left" Height="266" Margin="10,57,0,0" VerticalAlignment="Top" Width="448"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.Rules}">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="ruleSetListBox" SelectionChanged="RuleSetListBox_SelectionChanged"  HorizontalAlignment="Left" Height="288" Margin="10,10,0,0" VerticalAlignment="Top" Width="109"/>
+                    <Button x:Name="addRuleSetButton" Click="AddRuleSetButton_Click" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" Width="52"/>
+                    <Button x:Name="removeRuleSetButton" Click="RemoveRuleSetButton_Click" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="67,303,0,0" VerticalAlignment="Top" Width="52"/>
+                    <Label Content="{x:Static res:Strings.rulseSetName}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="124,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,0.038" Width="100"/>
+                    <Label Content="{x:Static res:Strings.DomainStrategy}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="124,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.635" Width="100"/>
+                    <TextBox TextChanged="RuleSetNameBox_TextChanged" x:Name="ruleSetNameBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="244,11,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
+                    <ComboBox SelectionChanged="DomainStrategyBox_SelectionChanged" x:Name="domainStrategyBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="244,39,0,0"  VerticalAlignment="Top" Width="170"/>
+                    <GroupBox Header="{x:Static res:Strings.Rules}" HorizontalAlignment="Left" Height="261" Margin="124,62,0,0" VerticalAlignment="Top" Width="334">
+                        <Grid>
+                            <CheckBox Click="DomainIpEnableBox_Click" x:Name="domainIpEnableBox" Content="{x:Static res:Strings.domainIp}" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top"/>
+                            <TextBox LostFocus="DomainIpBox_LostFocus" x:Name="domainIpBox" AcceptsReturn="True" IsEnabled="{Binding IsChecked, ElementName=domainIpEnableBox}" HorizontalAlignment="Left" Margin="98,30,0,0" VerticalAlignment="Top" Width="214" Height="112" />
+                            <CheckBox Click="NetworkEnableBox_Click" x:Name="networkEnableBox" Content="{x:Static res:Strings.rulenetwork}" HorizontalAlignment="Left" Margin="98,151,0,0" VerticalAlignment="Top"/>
+                            <CheckBox Click="PortEnableBox_Click" x:Name="portEnableBox" Content="{x:Static res:Strings.ruleport}" HorizontalAlignment="Left" Margin="98,179,0,0" VerticalAlignment="Top"/>
+                            <ListBox x:Name="ruleListBox" SelectionChanged="RuleListBox_SelectionChanged" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.696,0.553" Margin="10,10,0,0"/>
+                            <TextBox LostFocus="PortBox_LostFocus" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding ElementName=portEnableBox, Path=IsChecked}" x:Name="portBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="181,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="131"/>
+                            <ComboBox SelectedIndex="0" SelectionChanged="NetWorkListBox_SelectionChanged" x:Name="netWorkListBox" IsEnabled="{Binding ElementName=networkEnableBox, Path=IsChecked}" HorizontalAlignment="Left" Margin="181,147,0,0" VerticalAlignment="Top" Width="131">
+                                <ComboBoxItem>tcp</ComboBoxItem>
+                            </ComboBox>
+                            <Label Content="{x:Static res:Strings.routeto}" HorizontalAlignment="Left" Margin="98,204,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.269"/>
+                            <TextBox LostFocus="RouteToBox_LostFocus" x:Name="routeToBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="181,205,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="131"/>
+                            <Button x:Name="addRuleButton" Click="AddRuleButton_Click" Content="+" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="30"/>
+                            <Button x:Name="removeRuleButton" Click="RemoveRuleButton_Click" Content="-" HorizontalAlignment="Left" Margin="54,205,0,0" VerticalAlignment="Top" Width="29"/>
+                        </Grid>
+
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.Config}">
+                <Grid Background="#FFE5E5E5">
+                    <Label Width="448" HorizontalAlignment="Left" Margin="10,10,0,281">
+                        <AccessText TextWrapping="WrapWithOverflow" Width="438" Text="{x:Static res:Strings.configInstruction}" />
+                    </Label>
+                    <ListBox x:Name="cusConfigBox" HorizontalAlignment="Left" Height="200" Margin="10,88,0,0" VerticalAlignment="Top" Width="448"/>
+                    <Button Click="BrowseButton_Click" Content="{x:Static res:Strings.browseconfig}" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" Width="157"/>
+                    <Button x:Name="refreshButton" Click="RefreshButton_Click" Content="{x:Static res:Strings.refresh}" HorizontalAlignment="Left" Margin="377,61,0,0" VerticalAlignment="Top" Width="81"/>
+                    <Label Content="{x:Static res:Strings.validConfig}" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Visibility="Collapsed" Header="{x:Static res:Strings.V2RayCore}">
+                <Grid Background="#FFE5E5E5">
+                    <ComboBox x:Name="enableRestoreBox" HorizontalAlignment="Left" Margin="181,184,0,0" VerticalAlignment="Top" Width="120"/>
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+        <Button x:Name="helpButton" Click="HelpButton_Click" Content="{x:Static res:Strings.help}" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="cancelButton" Click="CancelButton_Click" Content="{x:Static res:Strings.cancel}" HorizontalAlignment="Left" Margin="311,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="saveButton" Click="SaveButton_Click" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="409,389,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
