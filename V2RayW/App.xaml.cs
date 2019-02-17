@@ -13,6 +13,10 @@ namespace V2RayW
     /// </summary>
     public partial class App : Application
     {
-
+        void App_SessionEnding(object sender, SessionEndingCancelEventArgs e)
+        {
+            (MainWindow as V2RayW.MainWindow).QuitV2RayW(sender, null);
+        }
     }
+
 }

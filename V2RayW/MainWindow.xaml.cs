@@ -40,8 +40,6 @@ namespace V2RayW
 
         private TaskbarIcon notifyIcon;
 
-        private ConfigWindow configWindow;
-
 
         public bool proxyState = false;
         public ProxyMode proxyMode = ProxyMode.manual;
@@ -468,6 +466,10 @@ namespace V2RayW
             }
             this.UpdateStatusAndModeMenus();
             this.UpdatePacMenuList();
+            if(sender.GetType().Equals(typeof(ConfigWindow)))
+            {
+                WriteSettings();
+            }
         }
         #endregion
 
@@ -506,7 +508,7 @@ namespace V2RayW
             } else if (proxyMode == ProxyMode.global)
             {
                 registry.SetValue("ProxyEnable", 1);
-                var proxyServer = $"http=127.0.0.1:{httpPort};socks=127.0.0.1:{localPort}";
+                var proxyServer = $"http://127.0.0.1:{httpPort}";
                 var proxyOverride = "<local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*";
                 registry.SetValue("ProxyServer", proxyServer);
                 registry.SetValue("ProxyOverride", proxyOverride);
@@ -780,7 +782,11 @@ namespace V2RayW
             v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
             Debug.WriteLine(v2rayProcess.StartInfo.FileName);
             v2rayProcess.StartInfo.Arguments = @"-config http://127.0.0.1:18000/config.json";
+#if DEBUG
+            v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+#else
             v2rayProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+#endif
             v2rayCoreWorker.DoWork += V2rayCoreWorker_DoWork;
             v2rayCoreWorker.RunWorkerAsync();
         }
@@ -820,9 +826,9 @@ namespace V2RayW
             this.UnloadV2ray();
             coreWorkerSemaphore.Release(1);
         }
-        #endregion
+#endregion
 
-        #region core config management
+#region core config management
         byte[] v2rayJsonConfig = new byte[0];
 
         void CoreConfigChanged(object sender)
@@ -848,9 +854,13 @@ namespace V2RayW
             Dictionary<string, object> fullConfig = Utilities.configTemplate;
             fullConfig["log"] = new Dictionary<string, string>
             {
-                {"loglevel", logLevel },
+#if DEBUG
+                {"loglevel", "debug" }
+#else
                 { "error",AppDomain.CurrentDomain.BaseDirectory + @"log\error.log" },
-                { "access", AppDomain.CurrentDomain.BaseDirectory + @"log\access.log"}
+                { "access", AppDomain.CurrentDomain.BaseDirectory + @"log\access.log"},
+                {"loglevel", logLevel }
+#endif
             };
             var dnsList = dnsString.Split(',');
             if(dnsList.Count() > 0)
@@ -943,9 +953,9 @@ namespace V2RayW
             }
             return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(fullConfig, Formatting.Indented));
         }
-        #endregion
+#endregion
 
-        #region routingRules 
+#region routingRules 
         void UpdateRuleSetMenuList()
         {
             Debug.WriteLine($"rules count = {routingRuleSets.Count}");
@@ -975,12 +985,12 @@ namespace V2RayW
             this.CoreConfigChanged(sender);
         }
 
-        #endregion
+#endregion
 
 
-        #region other main menu items
+#region other main menu items
 
-        private void QuitV2RayW(object sender, RoutedEventArgs e)
+        public void QuitV2RayW(object sender, RoutedEventArgs e)
         {
             notifyIcon.Icon = null;
             this.UnloadV2ray();
@@ -1006,17 +1016,12 @@ namespace V2RayW
 
         private void ShowConfigWindow(object sender, RoutedEventArgs e)
         {
-            if (this.configWindow == null)
+            ConfigWindow configWindow = new ConfigWindow
             {
-                this.configWindow = new ConfigWindow
-                {
-                    mainWindow = this
-                };
-                
-            }
-            this.configWindow.InitializeData();
-            this.configWindow.Show();
-            this.configWindow.Focus();
+                mainWindow = this
+            };
+            configWindow.InitializeData();
+            configWindow.Show();
         }
 
         private void ViewCurrentConfig(object sender, RoutedEventArgs e)
@@ -1024,7 +1029,7 @@ namespace V2RayW
             Process.Start("http://127.0.0.1:18000/config.json");
         }
 
-        #endregion
+#endregion
 
         private void ShowLogMenuItem_Click(object sender, RoutedEventArgs e)
         {

@@ -180,16 +180,6 @@ namespace V2RayW
 
         #region closewindow
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Hide();
-        }
-
-        private void CheckInputs()
-        {
-        }
-
         private void HideWindow(object sender, RoutedEventArgs e)
         {
             if(sender == saveConfigButton)
@@ -238,9 +228,11 @@ namespace V2RayW
                 mainWindow.udpSupport = udpSupportBox.IsChecked ?? false;
                 mainWindow.logLevel = logLevelBox.SelectedItem.ToString();
 
+
                 mainWindow.OverallChanged(this, null);
+
             }
-            this.Hide();
+            this.Close();
         }
         #endregion
 
