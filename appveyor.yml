@@ -51,7 +51,7 @@ artifacts:
 
 before_deploy:
   - ps: $env:tagname = (git describe --exact-match HEAD)
-  - ps: $env:releasenote = (git tag -l --format='%(contents)' $env:tagname)
+  - ps: $env:releasenote = (git tag -l --format='%(contents)' $env:tagname) | select -Skip 2 | Out-String
   - ps: echo $env:tagname $env:releasenote
 
 deploy:
