@@ -776,8 +776,8 @@ namespace V2RayW
                 serverMenuList.Items.Add(new Separator());
                 var newItem = new MenuItem
                 {
-                    Header = Strings.speedtest
-                    //ToolTip = Strings.speedtesttip
+                    Header = Strings.speedtest,
+                    ToolTip = Strings.speedtesttip
                 };
                 newItem.Click += SpeedTest;
                 serverMenuList.Items.Add(newItem);

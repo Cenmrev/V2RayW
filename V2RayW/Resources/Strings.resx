@@ -457,7 +457,7 @@ v2ray-core\geosite.dat</value>
     <value>Speed Test</value>
   </data>
   <data name="speedtesttip" xml:space="preserve">
-    <value>Please adjust your routing strategy and proxy mode to ensure that www.google.com is accessed through a proxy</value>
+    <value>The independent process implements the speed test function without affecting the current configuration.</value>
   </data>
   <data name="Clone" xml:space="preserve">
     <value>Clone</value>

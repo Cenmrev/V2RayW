@@ -457,7 +457,7 @@ v2ray-core\geosite.dat</value>
     <value>连接速度测试</value>
   </data>
   <data name="speedtesttip" xml:space="preserve">
-    <value>请调整路由策略和代理模式，以确保通过代理访问www.google.com。</value>
+    <value>独立进程实现速度测速功能，不影响当前配置。</value>
   </data>
   <data name="Clone" xml:space="preserve">
     <value>拷贝当前配置</value>

@@ -898,7 +898,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Please adjust your routing strategy and proxy mode to ensure that www.google.com is accessed through a proxy 的本地化字符串。
+        ///   查找类似 The independent process implements the speed test function without affecting the current configuration. 的本地化字符串。
         /// </summary>
         public static string speedtesttip {
             get {
