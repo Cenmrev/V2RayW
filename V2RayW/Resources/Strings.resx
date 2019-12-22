@@ -453,4 +453,28 @@ v2ray-core\geosite.dat</value>
   <data name="paclist" xml:space="preserve">
     <value>PAC list</value>
   </data>
+  <data name="speedtest" xml:space="preserve">
+    <value>Speed Test</value>
+  </data>
+  <data name="speedtesttip" xml:space="preserve">
+    <value>Please adjust your routing strategy and proxy mode to ensure that www.google.com is accessed through a proxy</value>
+  </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import...</value>
+  </data>
+  <data name="ImportClipboard" xml:space="preserve">
+    <value>Import from clipboard</value>
+  </data>
+  <data name="ImportSubscribe" xml:space="preserve">
+    <value>Import form subscribe</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="SubscriptionInstruction" xml:space="preserve">
+    <value>Save your airport subscription link here, and select subscription from the configuration interface import from to refresh the server configuration.</value>
+  </data>
 </root>

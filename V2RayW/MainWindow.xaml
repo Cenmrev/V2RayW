@@ -13,7 +13,6 @@
 
     <Window.Resources>
         <MenuItem x:Key="editPacMenuItem" Header="{x:Static res:Strings.editpac}" Click="EditPacMenuItem_Click"/>
-        <MenuItem x:Key="updateSubscriptionMenuItem" Header="{x:Static res:Strings.updatesubscription}" Click="UpdateSubscription"/>
         <MenuItem x:Key="resetPacButton" Click="ResetPacButton_Click" Header="{x:Static res:Strings.resetpacfile}"/>
         <ContextMenu x:Key="TrayMenu">
             <MenuItem Header="_core status" IsEnabled="False"/>

@@ -23,12 +23,11 @@
                     <TextBox AcceptsReturn="True" TextChanged="OutboundContentBox_TextChanged" x:Name="outboundContentBox" Padding="4" HorizontalAlignment="Left" Height="241" Margin="136,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="322" FontFamily="Lucida Console" FontSize="13"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static res:Strings.Subscription}" Visibility="Collapsed">
+            <TabItem Header="{x:Static res:Strings.Subscription}">
 
                 <Grid Background="#FFE5E5E5">
                     <Label Width="448" HorizontalAlignment="Left" Margin="10,10,0,281">
-                        <AccessText TextWrapping="WrapWithOverflow" Width="438">Save your airport subscription link here and refresh config from server list in menubar icon.
-                        </AccessText>
+                        <AccessText TextWrapping="WrapWithOverflow" Width="438" Text="{x:Static res:Strings.SubscriptionInstruction}" />
                     </Label>
                     <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="subscriptionBox" HorizontalAlignment="Left" Height="266" Margin="10,57,0,0" VerticalAlignment="Top" Width="448"/>
                 </Grid>
@@ -74,7 +73,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Visibility="Collapsed" Header="{x:Static res:Strings.V2RayCore}">
+            <TabItem Header="{x:Static res:Strings.V2RayCore}" Visibility="Collapsed">
                 <Grid Background="#FFE5E5E5">
                     <ComboBox x:Name="enableRestoreBox" HorizontalAlignment="Left" Margin="181,184,0,0" VerticalAlignment="Top" Width="120"/>
 
