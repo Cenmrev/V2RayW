@@ -65,11 +65,17 @@
         <Button Click="AddVmess" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="18,366,0,0" VerticalAlignment="Top" Width="50"/>
         <Button Click="RemoveVmess" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="73,366,0,0" VerticalAlignment="Top" Width="52"/>
         <Menu HorizontalAlignment="Left"  Margin="327,402,0,0" VerticalAlignment="Top" >
-            <MenuItem Header="{x:Static res:Strings.Import}" Height="18">
+            <MenuItem Header="{x:Static res:Strings.Import}" Height="18" Style="{DynamicResource MenuItemStyleRemoveMargin}">
                 <MenuItem x:Name="ImportSubscribe" Header="{x:Static res:Strings.ImportSubscribe}" Click="ImportSubscribe_Click"  />
                 <MenuItem x:Name="ImportClipboard" Header="{x:Static res:Strings.ImportClipboard}" Click="ImportClipboard_Click"  />
             </MenuItem>
         </Menu>
-
     </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/StyleMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>
