@@ -131,6 +131,15 @@ namespace V2RayW
             return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.vmessjson);
         }
 
+        public static Dictionary<string, object> VmessOutboundTemplateNew()
+        {
+            return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.vmesstemplate);
+        }
+        public static Dictionary<string, object> ShadowsocksOutboundTemplateNew()
+        {
+            return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.shadowsockstemplate);
+        }
+
         public static Dictionary<string, object> outboundTemplate = new Dictionary<string, object>
         {
             {"sendThrough", "0.0.0.0" },

@@ -9,6 +9,7 @@
         ResizeMode="NoResize"
         x:Name="configWindow"
         Title="{x:Static res:Strings.configWindowName}" Height="508" Width="525">
+
     <Grid>
 
         <Label Content="{x:Static res:Strings.LocalSocks5Port}" HorizontalContentAlignment="Right"  HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
@@ -19,14 +20,14 @@
                  >
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Clone" Click="CloneMenuItem_Click"></MenuItem>
-                    <MenuItem Header="Share" Click="ShareMenuItem_Click" Visibility="Collapsed"></MenuItem>
+                    <MenuItem Header="{x:Static res:Strings.Clone}" Click="CloneMenuItem_Click"></MenuItem>
+                    <MenuItem Header="{x:Static res:Strings.Share}" Click="ShareMenuItem_Click"></MenuItem>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
         <Button Content="{x:Static res:Strings.cancel}" HorizontalAlignment="Left" Margin="327,439,0,0" VerticalAlignment="Top" Width="76" Click="HideWindow"/>
         <Button x:Name="saveConfigButton" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="421,439,0,0" VerticalAlignment="Top" Width="74" Click="HideWindow"/>
-        <Button Content="{x:Static res:Strings.advanced}" HorizontalAlignment="Left" Margin="386,401,0,0" VerticalAlignment="Top" Width="109" Click="ShowAdvancedWindow"/>
+        <Button Content="{x:Static res:Strings.advanced}" HorizontalAlignment="Left" Margin="395,401,0,0" VerticalAlignment="Top" Width="100" Click="ShowAdvancedWindow"/>
         <CheckBox x:Name="udpSupportBox" Content="{x:Static res:Strings.UDPSupport}" HorizontalAlignment="Left" Margin="314,16,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="shareOverLanBox" Content="{x:Static res:Strings.ShareOverLan}" HorizontalAlignment="Left" Margin="314,47,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static res:Strings.DNSInstruction}" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" FontSize="11"/>
@@ -63,6 +64,18 @@
         <Button Click="ShowLogButton_Click" Content="{x:Static res:Strings.showlog}" HorizontalAlignment="Left" Margin="168,439,0,0" VerticalAlignment="Top" Width="76"/>
         <Button Click="AddVmess" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="18,366,0,0" VerticalAlignment="Top" Width="50"/>
         <Button Click="RemoveVmess" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="73,366,0,0" VerticalAlignment="Top" Width="52"/>
-
+        <Menu HorizontalAlignment="Left"  Margin="327,402,0,0" VerticalAlignment="Top" >
+            <MenuItem Header="{x:Static res:Strings.Import}" Height="18" Style="{DynamicResource MenuItemStyleRemoveMargin}">
+                <MenuItem x:Name="ImportSubscribe" Header="{x:Static res:Strings.ImportSubscribe}" Click="ImportSubscribe_Click"  />
+                <MenuItem x:Name="ImportClipboard" Header="{x:Static res:Strings.ImportClipboard}" Click="ImportClipboard_Click"  />
+            </MenuItem>
+        </Menu>
     </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/StyleMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>

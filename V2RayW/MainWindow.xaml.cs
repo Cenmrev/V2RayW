@@ -47,31 +47,37 @@ namespace V2RayW
         public int httpPort = 8001;
         public bool udpSupport = false;
         public bool shareOverLan = false;
-        public bool useCusProfile= false;
+        public bool useCusProfile = false;
         public bool useMultipleServer = false;
         public int selectedServerIndex = 0;
         private string selectedCusConfig = "";
         public int selectedRoutingSet = 0;
         public string selectedPacFileName = "pac.js";
         public string dnsString = "localhost";
+
         public List<Dictionary<string, object>> profiles = new List<Dictionary<string, object>>();
         public List<Dictionary<string, object>> subsOutbounds = new List<Dictionary<string, object>>();
 
         public List<string> cusProfiles = new List<string>();
         public string logLevel = "none";
         public bool enableRestore = false;
-        public List<string> subscriptions = new List<string>();
+        public string subscribeTag = "";
+        public List<string> subscribeUrl = new List<string>();
         public List<Dictionary<string, object>> routingRuleSets = new List<Dictionary<string, object>> { Utilities.ROUTING_GLOBAL, Utilities.ROUTING_DIRECT, Utilities.ROUTING_BYPASSCN_PRIVATE_APPLE };
 
         private FileSystemWatcher pacFileWatcher;
 
         public MainWindow()
         {
+
+#if DEBUG
+            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+#endif
             Hide();
             InitializeComponent();
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
             this.mainMenu = FindResource("TrayMenu") as ContextMenu;
-            if(CheckFiles() == false)
+            if (CheckFiles() == false)
             {
                 Application.Current.Shutdown();
                 return;
@@ -82,6 +88,7 @@ namespace V2RayW
 
             this.InitializeHttpServer();
             this.InitializeCoreProcess();
+
 
             pacFileWatcher = new FileSystemWatcher(AppDomain.CurrentDomain.BaseDirectory + @"pac\")
             {
@@ -108,12 +115,13 @@ namespace V2RayW
         #region startup check
         private bool ClearLog()
         {
-            if(!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"log\"))
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"log\"))
             {
                 try
                 {
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"log\");
-                } catch
+                }
+                catch
                 {
                     MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory + @"log\", Strings.messagedircreatefail);
                     return false;
@@ -123,7 +131,8 @@ namespace V2RayW
             {
                 File.Create(AppDomain.CurrentDomain.BaseDirectory + @"log\access.log").Close();
                 File.Create(AppDomain.CurrentDomain.BaseDirectory + @"log\error.log").Close();
-            } catch
+            }
+            catch
             {
                 MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory + "log\\access.log\n" + AppDomain.CurrentDomain.BaseDirectory + @"log\access.log", Strings.messagedircreatefail);
                 return false;
@@ -175,20 +184,23 @@ namespace V2RayW
         {
             #region pac, config, log dir 
             string currentDir = AppDomain.CurrentDomain.BaseDirectory;
-            foreach (string folder in new string[] {@"pac\", @"config\", @"config\" }) {
+            foreach (string folder in new string[] { @"pac\", @"config\", @"config\" })
+            {
                 if (!Directory.Exists(currentDir + folder))
                 {
                     try
                     {
                         Directory.CreateDirectory(currentDir + folder);
-                    } catch
+                    }
+                    catch
                     {
                         MessageBox.Show(currentDir + folder, Strings.messagedircreatefail);
                         return false;
                     }
+                }
             }
-            }
-            if(ClearLog() == false) {
+            if (ClearLog() == false)
+            {
                 return false;
             }
             #endregion
@@ -199,16 +211,16 @@ namespace V2RayW
             string coreDirectory = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\";
             foreach (string file in Utilities.necessaryFiles)
             {
-                if(!File.Exists(coreDirectory + file))
+                if (!File.Exists(coreDirectory + file))
                 {
                     findMissingFile = true;
                     break;
                 }
             }
-            if(findMissingFile)
+            if (findMissingFile)
             {
                 var result = MessageBox.Show(Strings.messagenocore, Strings.messagenocoretitle, MessageBoxButton.YesNoCancel);
-                switch(result)
+                switch (result)
                 {
                     case MessageBoxResult.Yes:
                         {
@@ -230,7 +242,8 @@ namespace V2RayW
                         }
                 }
 
-            } else
+            }
+            else
             {
                 (mainMenu.Items[1] as MenuItem).IsEnabled = true;
                 return true;
@@ -259,6 +272,14 @@ namespace V2RayW
                         { "useCusProfile", useCusProfile }
                     }
                 },
+                {
+                    "subscriptions",
+                    new Dictionary<string, object>
+                    {
+                        { "url", subscribeUrl },
+                        { "tag", subscribeTag }
+                    }
+                },
                 { "selectedPacFileName", selectedPacFileName },
                 { "logLevel", logLevel },
                 { "localPort", localPort },
@@ -268,7 +289,6 @@ namespace V2RayW
                 { "dnsString", dnsString },
                 { "enableRestore", enableRestore },
                 { "profiles", profiles },
-                { "subscriptions", subscriptions },
                 { "routingRuleSets", routingRuleSets },
             };
             File.WriteAllText(settingPath, JsonConvert.SerializeObject(settings, Formatting.Indented));
@@ -280,7 +300,8 @@ namespace V2RayW
             if (!File.Exists(settingPath))
             {
                 WriteSettings();
-            } else
+            }
+            else
             {
                 JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
                 var settingString = File.ReadAllText(settingPath);
@@ -291,7 +312,7 @@ namespace V2RayW
                     proxyState = settings["appStatus"]["proxyState"];
                     proxyMode = (ProxyMode)settings["appStatus"]["proxyMode"];
                     selectedServerIndex = settings["appStatus"]["selectedServerIndex"];
-                    selectedCusConfig = settings["appStatus"]["selectedCusConfig"]; 
+                    selectedCusConfig = settings["appStatus"]["selectedCusConfig"];
                     selectedRoutingSet = settings["appStatus"]["selectedRoutingSet"];
                     useMultipleServer = settings["appStatus"]["useMultipleServer"];
                     useCusProfile = settings["appStatus"]["useCusProfile"];
@@ -304,24 +325,25 @@ namespace V2RayW
                     shareOverLan = settings["shareOverLan"];
                     dnsString = settings["dnsString"];
                     enableRestore = settings["enableRestore"];
-                    
-                    
-                    foreach(dynamic profile in settings["profiles"])
+
+                    subscribeTag = settings["subscriptions"]["tag"];
+                    foreach (string subscribe in settings["subscriptions"]["url"])
+                    {
+                        subscribeUrl.Add(subscribe);
+                    }
+                    foreach (dynamic profile in settings["profiles"])
                     {
                         try
                         {
-                            if(Utilities.RESERVED_TAGS.FindIndex(x => x == profile["tag"] as string) == -1)
+                            if (Utilities.RESERVED_TAGS.FindIndex(x => x == profile["tag"] as string) == -1)
                             {
                                 profiles.Add(profile as Dictionary<string, object>);
                             }
-                        } catch { continue; }
-                    }
-                    foreach(string subscription in settings["subscriptions"])
-                    {
-                        subscriptions.Add(subscription);
+                        }
+                        catch { continue; }
                     }
                     routingRuleSets.Clear();
-                    foreach(Dictionary<string, object> set in settings["routingRuleSets"])
+                    foreach (Dictionary<string, object> set in settings["routingRuleSets"])
                     {
                         routingRuleSets.Add(set);
                     }
@@ -331,14 +353,14 @@ namespace V2RayW
                         routingRuleSets = new List<Dictionary<string, object>> { Utilities.ROUTING_GLOBAL, Utilities.ROUTING_DIRECT, Utilities.ROUTING_BYPASSCN_PRIVATE_APPLE };
                         Debug.WriteLine("reset routing rules");
                     }
-                } 
+                }
                 catch
                 {
                     notifyIcon.ShowBalloonTip("", Strings.messagereaddefaultserror, BalloonIcon.Info);
                 }
             }
         }
-       
+
         #endregion
 
         private ContextMenu mainMenu;
@@ -351,7 +373,8 @@ namespace V2RayW
             {
                 (mainMenu.Items[0] as MenuItem).Header = Strings.coreloaded;
                 (mainMenu.Items[1] as MenuItem).Header = Strings.unloadcore;
-            } else
+            }
+            else
             {
                 (mainMenu.Items[0] as MenuItem).Header = Strings.coreunloaded;
                 (mainMenu.Items[1] as MenuItem).Header = Strings.loadcore;
@@ -367,27 +390,28 @@ namespace V2RayW
             Debug.WriteLine($"mode changed by {sender} {e}");
             MenuItem senderItem = sender as MenuItem;
             int senderTag = Int32.Parse(senderItem.Tag as string);
-            if(proxyState == true && proxyMode == ProxyMode.manual && senderTag != (int)ProxyMode.manual)
+            if (proxyState == true && proxyMode == ProxyMode.manual && senderTag != (int)ProxyMode.manual)
             {
                 this.BackupSystemProxy();
             }
             if (proxyState == true && proxyMode != ProxyMode.manual && senderTag == (int)ProxyMode.manual)
             {
-                if(enableRestore)
+                if (enableRestore)
                 {
                     RestoreSystemProxy();
-                } else
+                }
+                else
                 {
                     CancelSystemProxy();
                 }
             }
             proxyMode = (ProxyMode)senderTag;
             this.UpdateStatusAndModeMenus();
-            if(senderTag == (int)ProxyMode.pac)
+            if (senderTag == (int)ProxyMode.pac)
             {
                 this.UpdatePacMenuList();
             }
-            if(proxyState == true)
+            if (proxyState == true)
             {
                 this.UpdateSystemProxy();
             }
@@ -415,7 +439,7 @@ namespace V2RayW
             {
                 selectedServerIndex = Math.Max(selectedServerIndex, 0);
             }
-            if(!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"config\" + selectedCusConfig))
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"config\" + selectedCusConfig))
             {
                 selectedCusConfig = "";
             }
@@ -429,25 +453,29 @@ namespace V2RayW
                 (useMultipleServer && profiles.Count + subsOutbounds.Count < 1))
             {
                 proxyState = false;
-            } else if (!useMultipleServer && selectedCusConfig == "")
+            }
+            else if (!useMultipleServer && selectedCusConfig == "")
             {
                 useCusProfile = false;
-            } else if (!useMultipleServer && selectedServerIndex == -1)
+            }
+            else if (!useMultipleServer && selectedServerIndex == -1)
             {
                 useCusProfile = true;
             }
 
             if (proxyMode != ProxyMode.manual)
             {
-                if(previousStatus == false && proxyState == true)
+                if (previousStatus == false && proxyState == true)
                 {
                     this.BackupSystemProxy();
-                } else if (previousStatus == true && proxyState == false)
+                }
+                else if (previousStatus == true && proxyState == false)
                 {
                     if (enableRestore)
                     {
                         RestoreSystemProxy();
-                    } else
+                    }
+                    else
                     {
                         CancelSystemProxy();
                     }
@@ -466,7 +494,7 @@ namespace V2RayW
             }
             this.UpdateStatusAndModeMenus();
             this.UpdatePacMenuList();
-            if(sender.GetType().Equals(typeof(ConfigWindow)))
+            if (sender.GetType().Equals(typeof(ConfigWindow)))
             {
                 WriteSettings();
             }
@@ -491,7 +519,7 @@ namespace V2RayW
             ;
         }
 
-        
+
         Random paccounter = new Random(); // to force windows refresh pac files
 
         public void UpdateSystemProxy()
@@ -505,7 +533,8 @@ namespace V2RayW
             {
                 registry.SetValue("ProxyEnable", 0);
                 registry.SetValue("AutoConfigURL", $"http://127.0.0.1:18000/proxy.pac/{paccounter.Next()}", RegistryValueKind.String);
-            } else if (proxyMode == ProxyMode.global)
+            }
+            else if (proxyMode == ProxyMode.global)
             {
                 registry.SetValue("ProxyEnable", 1);
                 var proxyServer = $"http://127.0.0.1:{httpPort}";
@@ -528,7 +557,7 @@ namespace V2RayW
         }
 
         #endregion
-        
+
 
         #region pac management
 
@@ -540,7 +569,7 @@ namespace V2RayW
             DirectoryInfo pacDirInfo = new DirectoryInfo(pacDir);
             var pacFiles = pacDirInfo.GetFiles("*.js", SearchOption.TopDirectoryOnly);
             int i = 0;
-            foreach(var pacFile in pacFiles)
+            foreach (var pacFile in pacFiles)
             {
                 MenuItem menuItem = new MenuItem
                 {
@@ -666,10 +695,92 @@ namespace V2RayW
                 newItem.Click += SwitchServer;
                 serverMenuList.Items.Add(newItem);
             }
-            if (subscriptions.Count > 0)
+            if (profiles.Count + subsOutbounds.Count > 0)
             {
                 serverMenuList.Items.Add(new Separator());
-                serverMenuList.Items.Add(FindResource("updateSubscriptionMenuItem"));
+                var newItem = new MenuItem
+                {
+                    Header = Strings.speedtest,
+                    ToolTip = Strings.speedtesttip
+                };
+                newItem.Click += SpeedTest;
+                serverMenuList.Items.Add(newItem);
+            }
+            if (cusProfiles.Count > 0)
+            {
+                serverMenuList.Items.Add(new Separator());
+            }
+            foreach (string cusConfigFileName in cusProfiles)
+            {
+                var newOutboundItem = new MenuItem
+                {
+                    Header = "_" + cusConfigFileName,
+                    IsChecked = useCusProfile && cusConfigFileName == selectedCusConfig,
+                    Tag = useCusConfigTag
+                };
+                newOutboundItem.Click += SwitchServer;
+                serverMenuList.Items.Add(newOutboundItem);
+            }
+        }
+
+        private void UpdateServerMenuList(Dictionary<string,string> responseTime)
+        {
+            var serverMenuList = mainMenu.Items[serverMenuListIndex] as MenuItem;
+            serverMenuList.Items.Clear();
+            if (profiles.Count == 0 && cusProfiles.Count == 0 && subsOutbounds.Count == 0)
+            {
+                serverMenuList.Items.Add(Strings.messagenoserver);
+                return;
+            }
+            int tagIndex = 0;
+            foreach (Dictionary<string, object> outbound in this.profiles)
+            {
+                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? responseTime[outbound[@"tag"].ToString()] : "0";
+                var newOutboundItem = new MenuItem
+                {
+                    Header = outbound["tag"] + "=" + tagadd,
+                    Tag = tagIndex,
+                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
+                };
+                newOutboundItem.Click += SwitchServer;
+                serverMenuList.Items.Add(newOutboundItem);
+                tagIndex += 1;
+            }
+            foreach (Dictionary<string, object> outbound in this.subsOutbounds)
+            {
+                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? responseTime[outbound[@"tag"].ToString()] : "0";
+                var newOutboundItem = new MenuItem
+                {
+                    Header = outbound["tag"] + tagadd,
+                    Tag = tagIndex,
+                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
+                };
+                newOutboundItem.Click += SwitchServer;
+                serverMenuList.Items.Add(newOutboundItem);
+                tagIndex += 1;
+            }
+            if (profiles.Count + subsOutbounds.Count > 0)
+            {
+                serverMenuList.Items.Add(new Separator());
+                var newItem = new MenuItem
+                {
+                    Header = Strings.useall,
+                    Tag = useAllServerTag,
+                    IsChecked = !useCusProfile && useMultipleServer
+                };
+                newItem.Click += SwitchServer;
+                serverMenuList.Items.Add(newItem);
+            }
+            if (profiles.Count + subsOutbounds.Count > 0)
+            {
+                serverMenuList.Items.Add(new Separator());
+                var newItem = new MenuItem
+                {
+                    Header = Strings.speedtest,
+                    ToolTip = Strings.speedtesttip
+                };
+                newItem.Click += SpeedTest;
+                serverMenuList.Items.Add(newItem);
             }
             if (cusProfiles.Count > 0)
             {
@@ -697,12 +808,14 @@ namespace V2RayW
                 this.useMultipleServer = false;
                 this.useCusProfile = false;
                 this.selectedServerIndex = senderTag;
-            } else if (senderTag == useCusConfigTag)
+            }
+            else if (senderTag == useCusConfigTag)
             {
                 useMultipleServer = false;
                 useCusProfile = true;
                 selectedCusConfig = ((sender as MenuItem).Header as string).Substring(1);
-            } else if (senderTag == useAllServerTag)
+            }
+            else if (senderTag == useAllServerTag)
             {
                 useMultipleServer = true;
                 useCusProfile = false;
@@ -711,13 +824,76 @@ namespace V2RayW
             this.CoreConfigChanged(sender);
         }
 
-
-        private void UpdateSubscription(object sender, RoutedEventArgs e)
-        {
-
-        }
         #endregion
 
+
+        #region speed test
+
+        List<string> speedTestResult = new List<string>();
+        Dictionary<string,string> speedTestResultDic = new Dictionary<string, string>();
+        Semaphore speedTestSemaphore;
+        private const string SpeedTestUrl = @"https://www.google.com/generate_204";
+
+        void SpeedTest(object sender, RoutedEventArgs e)
+        {
+            speedTestResultDic.Clear();
+            BackgroundWorker speedTestWorker = new BackgroundWorker();
+            speedTestWorker.WorkerSupportsCancellation = true;
+            speedTestWorker.DoWork += SpeedTestWorker_DoWork;
+            speedTestWorker.RunWorkerCompleted += SpeedTestWorker_RunWorkerCompleted;
+            if (speedTestWorker.IsBusy) return;
+            speedTestWorker.RunWorkerAsync();
+
+        }
+
+        void SpeedTestWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            speedTestSemaphore = new Semaphore(3,3);
+            int tag = 0;
+            List<Dictionary<string, object>> allOutbounds = new List<Dictionary<string, object>>(profiles);
+            allOutbounds.AddRange(subsOutbounds);
+            foreach (Dictionary<string, object> Outbound in allOutbounds)
+            {
+                tag++;
+                Thread thread = new Thread(()=> { threadSpeedTest(Outbound, tag); });
+                thread.Start();
+                Thread.Sleep(1000);
+            }
+            Thread.Sleep(11500); 
+        }
+
+        private void SpeedTestWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
+            Debug.WriteLine("test done ");
+        }
+
+        void threadSpeedTest(Dictionary<string, object> outbound, int tag)
+        {
+            try
+            {
+                speedTestSemaphore.WaitOne();
+                Process v2rayProcessTest = new Process();
+                v2rayProcessTest.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
+                v2rayJsonConfigTest = GenerateConfigFileTest(outbound, tag);
+                v2rayProcessTest.StartInfo.Arguments = @" -config http://127.0.0.1:18000/test/config.json";
+#if DEBUG
+                v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+#else
+                v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+#endif
+                v2rayProcessTest.Start();
+
+                speedTestResultDic.Add(outbound["tag"].ToString(), ExtraUtils.GetHttpStatusTime(SpeedTestUrl, httpPort + tag));
+                v2rayProcessTest.Kill();
+                speedTestSemaphore.Release();
+                Debug.WriteLine("outbonds result : {0} {1}", outbound["tag"].ToString(), speedTestResultDic[outbound["tag"].ToString()]);
+            }
+            catch
+            { }
+        }
+
+        #endregion
 
         #region simple http server
 
@@ -728,6 +904,7 @@ namespace V2RayW
         {
             listener.Prefixes.Add("http://127.0.0.1:18000/proxy.pac/");
             listener.Prefixes.Add("http://127.0.0.1:18000/config.json/");
+            listener.Prefixes.Add("http://127.0.0.1:18000/test/config.json/");
             listener.Start();
             httpServerWorker.WorkerSupportsCancellation = true;
             httpServerWorker.DoWork += new DoWorkEventHandler(HttpServerWorker_DoWork);
@@ -736,19 +913,24 @@ namespace V2RayW
 
         private void HttpServerWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker backgroundWorker = sender as BackgroundWorker;
             while (true)
             {
                 HttpListenerContext context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
-                Debug.WriteLine("get request "+request.Url+DateTime.Now.ToString());
+                Debug.WriteLine("get request " + request.Url + DateTime.Now.ToString());
                 byte[] respondBytes = new byte[0];
                 HttpListenerResponse response = context.Response;
                 if (request.Url.AbsolutePath == "/config.json")
                 {
                     respondBytes = v2rayJsonConfig;
                     response.ContentType = "application/json; charset=utf-8";
-                } else if (request.Url.AbsolutePath.StartsWith("/proxy.pac"))
+                }
+                if (request.Url.AbsolutePath == "/test/config.json")
+                {
+                    respondBytes = v2rayJsonConfigTest;
+                    response.ContentType = "application/json; charset=utf-8";
+                }
+                else if (request.Url.AbsolutePath.StartsWith("/proxy.pac"))
                 {
                     Debug.WriteLine("pac file is requested");
                     // https://support.microsoft.com/en-us/help/4025058/windows-10-does-not-read-a-pac-file-referenced-by-a-file-protocol
@@ -793,7 +975,7 @@ namespace V2RayW
 
         private void V2rayCoreWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            while(true)
+            while (true)
             {
                 coreWorkerSemaphore.WaitOne();
                 v2rayProcess.Start();
@@ -801,7 +983,7 @@ namespace V2RayW
                 v2rayProcess.WaitForExit();
                 if (!coreKilledByMe)
                 {
-                    this.Dispatcher.Invoke(() => 
+                    this.Dispatcher.Invoke(() =>
                     {
                         this.OverallChanged(v2rayCoreWorker, null);
                         notifyIcon.ShowBalloonTip("", Strings.messagecorequit, BalloonIcon.Warning);
@@ -817,7 +999,8 @@ namespace V2RayW
                 coreKilledByMe = true;
                 v2rayProcess.Kill();
             }
-            catch {
+            catch
+            {
             };
         }
 
@@ -826,20 +1009,22 @@ namespace V2RayW
             this.UnloadV2ray();
             coreWorkerSemaphore.Release(1);
         }
-#endregion
+        #endregion
 
-#region core config management
+        #region core config management
         byte[] v2rayJsonConfig = new byte[0];
+        byte[] v2rayJsonConfigTest = new byte[0];
 
         void CoreConfigChanged(object sender)
         {
             Debug.WriteLine($"{sender} calls config change");
             if (proxyState == true)
             {
-                if(!useMultipleServer && useCusProfile)
+                if (!useMultipleServer && useCusProfile)
                 {
                     v2rayJsonConfig = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + @"config\" + selectedCusConfig);
-                } else
+                }
+                else
                 {
                     v2rayJsonConfig = this.GenerateConfigFile();
                 }
@@ -863,7 +1048,7 @@ namespace V2RayW
 #endif
             };
             var dnsList = dnsString.Split(',');
-            if(dnsList.Count() > 0)
+            if (dnsList.Count() > 0)
             {
                 fullConfig["dns"] = new Dictionary<string, string[]>
                 {
@@ -896,7 +1081,7 @@ namespace V2RayW
             Dictionary<string, object> outboundsForConfig = new Dictionary<string, object>();
             Dictionary<string, object> uniqueTagOutbounds = new Dictionary<string, object>();
 
-            foreach(Dictionary<string, object> outbound in allOutbounds)
+            foreach (Dictionary<string, object> outbound in allOutbounds)
             {
                 uniqueTagOutbounds[outbound[@"tag"].ToString()] = outbound;
             }
@@ -913,7 +1098,8 @@ namespace V2RayW
                     if (!useMultipleServer)
                     {
                         aRule["outboundTag"] = allOutbounds[selectedServerIndex][@"tag"].ToString();
-                    } else
+                    }
+                    else
                     {
                         aRule.Remove("outboundTag");
                         aRule["balancerTag"] = "balance";
@@ -923,19 +1109,20 @@ namespace V2RayW
             bool useBalance = false;
             foreach (Dictionary<string, object> aRule in currentRules)
             {
-                if(aRule.ContainsKey("balancerTag") && !aRule.ContainsKey("outboundTag"))
+                if (aRule.ContainsKey("balancerTag") && !aRule.ContainsKey("outboundTag"))
                 {
                     useBalance = true;
                     break;
-                } else
+                }
+                else
                 {
-                    if(uniqueTagOutbounds.ContainsKey(aRule["outboundTag"].ToString()))
+                    if (uniqueTagOutbounds.ContainsKey(aRule["outboundTag"].ToString()))
                     {
                         outboundsForConfig[aRule["outboundTag"].ToString()] = uniqueTagOutbounds[aRule["outboundTag"].ToString()];
                     }
                 }
             }
-            if(useBalance)
+            if (useBalance)
             {
                 (fullConfig["routing"] as Dictionary<string, object>).Add("balancers", new List<object>
                 {
@@ -947,22 +1134,63 @@ namespace V2RayW
                 }
                 );
                 fullConfig["outbounds"] = uniqueTagOutbounds.Values;
-            } else
+            }
+            else
             {
                 fullConfig["outbounds"] = outboundsForConfig.Values;
             }
             return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(fullConfig, Formatting.Indented));
         }
-#endregion
 
-#region routingRules 
+        byte[] GenerateConfigFileTest(Dictionary<string, object> outbound, int tag)
+        {
+            Dictionary<string, object> fullConfig = Utilities.configTemplate;
+            fullConfig["log"] = new Dictionary<string, string>
+            {
+                { "loglevel", "none" },
+                { "error", "none" },
+                { "access", "none" },
+            };
+            fullConfig["dns"] = new Dictionary<string, object>
+            {
+                { "servers", new List<string> { "8.8.8.8" } }
+            };
+            fullConfig["inbounds"] = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "port", localPort+tag },
+                    { "listen", @"127.0.0.1" },
+                    {
+                        "settings",
+                        new Dictionary<string, object> { {"udp", true} }
+                    },
+                    { "protocol", "socks" }
+                },
+                new Dictionary<string, object>
+                {
+                    { "port", httpPort+tag },
+                    { "listen",  @"127.0.0.1" },
+                    { "protocol", "http" }
+                }
+            };
+            fullConfig["outbounds"] = new List<Dictionary<string, object>> { outbound };
+            Dictionary<string, object> routing = Utilities.ROUTING_GLOBAL;
+            Dictionary<string, object> outboundTag = (routing["rules"] as List<object>)[0] as Dictionary<string, object>;
+            outboundTag["outboundTag"] = outbound["tag"];
+            fullConfig["routing"] = routing;
+            return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(fullConfig, Formatting.Indented));
+        }
+        #endregion
+
+        #region routingRules 
         void UpdateRuleSetMenuList()
         {
             Debug.WriteLine($"rules count = {routingRuleSets.Count}");
             MenuItem ruleSetMenuItem = mainMenu.Items[routingRuleSetMenuItemIndex] as MenuItem;
             ruleSetMenuItem.Items.Clear();
             int i = 0;
-            foreach(Dictionary<string, object> rule in routingRuleSets)
+            foreach (Dictionary<string, object> rule in routingRuleSets)
             {
                 MenuItem menuItem = new MenuItem
                 {
@@ -985,21 +1213,22 @@ namespace V2RayW
             this.CoreConfigChanged(sender);
         }
 
-#endregion
+        #endregion
 
 
-#region other main menu items
+        #region other main menu items
 
         public void QuitV2RayW(object sender, RoutedEventArgs e)
         {
             notifyIcon.Icon = null;
             this.UnloadV2ray();
-            if(proxyState && proxyMode != ProxyMode.manual)
+            if (proxyState && proxyMode != ProxyMode.manual)
             {
                 if (enableRestore)
                 {
                     RestoreSystemProxy();
-                } else
+                }
+                else
                 {
                     CancelSystemProxy();
                 }
@@ -1029,7 +1258,7 @@ namespace V2RayW
             Process.Start("http://127.0.0.1:18000/config.json");
         }
 
-#endregion
+        #endregion
 
         private void ShowLogMenuItem_Click(object sender, RoutedEventArgs e)
         {

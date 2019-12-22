@@ -42,19 +42,16 @@ namespace V2RayW
 
         private ConfigWindow configWindow;
 
-
         public void InitializeData()
         {
             configWindow = this.Owner as ConfigWindow;
-
             outbounds = Utilities.DeepClone(configWindow.outbounds);
-            subscriptionBox.Text = String.Join("\n", configWindow.subscriptions);
+            subscriptionBox.Text = String.Join("\n", configWindow.subscribeUrl);  
             routingRuleSets = Utilities.DeepClone(configWindow.routingRuleSets);
             foreach(Dictionary<string, object> set in routingRuleSets)
             {
                 set["rules"] = new List<object>(set["rules"] as IList<object>);
             }
-
             enableRestoreBox.Items.Clear();
             enableRestoreBox.Items.Add(V2RayW.Resources.Strings.RestoreTurnOff);
             enableRestoreBox.Items.Add(V2RayW.Resources.Strings.RestoreTurnOn);
@@ -71,13 +68,7 @@ namespace V2RayW
             ruleSetListBox.SelectedIndex = 0;
         }
 
-
-
-
-        #region subscriptions
-        public List<string> subscriptions;
-        #endregion
-
+        
         #region customized configs
         private BackgroundWorker configScanner = new BackgroundWorker();
 
@@ -529,7 +520,7 @@ namespace V2RayW
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             configWindow.outbounds = outbounds;
-            configWindow.subscriptions = subscriptionBox.Text.Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(link => link.Length > 0).ToList();
+            configWindow.subscribeUrl = subscriptionBox.Text.Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToList();
             configWindow.routingRuleSets = routingRuleSets;
             configWindow.enableRestore = enableRestoreBox.SelectedIndex == 1;
             this.Close();
