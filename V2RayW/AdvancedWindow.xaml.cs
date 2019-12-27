@@ -458,10 +458,24 @@ namespace V2RayW
                 rule["domain"] = parts[0].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
             } else
             {
-                rule["domain"] = parts[0].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
-                rule["ip"] = parts[1].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+                
+                if (parts[0].Trim() == "")
+                {
+                    rule.Remove("domain");
+                    rule["ip"] = parts[1].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+                }
+                else if (parts[1].Trim() == "")
+                {
+                    rule["domain"] = parts[0].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+                    rule.Remove("ip");
+                }
+                else
+                {
+                    rule["domain"] = parts[0].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+                    rule["ip"] = parts[1].Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+                }
             }
-            
+
         }
 
         private void NetWorkListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
