@@ -152,6 +152,7 @@ namespace V2RayW
                 v2rayProcess.Start();
                 v2rayProcess.WaitForExit();
                 string version = v2rayProcess.StandardOutput.ReadLine();
+                version = version.Substring(0,version.IndexOf("("));
                 Dispatcher.Invoke(() => {
                     versionLabel.Content = version;
                 });

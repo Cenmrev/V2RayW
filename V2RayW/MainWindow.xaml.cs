@@ -615,7 +615,7 @@ namespace V2RayW
 
         private void ConfigScanner_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Dispatcher.Invoke(() => { UpdateServerMenuList(); });
+            Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
         }
 
         private void ConfigScanner_DoWork(object sender, DoWorkEventArgs e)
@@ -649,80 +649,6 @@ namespace V2RayW
             }
         }
 
-        private void UpdateServerMenuList()
-        {
-            var serverMenuList = mainMenu.Items[serverMenuListIndex] as MenuItem;
-            serverMenuList.Items.Clear();
-            if (profiles.Count == 0 && cusProfiles.Count == 0 && subsOutbounds.Count == 0)
-            {
-                serverMenuList.Items.Add(Strings.messagenoserver);
-                return;
-            }
-            int tagIndex = 0;
-            foreach (Dictionary<string, object> outbound in this.profiles)
-            {
-                var newOutboundItem = new MenuItem
-                {
-                    Header = outbound["tag"],
-                    Tag = tagIndex,
-                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
-                };
-                newOutboundItem.Click += SwitchServer;
-                serverMenuList.Items.Add(newOutboundItem);
-                tagIndex += 1;
-            }
-            foreach (Dictionary<string, object> outbound in this.subsOutbounds)
-            {
-                var newOutboundItem = new MenuItem
-                {
-                    Header = outbound["tag"],
-                    Tag = tagIndex,
-                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
-                };
-                newOutboundItem.Click += SwitchServer;
-                serverMenuList.Items.Add(newOutboundItem);
-                tagIndex += 1;
-            }
-            if (profiles.Count + subsOutbounds.Count > 0)
-            {
-                serverMenuList.Items.Add(new Separator());
-                var newItem = new MenuItem
-                {
-                    Header = Strings.useall,
-                    Tag = useAllServerTag,
-                    IsChecked = !useCusProfile && useMultipleServer
-                };
-                newItem.Click += SwitchServer;
-                serverMenuList.Items.Add(newItem);
-            }
-            if (profiles.Count + subsOutbounds.Count > 0)
-            {
-                serverMenuList.Items.Add(new Separator());
-                var newItem = new MenuItem
-                {
-                    Header = Strings.speedtest,
-                    ToolTip = Strings.speedtesttip
-                };
-                newItem.Click += SpeedTest;
-                serverMenuList.Items.Add(newItem);
-            }
-            if (cusProfiles.Count > 0)
-            {
-                serverMenuList.Items.Add(new Separator());
-            }
-            foreach (string cusConfigFileName in cusProfiles)
-            {
-                var newOutboundItem = new MenuItem
-                {
-                    Header = "_" + cusConfigFileName,
-                    IsChecked = useCusProfile && cusConfigFileName == selectedCusConfig,
-                    Tag = useCusConfigTag
-                };
-                newOutboundItem.Click += SwitchServer;
-                serverMenuList.Items.Add(newOutboundItem);
-            }
-        }
-
         private void UpdateServerMenuList(Dictionary<string,string> responseTime)
         {
             var serverMenuList = mainMenu.Items[serverMenuListIndex] as MenuItem;
@@ -735,10 +661,10 @@ namespace V2RayW
             int tagIndex = 0;
             foreach (Dictionary<string, object> outbound in this.profiles)
             {
-                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? responseTime[outbound[@"tag"].ToString()] : "0";
+                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
                 var newOutboundItem = new MenuItem
                 {
-                    Header = outbound["tag"] + "=" + tagadd,
+                    Header = outbound["tag"] + tagadd,
                     Tag = tagIndex,
                     IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
                 };
@@ -748,7 +674,7 @@ namespace V2RayW
             }
             foreach (Dictionary<string, object> outbound in this.subsOutbounds)
             {
-                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? responseTime[outbound[@"tag"].ToString()] : "0";
+                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
                 var newOutboundItem = new MenuItem
                 {
                     Header = outbound["tag"] + tagadd,
@@ -829,7 +755,6 @@ namespace V2RayW
 
         #region speed test
 
-        List<string> speedTestResult = new List<string>();
         Dictionary<string,string> speedTestResultDic = new Dictionary<string, string>();
         Semaphore speedTestSemaphore;
         private const string SpeedTestUrl = @"https://www.google.com/generate_204";
@@ -1030,7 +955,7 @@ namespace V2RayW
                 }
                 this.ToggleCore();
             }
-            this.UpdateServerMenuList();
+            this.UpdateServerMenuList(speedTestResultDic);
             this.UpdateRuleSetMenuList();
         }
 
