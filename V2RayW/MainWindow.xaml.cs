@@ -5,13 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Net;
 using System.ComponentModel;
@@ -23,7 +16,6 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using V2RayW.Resources;
 
 namespace V2RayW
@@ -649,7 +641,7 @@ namespace V2RayW
             }
         }
 
-        private void UpdateServerMenuList(Dictionary<string,string> responseTime)
+        private void UpdateServerMenuList(Dictionary<string, string> responseTime)
         {
             var serverMenuList = mainMenu.Items[serverMenuListIndex] as MenuItem;
             serverMenuList.Items.Clear();
@@ -755,7 +747,7 @@ namespace V2RayW
 
         #region speed test
 
-        Dictionary<string,string> speedTestResultDic = new Dictionary<string, string>();
+        Dictionary<string, string> speedTestResultDic = new Dictionary<string, string>();
         Semaphore speedTestSemaphore;
         private const string SpeedTestUrl = @"https://www.google.com/generate_204";
 
@@ -777,14 +769,17 @@ namespace V2RayW
             int tag = 0;
             List<Dictionary<string, object>> allOutbounds = new List<Dictionary<string, object>>(profiles);
             allOutbounds.AddRange(subsOutbounds);
-            foreach (Dictionary<string, object> Outbound in allOutbounds)
+            Debug.WriteLine("task start……");
+            List<Task> tasks = new List<Task>();
+            foreach (Dictionary<string, object> outbound in allOutbounds)
             {
                 tag++;
-                Thread thread = new Thread(()=> { threadSpeedTest(Outbound, tag); });
-                thread.Start();
-                Thread.Sleep(1000);
+                speedTestSemaphore.WaitOne();
+                tasks.Add(Task.Run(() => { threadSpeedTest(outbound, tag); }).ContinueWith(task => { speedTestSemaphore.Release(); }));
+                Thread.Sleep(500);
             }
-            Thread.Sleep(11500); 
+            Task.WaitAll(tasks.ToArray());
+            Debug.WriteLine("task done……");
         }
 
         private void SpeedTestWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -797,7 +792,6 @@ namespace V2RayW
         {
             try
             {
-                speedTestSemaphore.WaitOne();
                 Process v2rayProcessTest = new Process();
                 v2rayProcessTest.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
                 v2rayJsonConfigTest = GenerateConfigFileTest(outbound, tag);
@@ -811,12 +805,12 @@ namespace V2RayW
 
                 speedTestResultDic.Add(outbound["tag"].ToString(), ExtraUtils.GetHttpStatusTime(SpeedTestUrl, httpPort + tag));
                 v2rayProcessTest.Kill();
-                speedTestSemaphore.Release();
                 Debug.WriteLine("outbonds result : {0} {1}", outbound["tag"].ToString(), speedTestResultDic[outbound["tag"].ToString()]);
             }
-            catch
-            { }
+            catch{}
+
         }
+
 
         #endregion
 
@@ -842,7 +836,7 @@ namespace V2RayW
             {
                 HttpListenerContext context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
-                Debug.WriteLine("get request " + request.Url + DateTime.Now.ToString());
+                Debug.WriteLine("get request {0} {1}" , request.Url ,DateTime.Now.ToString());
                 byte[] respondBytes = new byte[0];
                 HttpListenerResponse response = context.Response;
                 if (request.Url.AbsolutePath == "/config.json")
