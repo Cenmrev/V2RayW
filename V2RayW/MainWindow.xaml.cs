@@ -59,9 +59,10 @@ namespace V2RayW
 
         private FileSystemWatcher pacFileWatcher;
 
+        
         public MainWindow()
         {
-
+            SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 #if DEBUG
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
 #endif
@@ -103,6 +104,21 @@ namespace V2RayW
 
             OverallChanged(this, null);
         }
+
+        #region Power Mode Changed
+        void SystemEvents_PowerModeChanged(object s, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    notifyIcon.Icon = Properties.Resources.vw256;
+                    break;
+                case PowerModes.Suspend:
+                    break;
+            }
+        }
+
+        #endregion
 
         #region startup check
         private bool ClearLog()
