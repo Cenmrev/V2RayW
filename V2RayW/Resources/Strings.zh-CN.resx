@@ -477,4 +477,7 @@ v2ray-core\geosite.dat</value>
   <data name="SubscriptionInstruction" xml:space="preserve">
     <value>在此处保存你的机场订阅链接，并从配置界面【从..导入】中选择【订阅】按钮来刷新服务器配置。</value>
   </data>
+  <data name="autoStart" xml:space="preserve">
+    <value>开机启动</value>
+  </data>
 </root>

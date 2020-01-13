@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -195,6 +196,59 @@ namespace V2RayW
             catch
             {
                 return string.Empty;
+            }
+        }
+
+
+        /// <summary>
+        /// autostart ,set
+        /// </summary>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
+        public static bool AutoStartSet(bool enabled)
+        {
+            try
+            {
+                string applicationPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + System.AppDomain.CurrentDomain.SetupInformation.ApplicationName;
+                RegistryKey runKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+                if (enabled)
+                {
+                    runKey.SetValue("V2RayW", applicationPath);
+                }
+                else
+                {
+                    runKey.DeleteValue("V2RayW");
+                }
+                runKey.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// autostart ,check
+        /// </summary>
+        /// <returns></returns>
+        public static bool AutoStartCheck()
+        {
+            try
+            {
+                RegistryKey runKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run");
+                string[] runList = runKey.GetValueNames();
+                runKey.Close();
+                foreach (string item in runList)
+                {
+                    if (item.Equals("V2RayW"))
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

@@ -31,6 +31,7 @@
         <CheckBox x:Name="udpSupportBox" Content="{x:Static res:Strings.UDPSupport}" HorizontalAlignment="Left" Margin="314,16,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="shareOverLanBox" Content="{x:Static res:Strings.ShareOverLan}" HorizontalAlignment="Left" Margin="314,47,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static res:Strings.DNSInstruction}" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <CheckBox x:Name="autoStartBox" Content="{x:Static res:Strings.autoStart}" HorizontalAlignment="Left" Margin="314,76,0,0" VerticalAlignment="Top"/>
         <Label Content="DNS:" HorizontalAlignment="Left" Margin="21,102,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="dnsBox" HorizontalAlignment="Left" Height="23" Margin="62,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="427" VerticalContentAlignment="Center"/>
         <Label Content="{x:Static res:Strings.ListInstruction}" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top" FontSize="11"/>

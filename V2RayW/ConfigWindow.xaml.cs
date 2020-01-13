@@ -106,6 +106,7 @@ namespace V2RayW
             }
 
             // fill in data
+            autoStartBox.IsChecked = ExtraUtils.AutoStartCheck();
             udpSupportBox.IsChecked = mainWindow.udpSupport;
             shareOverLanBox.IsChecked = mainWindow.shareOverLan;
             localPortBox.Text = mainWindow.localPort.ToString();
@@ -232,7 +233,7 @@ namespace V2RayW
                 mainWindow.udpSupport = udpSupportBox.IsChecked ?? false;
                 mainWindow.logLevel = logLevelBox.SelectedItem.ToString();
                 mainWindow.OverallChanged(this, null);
-
+                ExtraUtils.AutoStartSet((bool)autoStartBox.IsChecked);
             }
             this.Close();
         }

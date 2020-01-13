@@ -477,4 +477,7 @@ v2ray-core\geosite.dat</value>
   <data name="SubscriptionInstruction" xml:space="preserve">
     <value>Save your airport subscription link here, and select subscription from the configuration interface import from to refresh the server configuration.</value>
   </data>
+  <data name="autoStart" xml:space="preserve">
+    <value>Autostart on windows</value>
+  </data>
 </root>

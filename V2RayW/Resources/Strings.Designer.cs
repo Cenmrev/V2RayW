@@ -97,6 +97,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Autostart on windows 的本地化字符串。
+        /// </summary>
+        public static string autoStart {
+            get {
+                return ResourceManager.GetString("autoStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Browse config folder... 的本地化字符串。
         /// </summary>
         public static string browseconfig {
