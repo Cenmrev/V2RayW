@@ -618,7 +618,7 @@ namespace V2RayW
 
         private const int useAllServerTag = -10;
         private const int useCusConfigTag = -11;
-
+        private bool speedtestState = true;
         private BackgroundWorker configScanner = new BackgroundWorker();
 
         private void ConfigScanner_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -711,6 +711,7 @@ namespace V2RayW
                 var newItem = new MenuItem
                 {
                     Header = Strings.speedtest,
+                    IsEnabled = speedtestState,
                     ToolTip = Strings.speedtesttip
                 };
                 newItem.Click += SpeedTest;
@@ -765,11 +766,12 @@ namespace V2RayW
 
         Dictionary<string, string> speedTestResultDic = new Dictionary<string, string>();
         Semaphore speedTestSemaphore;
-        private const string SpeedTestUrl = @"https://www.google.com/generate_204";
+        private const string SpeedTestUrl = @"https://www.google.com/generate_204";       
 
         void SpeedTest(object sender, RoutedEventArgs e)
         {
-            speedTestResultDic.Clear();
+            speedtestState = false;
+            Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
             BackgroundWorker speedTestWorker = new BackgroundWorker();
             speedTestWorker.WorkerSupportsCancellation = true;
             speedTestWorker.DoWork += SpeedTestWorker_DoWork;
@@ -800,7 +802,8 @@ namespace V2RayW
 
         private void SpeedTestWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
+            speedtestState = true;
+            Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
             Debug.WriteLine("test done ");
         }
 
