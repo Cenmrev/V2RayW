@@ -669,7 +669,7 @@ namespace V2RayW
             int tagIndex = 0;
             foreach (Dictionary<string, object> outbound in this.profiles)
             {
-                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
+                var tagadd = responseTime.ContainsKey(outbound["tag"].ToString()) ? "[" + responseTime[outbound["tag"].ToString()] + "]" : null;
                 var newOutboundItem = new MenuItem
                 {
                     Header = outbound["tag"] + tagadd,
@@ -682,7 +682,7 @@ namespace V2RayW
             }
             foreach (Dictionary<string, object> outbound in this.subsOutbounds)
             {
-                var tagadd = responseTime.ContainsKey(outbound[@"tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
+                var tagadd = responseTime.ContainsKey(outbound["tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
                 var newOutboundItem = new MenuItem
                 {
                     Header = outbound["tag"] + tagadd,
@@ -772,6 +772,7 @@ namespace V2RayW
         {
             speedtestState = false;
             Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
+            speedTestResultDic.Clear();
             BackgroundWorker speedTestWorker = new BackgroundWorker();
             speedTestWorker.WorkerSupportsCancellation = true;
             speedTestWorker.DoWork += SpeedTestWorker_DoWork;
