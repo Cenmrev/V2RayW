@@ -63,6 +63,7 @@ namespace V2RayW
         public MainWindow()
         {
             SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+            SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
 #if DEBUG
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
 #endif
@@ -105,7 +106,7 @@ namespace V2RayW
             OverallChanged(this, null);
         }
 
-        #region Power Mode Changed
+        #region SystemEvent,Power&display
         void SystemEvents_PowerModeChanged(object s, PowerModeChangedEventArgs e)
         {
             switch (e.Mode)
@@ -116,6 +117,11 @@ namespace V2RayW
                 case PowerModes.Suspend:
                     break;
             }
+        }
+
+        void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
+        {
+            notifyIcon.Icon = Properties.Resources.vw256;
         }
 
         #endregion
