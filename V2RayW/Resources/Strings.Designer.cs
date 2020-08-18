@@ -277,6 +277,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Encrypt: 的本地化字符串。
+        /// </summary>
+        public static string encryption {
+            get {
+                return ResourceManager.GetString("encryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Example: 的本地化字符串。
         /// </summary>
         public static string Example {

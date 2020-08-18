@@ -480,4 +480,7 @@ v2ray-core\geosite.dat</value>
   <data name="autoStart" xml:space="preserve">
     <value>Autostart on windows</value>
   </data>
+  <data name="encryption" xml:space="preserve">
+    <value>Encrypt:</value>
+  </data>
 </root>

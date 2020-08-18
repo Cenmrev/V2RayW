@@ -40,7 +40,11 @@ namespace V2RayW
             InitializeComponent();
 
             // initialize UI
-            foreach(string security in Utilities.VMESS_SECURITY_LIST) 
+            foreach (string protocol in Utilities.PROTOCOL_LIST)
+            {
+                protocolComboBox.Items.Add(protocol);
+            }
+            foreach (string security in Utilities.VMESS_SECURITY_LIST) 
             {
                 securityComboBox.Items.Add(security);
             }
@@ -62,7 +66,7 @@ namespace V2RayW
         {
             try
             {
-                if (outbound["protocol"].ToString() != "vmess")
+                if (outbound["protocol"].ToString() != "vmess" && outbound["protocol"].ToString() != "vless")
                 {
                     return false;
                 }
@@ -175,8 +179,16 @@ namespace V2RayW
                 addressBox.Text = selectedVnext["address"].ToString();
                 portBox.Text = selectedVnext["port"].ToString();
                 idBox.Text = selectedUserInfo["id"].ToString();
-                alterIdBox.Text = selectedUserInfo["alterId"].ToString();
-                securityComboBox.SelectedIndex = Utilities.VMESS_SECURITY_LIST.FindIndex(x => x == selectedUserInfo["security"] as string);
+                protocolComboBox.SelectedIndex = Utilities.PROTOCOL_LIST.FindIndex(x => x == selectedProfile["protocol"] as string);
+                if (selectedProfile["protocol"] as string == "vmess")
+                {
+                    securityComboBox.SelectedIndex = Utilities.VMESS_SECURITY_LIST.FindIndex(x => x == selectedUserInfo["security"] as string);
+                    alterIdBox.Text = selectedUserInfo["alterId"].ToString();                  
+                }
+                if (selectedProfile["protocol"] as string == "vless")
+                {
+                    encryptionBox.Text = selectedUserInfo["encryption"].ToString();
+                }
                 levelBox.Text = selectedUserInfo["level"].ToString();
                 tagBox.Text = selectedProfile["tag"].ToString();
                 networkBox.SelectedIndex = Utilities.NETWORK_LIST.FindIndex(x => x == (selectedProfile["streamSettings"] as Dictionary<string, object>)["network"] as string);
@@ -239,6 +251,7 @@ namespace V2RayW
         }
         #endregion
 
+
         public void ShowAdvancedWindow(object sender, RoutedEventArgs e)
         {
             var advancedWindow = new AdvancedWindow
@@ -287,7 +300,7 @@ namespace V2RayW
             } else if (sender == alterIdBox)
             {
                 if (alterIdBox.Text.Length == 0) return;
-                int alterId = (int)selectedUserInfo["alterId"];
+                int alterId =int.Parse(selectedUserInfo.ContainsKey("alterId") ? selectedUserInfo["alterId"].ToString() : "0");
                 try
                 {
                     alterId = UInt16.Parse(alterIdBox.Text);
@@ -312,6 +325,10 @@ namespace V2RayW
             } else if (sender == tagBox)
             {
                 selectedProfile["tag"] = tagBox.Text;
+            } else if (sender == encryptionBox)
+            {
+                if (encryptionBox.Text.Length == 0) return;
+                selectedUserInfo["encryption"] = encryptionBox.Text;
             }
         }
 
@@ -327,9 +344,35 @@ namespace V2RayW
             } else if (sender == networkBox)
             {
                 (selectedProfile["streamSettings"] as Dictionary<string, object>)["network"] = networkBox.SelectedItem.ToString();
+            } else if (sender == protocolComboBox)
+            {
+                selectedProfile["protocol"] = protocolComboBox.SelectedItem.ToString();
+                if (selectedProfile["protocol"] as string == "vmess")
+                {
+                    encryptionBox.Text = "none";
+                    alterIdBox.IsEnabled = true;
+                    securityComboBox.IsEnabled = true;
+                    encryptionBox.IsEnabled = false;
+                    alterIdBox.Text = selectedUserInfo.ContainsKey("alterId") ? selectedUserInfo["alterId"].ToString() : "0"; 
+                    selectedUserInfo["alterId"] = int.Parse(alterIdBox.Text);
+                    selectedUserInfo["security"]= selectedUserInfo.ContainsKey("security") ? selectedUserInfo["security"].ToString() : "auto";
+                    selectedUserInfo.Remove("encryption");
+                }
+                if (selectedProfile["protocol"] as string == "vless")
+                {
+                    alterIdBox.Text = "0";
+                    securityComboBox.Text = "auto";
+                    alterIdBox.IsEnabled = false;
+                    securityComboBox.IsEnabled = false;
+                    encryptionBox.IsEnabled = true;
+                    encryptionBox.Text = selectedUserInfo.ContainsKey("encryption") ? selectedUserInfo["encryption"].ToString() : "none";
+                    selectedUserInfo["encryption"] = encryptionBox.Text;
+                    selectedUserInfo.Remove("alterId");
+                    selectedUserInfo.Remove("security");
+                }
             }
         }
-        
+
 
         private void TagBox_LostFocus(object sender, RoutedEventArgs e)
         {
