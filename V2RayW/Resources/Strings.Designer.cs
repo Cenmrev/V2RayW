@@ -214,6 +214,24 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Customize Encryption 的本地化字符串。
+        /// </summary>
+        public static string customizeencryption {
+            get {
+                return ResourceManager.GetString("customizeencryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Customize Flow 的本地化字符串。
+        /// </summary>
+        public static string customizeflow {
+            get {
+                return ResourceManager.GetString("customizeflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Customize HTTP Header 的本地化字符串。
         /// </summary>
         public static string customizehttpheader {
@@ -277,11 +295,11 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Encrypt: 的本地化字符串。
+        ///   查找类似 https://www.v2fly.org/config/protocols/vless.html#outboundconfigurationobject 的本地化字符串。
         /// </summary>
-        public static string encryption {
+        public static string encryptionHelpPage {
             get {
-                return ResourceManager.GetString("encryption", resourceCulture);
+                return ResourceManager.GetString("encryptionHelpPage", resourceCulture);
             }
         }
         
@@ -300,6 +318,15 @@ namespace V2RayW.Resources {
         public static string exportbackup {
             get {
                 return ResourceManager.GetString("exportbackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.v2fly.org/config/protocols/vless.html#xtls-%E9%BB%91%E7%A7%91%E6%8A%80 的本地化字符串。
+        /// </summary>
+        public static string flowHelpPage {
+            get {
+                return ResourceManager.GetString("flowHelpPage", resourceCulture);
             }
         }
         

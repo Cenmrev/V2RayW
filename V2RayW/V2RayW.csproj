@@ -92,6 +92,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnhanceWindow.xaml.cs">
+      <DependentUpon>EnhanceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExtraUtils.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EnhanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

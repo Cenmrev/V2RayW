@@ -107,13 +107,16 @@ namespace V2RayW
             #endregion
 
             #region tls
-            tlsEnableBox.IsChecked = streamSettings["security"] as string == "tls";
+            tlsEnableBox.IsChecked = streamSettings["security"] as string == "tls" || streamSettings["security"] as string == "xtls";
             Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
+            if (streamSettings["security"] as string == "xtls")
+            {
+                tlsSettings = streamSettings["xtlsSettings"] as Dictionary<string, object>;
+            }
             tlsAlpnBox.Text = String.Join(",", tlsSettings["alpn"] as object[]);
             tlsServerBox.Text = tlsSettings["serverName"] as string;
             tlsInsecureBox.IsChecked = (bool)tlsSettings["allowInsecure"];
             tlsInsecureCipherBox.IsChecked = (bool)tlsSettings["allowInsecureCiphers"];
-
             #endregion
         }
 
@@ -142,12 +145,12 @@ namespace V2RayW
             {
                 {"header", new Dictionary<string, object>{ {"type", "none"} } }
             };
-            if(tcpHeaderCheckBox.IsChecked ?? false)
+            if (tcpHeaderCheckBox.IsChecked ?? false)
             {
                 try
                 {
                     tcpSettings = Utilities.javaScriptSerializer.Deserialize<dynamic>(tcpHeaderContentBox.Text);
-                    if(tcpSettings==null)
+                    if (tcpSettings == null)
                     {
                         throw new NullReferenceException();
                     }
@@ -193,7 +196,7 @@ namespace V2RayW
             };
 
             streamSettings["tcpSettings"] = tcpSettings;
-            if(tcpForceBox.IsChecked??false && Utilities.IsWindows10())
+            if (tcpForceBox.IsChecked ?? false && Utilities.IsWindows10())
             {
                 streamSettings["sockopt"] = new Dictionary<string, object> { { "tcpFastOpen", true } };
             } else
@@ -220,13 +223,21 @@ namespace V2RayW
                 {"security", quicSecurityBox.SelectedItem.ToString() },
                 {"header", new Dictionary<string, object>{ { "type", quicHeaderBox.SelectedItem.ToString() } } }
             };
-            streamSettings["security"] = tlsEnableBox.IsChecked??false ? "tls" : "none";
-            streamSettings["tlsSettings"] = new Dictionary<string, object> {
+            streamSettings["security"] = tlsEnableBox.IsChecked ?? false ? streamSettings["security"].ToString() : "none";
+            Dictionary<string, object> tlsxtlsSettings = new Dictionary<string, object> {
                 { "allowInsecure", tlsInsecureBox.IsChecked ?? false },
                 { "alpn", tlsAlpnBox.Text.Split(',') },
                 { "serverName", tlsServerBox.Text.Trim() },
                 { "allowInsecureCiphers", tlsInsecureCipherBox.IsChecked ?? false }
             };
+            if (streamSettings["security"] as string == "tls")
+            {
+                streamSettings["tlsSettings"] = tlsxtlsSettings;
+            }
+            if(streamSettings["security"] as string == "xtls")
+            {
+                streamSettings["xtlsSettings"] = tlsxtlsSettings;
+            }
             this.Close();
         }
 

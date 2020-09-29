@@ -480,7 +480,16 @@ v2ray-core\geosite.dat</value>
   <data name="autoStart" xml:space="preserve">
     <value>开机启动</value>
   </data>
-  <data name="encryption" xml:space="preserve">
-    <value>加密：</value>
+  <data name="customizeencryption" xml:space="preserve">
+    <value>自定义加密方式</value>
+  </data>
+  <data name="customizeflow" xml:space="preserve">
+    <value>自定义流控算法</value>
+  </data>
+  <data name="encryptionHelpPage" xml:space="preserve">
+    <value>https://www.v2fly.org/config/protocols/vless.html#outboundconfigurationobject</value>
+  </data>
+  <data name="flowHelpPage" xml:space="preserve">
+    <value>https://www.v2fly.org/config/protocols/vless.html#xtls-%E9%BB%91%E7%A7%91%E6%8A%80</value>
   </data>
 </root>

@@ -185,10 +185,6 @@ namespace V2RayW
                     securityComboBox.SelectedIndex = Utilities.VMESS_SECURITY_LIST.FindIndex(x => x == selectedUserInfo["security"] as string);
                     alterIdBox.Text = selectedUserInfo["alterId"].ToString();                  
                 }
-                if (selectedProfile["protocol"] as string == "vless")
-                {
-                    encryptionBox.Text = selectedUserInfo["encryption"].ToString();
-                }
                 levelBox.Text = selectedUserInfo["level"].ToString();
                 tagBox.Text = selectedProfile["tag"].ToString();
                 networkBox.SelectedIndex = Utilities.NETWORK_LIST.FindIndex(x => x == (selectedProfile["streamSettings"] as Dictionary<string, object>)["network"] as string);
@@ -273,6 +269,17 @@ namespace V2RayW
             transportWindow.ShowDialog();
         }
 
+        public void ShowEnhanceWindow(object sender, RoutedEventArgs e)
+        {
+            if (vmessListBox.SelectedIndex < 0 || vmessListBox.SelectedIndex >= profiles.Count) return;
+            var enhanceWindow = new EnhanceWindow
+            {
+                Owner = this
+            };
+            enhanceWindow.InitializeData();
+            enhanceWindow.ShowDialog();
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (vmessListBox.SelectedIndex < 0 || vmessListBox.SelectedIndex >= profiles.Count) return;
@@ -325,11 +332,7 @@ namespace V2RayW
             } else if (sender == tagBox)
             {
                 selectedProfile["tag"] = tagBox.Text;
-            } else if (sender == encryptionBox)
-            {
-                if (encryptionBox.Text.Length == 0) return;
-                selectedUserInfo["encryption"] = encryptionBox.Text;
-            }
+            } 
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -338,6 +341,7 @@ namespace V2RayW
             Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
             Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
             Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
+            Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
             if (sender == securityComboBox)
             {
                 selectedUserInfo["security"] = (sender as ComboBox).SelectedItem.ToString();
@@ -349,14 +353,20 @@ namespace V2RayW
                 selectedProfile["protocol"] = protocolComboBox.SelectedItem.ToString();
                 if (selectedProfile["protocol"] as string == "vmess")
                 {
-                    encryptionBox.Text = "none";
                     alterIdBox.IsEnabled = true;
                     securityComboBox.IsEnabled = true;
-                    encryptionBox.IsEnabled = false;
+                    enhanceButton.Visibility = Visibility.Collapsed;
                     alterIdBox.Text = selectedUserInfo.ContainsKey("alterId") ? selectedUserInfo["alterId"].ToString() : "0"; 
                     selectedUserInfo["alterId"] = int.Parse(alterIdBox.Text);
                     selectedUserInfo["security"]= selectedUserInfo.ContainsKey("security") ? selectedUserInfo["security"].ToString() : "auto";
                     selectedUserInfo.Remove("encryption");
+                    selectedUserInfo.Remove("flow");
+                    if (streamSettings["security"] as string == "xtls")
+                    {
+                        streamSettings["security"] = "tls";
+                        streamSettings.Remove("tlsSettings");
+                        profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
+                    }
                 }
                 if (selectedProfile["protocol"] as string == "vless")
                 {
@@ -364,9 +374,9 @@ namespace V2RayW
                     securityComboBox.Text = "auto";
                     alterIdBox.IsEnabled = false;
                     securityComboBox.IsEnabled = false;
-                    encryptionBox.IsEnabled = true;
-                    encryptionBox.Text = selectedUserInfo.ContainsKey("encryption") ? selectedUserInfo["encryption"].ToString() : "none";
-                    selectedUserInfo["encryption"] = encryptionBox.Text;
+                    enhanceButton.Visibility = Visibility.Visible; 
+                    selectedUserInfo["encryption"] = selectedUserInfo.ContainsKey("encryption") ? selectedUserInfo["encryption"].ToString() : "none";
+                    selectedUserInfo["flow"] = selectedUserInfo.ContainsKey("flow") ? selectedUserInfo["flow"].ToString() : "";
                     selectedUserInfo.Remove("alterId");
                     selectedUserInfo.Remove("security");
                 }
