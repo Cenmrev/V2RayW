@@ -1,4 +1,4 @@
-﻿<Window x:Class="V2RayW.EnhanceWindow"
+﻿<Window x:Class="V2RayW.EnhancedWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:res="clr-namespace:V2RayW.Resources"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="EnhanceWindow" Height="288" Width="500" WindowStartupLocation="CenterOwner">
+        Title="Enhanced Settings" Height="288" Width="500" WindowStartupLocation="CenterOwner">
     <Grid>
         <TabControl x:Name="mainTabControl" HorizontalAlignment="Left" Height="194" Margin="10,10,0,0" VerticalAlignment="Top" Width="465">
             <TabItem Header="Encryption">

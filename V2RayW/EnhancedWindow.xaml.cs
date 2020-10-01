@@ -8,12 +8,12 @@ using V2RayW.Resources;
 namespace V2RayW
 {
     /// <summary>
-    /// EnhanceWindow.xaml 的交互逻辑
+    /// EnhancedWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class EnhanceWindow : Window
+    public partial class EnhancedWindow : Window
     {
         private ConfigWindow configWindow;
-        public EnhanceWindow()
+        public EnhancedWindow()
         {
             InitializeComponent();
         }

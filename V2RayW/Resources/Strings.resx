@@ -492,4 +492,7 @@ v2ray-core\geosite.dat</value>
   <data name="flowHelpPage" xml:space="preserve">
     <value>https://www.v2fly.org/config/protocols/vless.html#xtls-%E9%BB%91%E7%A7%91%E6%8A%80</value>
   </data>
+  <data name="enhanced" xml:space="preserve">
+    <value>Enhanced...</value>
+  </data>
 </root>

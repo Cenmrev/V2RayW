@@ -304,6 +304,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Enhanced... 的本地化字符串。
+        /// </summary>
+        public static string enhanced {
+            get {
+                return ResourceManager.GetString("enhanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Example: 的本地化字符串。
         /// </summary>
         public static string Example {

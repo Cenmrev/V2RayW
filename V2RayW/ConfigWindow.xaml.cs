@@ -269,15 +269,15 @@ namespace V2RayW
             transportWindow.ShowDialog();
         }
 
-        public void ShowEnhanceWindow(object sender, RoutedEventArgs e)
+        public void ShowEnhancedWindow(object sender, RoutedEventArgs e)
         {
             if (vmessListBox.SelectedIndex < 0 || vmessListBox.SelectedIndex >= profiles.Count) return;
-            var enhanceWindow = new EnhanceWindow
+            var enhancedWindow = new EnhancedWindow
             {
                 Owner = this
             };
-            enhanceWindow.InitializeData();
-            enhanceWindow.ShowDialog();
+            enhancedWindow.InitializeData();
+            enhancedWindow.ShowDialog();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -355,7 +355,7 @@ namespace V2RayW
                 {
                     alterIdBox.IsEnabled = true;
                     securityComboBox.IsEnabled = true;
-                    enhanceButton.Visibility = Visibility.Collapsed;
+                    enhancedButton.IsEnabled = false;
                     alterIdBox.Text = selectedUserInfo.ContainsKey("alterId") ? selectedUserInfo["alterId"].ToString() : "0"; 
                     selectedUserInfo["alterId"] = int.Parse(alterIdBox.Text);
                     selectedUserInfo["security"]= selectedUserInfo.ContainsKey("security") ? selectedUserInfo["security"].ToString() : "auto";
@@ -374,7 +374,7 @@ namespace V2RayW
                     securityComboBox.Text = "auto";
                     alterIdBox.IsEnabled = false;
                     securityComboBox.IsEnabled = false;
-                    enhanceButton.Visibility = Visibility.Visible; 
+                    enhancedButton.IsEnabled = true; 
                     selectedUserInfo["encryption"] = selectedUserInfo.ContainsKey("encryption") ? selectedUserInfo["encryption"].ToString() : "none";
                     selectedUserInfo["flow"] = selectedUserInfo.ContainsKey("flow") ? selectedUserInfo["flow"].ToString() : "";
                     selectedUserInfo.Remove("alterId");

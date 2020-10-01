@@ -52,11 +52,11 @@
                 <TextBox  PreviewTextInput="NumberValidationTextBox" TextChanged="TextBox_TextChanged" x:Name="alterIdBox" HorizontalAlignment="Left" Height="23" Margin="83,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" VerticalContentAlignment="Center"/>
                 <TextBox  PreviewTextInput="NumberValidationTextBox" TextChanged="TextBox_TextChanged" x:Name="levelBox" HorizontalAlignment="Left" Height="23" Margin="266,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
                 <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="securityComboBox" HorizontalAlignment="Left" Margin="83,100,0,0" VerticalAlignment="Top" Width="136"/>
-                <TextBox LostFocus="TagBox_LostFocus" TextChanged="TextBox_TextChanged" x:Name="tagBox" HorizontalAlignment="Left" Height="23" Margin="83,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center"/>
+                <TextBox LostFocus="TagBox_LostFocus" TextChanged="TextBox_TextChanged" x:Name="tagBox" HorizontalAlignment="Left" Height="23" Margin="83,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136" VerticalContentAlignment="Center"/>
                 <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="networkBox" HorizontalAlignment="Left" Margin="83,161,0,0" VerticalAlignment="Top" Width="81"/>
                 <Button Content="{x:Static res:Strings.transportsettings}" HorizontalAlignment="Left" Margin="190,163,0,0" VerticalAlignment="Top" Width="138" Click="ShowTransportWindow"/>
                 <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="protocolComboBox" HorizontalAlignment="Left" Margin="250,100,0,0" VerticalAlignment="Top" Width="78"/>
-                <Button Click="ShowEnhanceWindow" x:Name="enhanceButton" Content="S" HorizontalAlignment="Left" Margin="230,100,0,0" VerticalAlignment="Top" Height="21.5" Width="20"/>
+                <Button Click="ShowEnhancedWindow" x:Name="enhancedButton" Content="{x:Static res:Strings.enhanced}" HorizontalAlignment="Left" Margin="234,131,0,0" VerticalAlignment="Top" Height="22" Width="94"/>
             </Grid>
         </GroupBox>
         <Label x:Name="versionLabel" Content="core version" Margin="18,398,0,0" VerticalAlignment="Top" Width="235" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>

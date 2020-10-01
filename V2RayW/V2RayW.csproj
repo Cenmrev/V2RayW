@@ -92,8 +92,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EnhanceWindow.xaml.cs">
-      <DependentUpon>EnhanceWindow.xaml</DependentUpon>
+    <Compile Include="EnhancedWindow.xaml.cs">
+      <DependentUpon>EnhancedWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExtraUtils.cs" />
     <Compile Include="Model.cs" />
@@ -119,7 +119,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EnhanceWindow.xaml">
+    <Page Include="EnhancedWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
