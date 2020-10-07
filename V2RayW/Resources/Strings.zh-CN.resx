@@ -237,8 +237,8 @@
   <data name="viewconfig" xml:space="preserve">
     <value>查看当前配置文件</value>
   </data>
-  <data name="VMessServers" xml:space="preserve">
-    <value>VMess 服务器</value>
+  <data name="V2RayServers" xml:space="preserve">
+    <value>V2Ray 服务器</value>
   </data>
   <data name="Config" xml:space="preserve">
     <value>配置文件</value>

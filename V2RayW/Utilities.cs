@@ -95,6 +95,7 @@ namespace V2RayW
 
         public static string suggestedCore = "V2Ray 4.14.0 (Po) 20190131";
         public static List<string> PROTOCOL_LIST = new List<string> { @"vmess", @"vless" };
+        public static List<string> PROTOCOL_LIST_UI = new List<string> { @"VMess", @"VLESS" };
         public static List<string> VMESS_SECURITY_LIST = new List<string> { @"auto", @"aes-128-gcm", @"chacha20-poly1305", @"none" };
         public static List<string> RESERVED_TAGS = new List<string> { @"main", @"direct", @"decline", @"balance" };
         public static List<string> NETWORK_LIST = new List<string> { @"tcp", @"kcp", @"ws", @"http", @"quic" };

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -34,15 +35,20 @@ namespace V2RayW
         public List<Dictionary<string, object>> routingRuleSets;
         public bool enableRestore;
         private BackgroundWorker coreVersionCheckWorker = new BackgroundWorker();
+        private ObservableCollection<ProtocolUI> pui = new ObservableCollection<ProtocolUI>();
 
         public ConfigWindow()
         {
             InitializeComponent();
 
             // initialize UI
-            foreach (string protocol in Utilities.PROTOCOL_LIST)
+            protocolComboBox.ItemsSource = pui;
+            protocolComboBox.DisplayMemberPath = "UI";
+            protocolComboBox.SelectedValuePath = "Protocol";
+            foreach (var protocol in Utilities.PROTOCOL_LIST.Zip(Utilities.PROTOCOL_LIST_UI, Tuple.Create))
             {
-                protocolComboBox.Items.Add(protocol);
+                pui.Add(new ProtocolUI { UI= protocol.Item2, Protocol=protocol.Item1});
+
             }
             foreach (string security in Utilities.VMESS_SECURITY_LIST) 
             {
@@ -350,7 +356,7 @@ namespace V2RayW
                 (selectedProfile["streamSettings"] as Dictionary<string, object>)["network"] = networkBox.SelectedItem.ToString();
             } else if (sender == protocolComboBox)
             {
-                selectedProfile["protocol"] = protocolComboBox.SelectedItem.ToString();
+                selectedProfile["protocol"] = protocolComboBox.SelectedValue.ToString();
                 if (selectedProfile["protocol"] as string == "vmess")
                 {
                     alterIdBox.IsEnabled = true;

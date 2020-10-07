@@ -35,7 +35,7 @@
         <Label Content="DNS:" HorizontalAlignment="Left" Margin="21,102,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="dnsBox" HorizontalAlignment="Left" Height="23" Margin="62,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="427" VerticalContentAlignment="Center"/>
         <Label Content="{x:Static res:Strings.ListInstruction}" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <Label Content="{x:Static res:Strings.VMessServers}" HorizontalAlignment="Left" Margin="18,162,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static res:Strings.V2RayServers}" HorizontalAlignment="Left" Margin="18,162,0,0" VerticalAlignment="Top"/>
         <GroupBox Header="{x:Static res:Strings.ServerInfo}" HorizontalAlignment="Left" Height="213" Margin="145,175,0,0" VerticalAlignment="Top" Width="350">
             <Grid>
                 <Label Content="{x:Static res:Strings.Address}"  HorizontalAlignment="Right" Margin="0,10,260,0" VerticalAlignment="Top"/>

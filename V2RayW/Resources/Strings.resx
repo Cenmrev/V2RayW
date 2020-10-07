@@ -237,8 +237,8 @@
   <data name="viewconfig" xml:space="preserve">
     <value>View current config.json</value>
   </data>
-  <data name="VMessServers" xml:space="preserve">
-    <value>VMess Servers</value>
+  <data name="V2RayServers" xml:space="preserve">
+    <value>V2Ray Servers</value>
   </data>
   <data name="Config" xml:space="preserve">
     <value>Config</value>

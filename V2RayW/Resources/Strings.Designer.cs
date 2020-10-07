@@ -1141,6 +1141,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 V2Ray Servers 的本地化字符串。
+        /// </summary>
+        public static string V2RayServers {
+            get {
+                return ResourceManager.GetString("V2RayServers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Valid config files: 的本地化字符串。
         /// </summary>
         public static string validConfig {
@@ -1155,15 +1164,6 @@ namespace V2RayW.Resources {
         public static string viewconfig {
             get {
                 return ResourceManager.GetString("viewconfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 VMess Servers 的本地化字符串。
-        /// </summary>
-        public static string VMessServers {
-            get {
-                return ResourceManager.GetString("VMessServers", resourceCulture);
             }
         }
         

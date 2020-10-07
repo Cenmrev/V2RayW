@@ -21,5 +21,11 @@ namespace V2RayW
         public string path { get; set; }
         public string tls { get; set; }
     }
+
+    public class ProtocolUI
+    {
+        public string UI { get; set; }
+        public string Protocol { get; set; }
+    }
     
 }
