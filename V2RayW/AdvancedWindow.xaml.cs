@@ -98,6 +98,7 @@ namespace V2RayW
 
             DirectoryInfo configDirectoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"config\");
             var cusConfigs = configDirectoryInfo.GetFiles("*.json", SearchOption.TopDirectoryOnly);
+            configWindow.cusProfiles.Clear();
             foreach (var cusConfig in cusConfigs)
             {
                 Debug.WriteLine(v2rayProcess.StartInfo.FileName);
@@ -113,6 +114,7 @@ namespace V2RayW
                         Dispatcher.Invoke(() =>
                         {
                             cusConfigBox.Items.Add(cusConfig.Name);
+                            configWindow.cusProfiles.Add(cusConfig.Name);
                         });
                     }
                 } catch { };

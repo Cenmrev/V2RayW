@@ -31,6 +31,7 @@ namespace V2RayW
 
         public List<Dictionary<string, object>> profiles; // only vmess
         public List<Dictionary<string, object>> outbounds; // except vmess
+        public List<string> cusProfiles;
         public List<string> subscribeUrl = new List<string>();
         public List<Dictionary<string, object>> routingRuleSets;
         public bool enableRestore;
@@ -102,6 +103,7 @@ namespace V2RayW
             enableRestore = mainWindow.enableRestore;
             outbounds = new List<Dictionary<string, object>>();
             profiles = new List<Dictionary<string, object>>();
+            cusProfiles = new List<string>();
             foreach (Dictionary<string, object> outbound in Utilities.DeepClone(mainWindow.profiles))
             {
                 if (VmessForUI(outbound))
@@ -237,6 +239,7 @@ namespace V2RayW
                     }
                 }
                 mainWindow.profiles = new List<Dictionary<string, object>>(allUniqueTagOutbounds.Values);
+                mainWindow.cusProfiles = cusProfiles;
                 mainWindow.routingRuleSets = routingRuleSets;
                 mainWindow.subscribeUrl = subscribeUrl;
                 mainWindow.httpPort = UInt16.Parse(httpPortBox.Text);
