@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using V2RayW.Resources;
 
 namespace V2RayW
 {
@@ -420,62 +421,74 @@ namespace V2RayW
 
         private void ShareMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (vmessListBox.SelectedIndex >= 0 && vmessListBox.SelectedIndex < profiles.Count)
+            Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
+            try
             {
-                Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
-                Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
-                Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
-                Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> kcpSettings = streamSettings["kcpSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> kcpSettingsT = kcpSettings["header"] as Dictionary<string, object>;
-                Dictionary<string, object> tcpSettings = streamSettings["tcpSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> tcpSettingsT = tcpSettings["header"] as Dictionary<string, object>;
-                Dictionary<string, object> wsSettings = streamSettings["wsSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> wsSettingsT = wsSettings["headers"] as Dictionary<string, object>;
-                Dictionary<string, object> httpSettings = streamSettings["httpSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> quicSettings = streamSettings["quicSettings"] as Dictionary<string, object>;
-                Dictionary<string, object> quicSettingsT = quicSettings["header"] as Dictionary<string, object>;
-                Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
-                VmessLink vlink = new VmessLink();
-                vlink.v = "2";
-                vlink.ps = selectedProfile["tag"].ToString();
-                vlink.add = selectedVnext["address"].ToString();
-                vlink.port = selectedVnext["port"].ToString();
-                vlink.id = selectedUserInfo["id"].ToString();
-                vlink.aid= selectedUserInfo["alterId"].ToString();
-                vlink.net = streamSettings["network"].ToString();
-                vlink.tls = streamSettings["security"].ToString();
-                vlink.type = "";
-                vlink.host = "";
-                vlink.path = "";
-                switch (streamSettings["network"].ToString())
+                if (vmessListBox.SelectedIndex >= 0 && vmessListBox.SelectedIndex < profiles.Count && selectedProfile["protocol"] as string == "vmess")
                 {
-                    case "ws":
-                        vlink.host = wsSettingsT["host"].ToString();
-                        vlink.path = wsSettings["path"].ToString() == "" ? "/" : wsSettings["path"].ToString();
-                        break;
-                    case "http":
-                        vlink.net = "h2";
-                        vlink.host = httpSettings.ContainsKey("host") ? String.Join(",", httpSettings["host"] as object[]) : "";
-                        vlink.path = httpSettings["path"].ToString() == "" ? "/" : httpSettings["path"].ToString();
-                        break;
-                    case "tcp":
-                        vlink.type = tcpSettingsT["type"].ToString() == "" ? "none" : tcpSettingsT["type"].ToString();
-                        break;
-                    case "kcp":
-                        vlink.type = kcpSettingsT["type"].ToString() == "" ? "none" : kcpSettingsT["type"].ToString();
-                        break;
-                    case "quic":
-                        vlink.type = quicSettingsT["type"].ToString() == "" ? "none" : quicSettingsT["type"].ToString();
-                        vlink.host = quicSettings["securty"].ToString() == "" ? "none" : quicSettings["securty"].ToString();
-                        vlink.path = quicSettings["key"].ToString();
-                        break;
-                    default:
-                        break;
+                    Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
+                    Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
+                    Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> kcpSettings = streamSettings["kcpSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> kcpSettingsT = kcpSettings["header"] as Dictionary<string, object>;
+                    Dictionary<string, object> tcpSettings = streamSettings["tcpSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> tcpSettingsT = tcpSettings["header"] as Dictionary<string, object>;
+                    Dictionary<string, object> wsSettings = streamSettings["wsSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> wsSettingsT = wsSettings["headers"] as Dictionary<string, object>;
+                    Dictionary<string, object> httpSettings = streamSettings["httpSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> quicSettings = streamSettings["quicSettings"] as Dictionary<string, object>;
+                    Dictionary<string, object> quicSettingsT = quicSettings["header"] as Dictionary<string, object>;
+                    Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
+                    VmessLink vlink = new VmessLink();
+                    vlink.v = "2";
+                    vlink.ps = selectedProfile["tag"].ToString();
+                    vlink.add = selectedVnext["address"].ToString();
+                    vlink.port = selectedVnext["port"].ToString();
+                    vlink.id = selectedUserInfo["id"].ToString();
+                    vlink.aid = selectedUserInfo["alterId"].ToString();
+                    vlink.net = streamSettings["network"].ToString();
+                    vlink.tls = streamSettings["security"].ToString();
+                    vlink.type = "";
+                    vlink.host = "";
+                    vlink.path = "";
+                    switch (streamSettings["network"].ToString())
+                    {
+                        case "ws":
+                            vlink.host = wsSettingsT["host"].ToString();
+                            vlink.path = wsSettings["path"].ToString() == "" ? "/" : wsSettings["path"].ToString();
+                            break;
+                        case "http":
+                            vlink.net = "h2";
+                            vlink.host = httpSettings.ContainsKey("host") ? String.Join(",", httpSettings["host"] as object[]) : "";
+                            vlink.path = httpSettings["path"].ToString() == "" ? "/" : httpSettings["path"].ToString();
+                            break;
+                        case "tcp":
+                            vlink.type = tcpSettingsT["type"].ToString() == "" ? "none" : tcpSettingsT["type"].ToString();
+                            break;
+                        case "kcp":
+                            vlink.type = kcpSettingsT["type"].ToString() == "" ? "none" : kcpSettingsT["type"].ToString();
+                            break;
+                        case "quic":
+                            vlink.type = quicSettingsT["type"].ToString() == "" ? "none" : quicSettingsT["type"].ToString();
+                            vlink.host = quicSettings["securty"].ToString() == "" ? "none" : quicSettings["securty"].ToString();
+                            vlink.path = quicSettings["key"].ToString();
+                            break;
+                        default:
+                            break;
+                    }
+                    var sharejson = Utilities.javaScriptSerializer.Serialize(vlink);
+                    ExtraUtils.SetClipboardData(ExtraUtils.Base64Encode(sharejson).Insert(0, "vmess://"));
                 }
-                var sharejson = Utilities.javaScriptSerializer.Serialize(vlink);
-                ExtraUtils.SetClipboardData(ExtraUtils.Base64Encode(sharejson).Insert(0,"vmess://"));
+                else
+                {
+                    ExtraUtils.SetClipboardData("");
+                }
             }
+            catch
+            {
+                MessageBox.Show(Strings.Share, Strings.messagenotvalidjson);   
+            }
+           
         }
 
         private void ShowLogButton_Click(object sender, RoutedEventArgs e)
