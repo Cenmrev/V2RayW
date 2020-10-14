@@ -173,7 +173,7 @@ namespace V2RayW
             } catch
             {
                 Dispatcher.Invoke(() => {
-                    versionLabel.Content = "No valid core found";
+                    versionLabel.Content = Strings.messagenocoretitle;
                 });
             }
         }
@@ -212,7 +212,7 @@ namespace V2RayW
                     UInt16.Parse(httpPortBox.Text);
                 } catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(), "Not a valid port number!");
+                    MessageBox.Show(ex.ToString(), Strings.messagenotvalidport);
                     return;
                 }
                 Dictionary<string, Dictionary<string, object>> allUniqueTagOutbounds = new Dictionary<string, Dictionary<string, object>>();
@@ -222,17 +222,17 @@ namespace V2RayW
                 {
                     if(outbound["tag"] as string == "")
                     {
-                        MessageBox.Show("tag can not be empty");
+                        MessageBox.Show(Strings.messagetagrequired);
                         return;
                     }
                     if(Utilities.RESERVED_TAGS.FindIndex(x => x == outbound["tag"] as string) != -1)
                     {
-                        MessageBox.Show($"tag {outbound["tag"]} is reserved.");
+                        MessageBox.Show(Strings.messagetag + $" {outbound["tag"]} " + Strings.messagereserved);
                         return;
                     }
                     if(allUniqueTagOutbounds.ContainsKey(outbound["tag"] as string))
                     {
-                        MessageBox.Show($"tag {outbound["tag"]} is not unique");
+                        MessageBox.Show(Strings.messagetag + $" {outbound["tag"]} " + Strings.messagenotunique);
                         return;
                     } else
                     {
@@ -308,7 +308,7 @@ namespace V2RayW
                     portNumber = UInt16.Parse(portBox.Text);
                 } catch
                 {
-                    MessageBox.Show("not a valid port number!");
+                    MessageBox.Show(Strings.messagenotvalidport);
                 }
                 selectedVnext["port"] = portNumber;
             } else if (sender == idBox)
@@ -324,7 +324,7 @@ namespace V2RayW
                 }
                 catch
                 {
-                    MessageBox.Show("not a valid alter id!");
+                    MessageBox.Show(Strings.messagenotvalidalterid);
                 }
                 selectedUserInfo["alterId"] = alterId;
             } else if (sender == levelBox)
@@ -336,7 +336,7 @@ namespace V2RayW
                     level = Int32.Parse(levelBox.Text);
                 } catch
                 {
-                    MessageBox.Show("not a valid number");
+                    MessageBox.Show(Strings.messagenotvalidnumber);
                 }
                 selectedUserInfo["level"] = level;
             } else if (sender == tagBox)
@@ -511,7 +511,7 @@ namespace V2RayW
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "format exception!");
+                MessageBox.Show(ex.ToString(), Strings.messageformatexception);
                 return;
             }
         }  
@@ -544,7 +544,7 @@ namespace V2RayW
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "request timeout!");
+                MessageBox.Show(ex.ToString(), Strings.messagerequesttimeout);
                 return;
             }
         }

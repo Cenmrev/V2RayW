@@ -495,4 +495,28 @@ v2ray-core\geosite.dat</value>
   <data name="enhanced" xml:space="preserve">
     <value>增强...</value>
   </data>
+  <data name="messageformatexception" xml:space="preserve">
+    <value>格式异常！</value>
+  </data>
+  <data name="messagenotunique" xml:space="preserve">
+    <value>不是唯一</value>
+  </data>
+  <data name="messagenotvalidalterid" xml:space="preserve">
+    <value>不是有效的alterId!</value>
+  </data>
+  <data name="messagenotvalidnumber" xml:space="preserve">
+    <value>不是有效的数字!</value>
+  </data>
+  <data name="messagenotvalidport" xml:space="preserve">
+    <value>不是有效的端口号!</value>
+  </data>
+  <data name="messagerequesttimeout" xml:space="preserve">
+    <value>请求超时!</value>
+  </data>
+  <data name="messagereserved" xml:space="preserve">
+    <value>已被保留</value>
+  </data>
+  <data name="messagetag" xml:space="preserve">
+    <value>标签(tag)</value>
+  </data>
 </root>

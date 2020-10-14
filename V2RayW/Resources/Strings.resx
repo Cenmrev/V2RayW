@@ -495,4 +495,28 @@ v2ray-core\geosite.dat</value>
   <data name="enhanced" xml:space="preserve">
     <value>Enhanced...</value>
   </data>
+  <data name="messageformatexception" xml:space="preserve">
+    <value>Format exception!</value>
+  </data>
+  <data name="messagenotunique" xml:space="preserve">
+    <value>is not unique</value>
+  </data>
+  <data name="messagenotvalidalterid" xml:space="preserve">
+    <value>Not a valid alter id!</value>
+  </data>
+  <data name="messagenotvalidnumber" xml:space="preserve">
+    <value>Not a valid number!</value>
+  </data>
+  <data name="messagenotvalidport" xml:space="preserve">
+    <value>Not a valid port number!</value>
+  </data>
+  <data name="messagerequesttimeout" xml:space="preserve">
+    <value>Request timeout!</value>
+  </data>
+  <data name="messagereserved" xml:space="preserve">
+    <value>is reserved</value>
+  </data>
+  <data name="messagetag" xml:space="preserve">
+    <value>tag</value>
+  </data>
 </root>

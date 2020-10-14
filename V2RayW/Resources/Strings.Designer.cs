@@ -547,6 +547,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Format exception! 的本地化字符串。
+        /// </summary>
+        public static string messageformatexception {
+            get {
+                return ResourceManager.GetString("messageformatexception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Let V2RayW doanload V2Ray from GitHub?
         ///“Yes”：V2RayW will try downloading V2Ray from GitHub。
         ///“No”：Manually download V2Ray and put files into folder v2ray-core.
@@ -583,6 +592,24 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 is not unique 的本地化字符串。
+        /// </summary>
+        public static string messagenotunique {
+            get {
+                return ResourceManager.GetString("messagenotunique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Not a valid alter id! 的本地化字符串。
+        /// </summary>
+        public static string messagenotvalidalterid {
+            get {
+                return ResourceManager.GetString("messagenotvalidalterid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Not a valid JSON! 的本地化字符串。
         /// </summary>
         public static string messagenotvalidjson {
@@ -592,11 +619,56 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Not a valid number! 的本地化字符串。
+        /// </summary>
+        public static string messagenotvalidnumber {
+            get {
+                return ResourceManager.GetString("messagenotvalidnumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Not a valid port number! 的本地化字符串。
+        /// </summary>
+        public static string messagenotvalidport {
+            get {
+                return ResourceManager.GetString("messagenotvalidport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 V2RayW encounters errors while reading settings. 的本地化字符串。
         /// </summary>
         public static string messagereaddefaultserror {
             get {
                 return ResourceManager.GetString("messagereaddefaultserror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Request timeout! 的本地化字符串。
+        /// </summary>
+        public static string messagerequesttimeout {
+            get {
+                return ResourceManager.GetString("messagerequesttimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 is reserved 的本地化字符串。
+        /// </summary>
+        public static string messagereserved {
+            get {
+                return ResourceManager.GetString("messagereserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 tag 的本地化字符串。
+        /// </summary>
+        public static string messagetag {
+            get {
+                return ResourceManager.GetString("messagetag", resourceCulture);
             }
         }
         

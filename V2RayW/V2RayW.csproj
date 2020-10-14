@@ -53,6 +53,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+	<AllowedReferenceRelatedFileExtensions>
+      <!-- Prevent default XML and PDB files copied to output in RELEASE.
+           Only *.allowedextension files will be included, which doesn't exist in my case.
+       -->
+      .allowedextension
+ 
+      <!-- or set to "-" to exclude all files -->
+      -
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>vw256.ico</ApplicationIcon>
@@ -178,9 +187,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="vw256.ico" />

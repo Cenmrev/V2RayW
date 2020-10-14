@@ -1,0 +1,56 @@
+name: .NET Build & Test
+
+on:
+  push:
+    branches: [ Dev ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+
+    # 添加 MSBuild.exe 到环境变量: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+
+    # 安装 NuGet
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: $${{ secrets.GITHUB_TOKEN }}
+        nuget-version: '5.x'
+
+    # 还原 NuGet 包
+    - name: NuGet restore
+      run: nuget restore
+
+    # 编译整个项目
+    - name: Build the solution
+      run: msbuild /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+    
+    - name: Package
+      shell: bash
+      run:  7z a -tzip "V2RayW.zip" "D:\a\V2RayW\V2RayW\V2RayW\bin\Release\*"
+      
+    - name: Release 
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "v2.2.5"
+          prerelease: false
+          title: "v2.2.5"
+          files:  |
+            V2RayW.zip
+     
