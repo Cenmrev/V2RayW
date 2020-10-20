@@ -46,7 +46,7 @@ namespace V2RayW
         {
             configWindow = this.Owner as ConfigWindow;
             outbounds = Utilities.DeepClone(configWindow.outbounds);
-            subscriptionBox.Text = String.Join("\n", configWindow.subscribeUrl);  
+            subscriptionBox.Text = String.Join("\n", configWindow.subscriptionUrl);  
             routingRuleSets = Utilities.DeepClone(configWindow.routingRuleSets);
             foreach(Dictionary<string, object> set in routingRuleSets)
             {
@@ -536,7 +536,7 @@ namespace V2RayW
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             configWindow.outbounds = outbounds;
-            configWindow.subscribeUrl = subscriptionBox.Text.Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToList();
+            configWindow.subscriptionUrl = subscriptionBox.Text.Split(new[] { '\r', '\n' }).Select(line => line.Trim()).Where(line => line.Length > 0).ToList();
             configWindow.routingRuleSets = routingRuleSets;
             configWindow.enableRestore = enableRestoreBox.SelectedIndex == 1;
             this.Close();

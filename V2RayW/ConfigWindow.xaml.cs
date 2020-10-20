@@ -33,7 +33,7 @@ namespace V2RayW
         public List<Dictionary<string, object>> profiles; // only vmess
         public List<Dictionary<string, object>> outbounds; // except vmess
         public List<string> cusProfiles;
-        public List<string> subscribeUrl = new List<string>();
+        public List<string> subscriptionUrl = new List<string>();
         public List<Dictionary<string, object>> routingRuleSets;
         public bool enableRestore;
         private BackgroundWorker coreVersionCheckWorker = new BackgroundWorker();
@@ -100,7 +100,7 @@ namespace V2RayW
         {
             // copy data 
             routingRuleSets = Utilities.DeepClone(mainWindow.routingRuleSets);
-            subscribeUrl = Utilities.DeepClone(mainWindow.subscribeUrl);
+            subscriptionUrl = Utilities.DeepClone(mainWindow.subscriptionUrl);
             enableRestore = mainWindow.enableRestore;
             outbounds = new List<Dictionary<string, object>>();
             profiles = new List<Dictionary<string, object>>();
@@ -242,7 +242,7 @@ namespace V2RayW
                 mainWindow.profiles = new List<Dictionary<string, object>>(allUniqueTagOutbounds.Values);
                 mainWindow.cusProfiles = cusProfiles;
                 mainWindow.routingRuleSets = routingRuleSets;
-                mainWindow.subscribeUrl = subscribeUrl;
+                mainWindow.subscriptionUrl = subscriptionUrl;
                 mainWindow.httpPort = UInt16.Parse(httpPortBox.Text);
                 mainWindow.localPort = UInt16.Parse(localPortBox.Text);
                 mainWindow.dnsString = dnsBox.Text;
@@ -516,13 +516,13 @@ namespace V2RayW
             }
         }  
 
-        private void ImportSubscribe_Click(object sender, RoutedEventArgs e)
+        private void ImportSubscription_Click(object sender, RoutedEventArgs e)
         {
             if (profiles.Count + outbounds.Count != 0)
             {
                 foreach (Dictionary<string, object> tag in profiles.Concat(outbounds).ToList())
                 {
-                    foreach (string ps in mainWindow.subscribeTag.ToString().Split(",".ToCharArray()))
+                    foreach (string ps in mainWindow.subscriptionTag.ToString().Split(",".ToCharArray()))
                     {
                         if (tag["tag"].ToString() == ps)
                         {
@@ -532,15 +532,15 @@ namespace V2RayW
                         }
                     }
                 }
-                mainWindow.subscribeTag = "";
+                mainWindow.subscriptionTag = "";
             }
             try
             {
-                BackgroundWorker subscribeWorker = new BackgroundWorker();
-                subscribeWorker.WorkerSupportsCancellation = true;
-                subscribeWorker.DoWork += subscribeWorker_DoWork;
-                if (subscribeWorker.IsBusy) return;
-                subscribeWorker.RunWorkerAsync();   
+                BackgroundWorker subscriptionWorker = new BackgroundWorker();
+                subscriptionWorker.WorkerSupportsCancellation = true;
+                subscriptionWorker.DoWork += subscriptionWorker_DoWork;
+                if (subscriptionWorker.IsBusy) return;
+                subscriptionWorker.RunWorkerAsync();   
             }
             catch (Exception ex)
             {
@@ -549,22 +549,22 @@ namespace V2RayW
             }
         }
 
-        #region import & subscribe
+        #region import & subscription
 
-        void subscribeWorker_DoWork(object sender, DoWorkEventArgs e)
+        void subscriptionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            mainWindow.subscribeTag = "";
-            List<string> subscribeTag = new List<string>();
-            foreach (string url in subscribeUrl)
+            mainWindow.subscriptionTag = "";
+            List<string> subscriptionTag = new List<string>();
+            foreach (string url in subscriptionUrl)
             {
                 var tag = ImportURL(ExtraUtils.Base64Decode(ExtraUtils.GetUrl(url)));
-                subscribeTag = subscribeTag.Concat(tag).ToList();
+                subscriptionTag = subscriptionTag.Concat(tag).ToList();
                 this.Dispatcher.Invoke(() =>
                 {
                     RefreshListBox();
                 });
             }
-            mainWindow.subscribeTag = String.Join(",", subscribeTag);
+            mainWindow.subscriptionTag = String.Join(",", subscriptionTag);
         }
 
         List<string> ImportURL(string importUrl)

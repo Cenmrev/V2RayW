@@ -468,14 +468,14 @@ v2ray-core\geosite.dat</value>
   <data name="ImportClipboard" xml:space="preserve">
     <value>从剪切板URL</value>
   </data>
-  <data name="ImportSubscribe" xml:space="preserve">
+  <data name="ImportSubscription" xml:space="preserve">
     <value>从订阅链接</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>分享至剪切板</value>
   </data>
   <data name="SubscriptionInstruction" xml:space="preserve">
-    <value>在此处保存你的机场订阅链接，并从配置界面【从..导入】中选择【订阅】按钮来刷新服务器配置。</value>
+    <value>在此处保存你的订阅链接，然后在配置界面点击【导入...】【从订阅链接】来刷新服务器配置。</value>
   </data>
   <data name="autoStart" xml:space="preserve">
     <value>开机启动</value>

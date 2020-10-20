@@ -1,4 +1,4 @@
-name: .NET Build & Test
+name: .NET Build & Release
 
 on:
   push:
@@ -48,9 +48,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v2.2.5"
+          automatic_release_tag: "v2.2.6"
           prerelease: false
-          title: "v2.2.5"
+          title: "v2.2.6"
           files:  |
             V2RayW.zip
      

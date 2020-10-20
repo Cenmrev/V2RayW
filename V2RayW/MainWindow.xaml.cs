@@ -53,8 +53,8 @@ namespace V2RayW
         public List<string> cusProfiles = new List<string>();
         public string logLevel = "none";
         public bool enableRestore = false;
-        public string subscribeTag = "";
-        public List<string> subscribeUrl = new List<string>();
+        public string subscriptionTag = "";
+        public List<string> subscriptionUrl = new List<string>();
         public List<Dictionary<string, object>> routingRuleSets = new List<Dictionary<string, object>> { Utilities.ROUTING_GLOBAL, Utilities.ROUTING_DIRECT, Utilities.ROUTING_BYPASSCN_PRIVATE_APPLE };
 
         private FileSystemWatcher pacFileWatcher;
@@ -290,8 +290,8 @@ namespace V2RayW
                     "subscriptions",
                     new Dictionary<string, object>
                     {
-                        { "url", subscribeUrl },
-                        { "tag", subscribeTag }
+                        { "url", subscriptionUrl },
+                        { "tag", subscriptionTag }
                     }
                 },
                 { "selectedPacFileName", selectedPacFileName },
@@ -340,10 +340,10 @@ namespace V2RayW
                     dnsString = settings["dnsString"];
                     enableRestore = settings["enableRestore"];
 
-                    subscribeTag = settings["subscriptions"]["tag"];
-                    foreach (string subscribe in settings["subscriptions"]["url"])
+                    subscriptionTag = settings["subscriptions"]["tag"];
+                    foreach (string subscription in settings["subscriptions"]["url"])
                     {
-                        subscribeUrl.Add(subscribe);
+                        subscriptionUrl.Add(subscription);
                     }
                     foreach (dynamic profile in settings["profiles"])
                     {

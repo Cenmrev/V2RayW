@@ -468,14 +468,14 @@ v2ray-core\geosite.dat</value>
   <data name="ImportClipboard" xml:space="preserve">
     <value>Import from clipboard</value>
   </data>
-  <data name="ImportSubscribe" xml:space="preserve">
-    <value>Import form subscribe</value>
+  <data name="ImportSubscription" xml:space="preserve">
+    <value>Import form subscription</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
   </data>
   <data name="SubscriptionInstruction" xml:space="preserve">
-    <value>Save your airport subscription link here, and select subscription from the configuration interface import from to refresh the server configuration.</value>
+    <value>Save your subscription link here, and then click [Import...] [Import form subscription] on the configuration interface to refresh the server configuration.</value>
   </data>
   <data name="autoStart" xml:space="preserve">
     <value>Autostart on windows</value>

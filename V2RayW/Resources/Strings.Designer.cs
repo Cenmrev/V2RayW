@@ -412,11 +412,11 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Import form subscribe 的本地化字符串。
+        ///   查找类似 Import form subscription 的本地化字符串。
         /// </summary>
-        public static string ImportSubscribe {
+        public static string ImportSubscription {
             get {
-                return ResourceManager.GetString("ImportSubscribe", resourceCulture);
+                return ResourceManager.GetString("ImportSubscription", resourceCulture);
             }
         }
         
@@ -1042,7 +1042,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Save your airport subscription link here, and select subscription from the configuration interface import from to refresh the server configuration. 的本地化字符串。
+        ///   查找类似 Save your subscription link here, and then click [Import...] [Import form subscription] on the configuration interface to refresh the server configuration. 的本地化字符串。
         /// </summary>
         public static string SubscriptionInstruction {
             get {
