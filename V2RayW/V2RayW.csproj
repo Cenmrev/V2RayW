@@ -44,7 +44,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<AllowedReferenceRelatedFileExtensions>
+    <AllowedReferenceRelatedFileExtensions>
       <!-- Prevent default XML and PDB files copied to output in RELEASE.
            Only *.allowedextension files will be included, which doesn't exist in my case.
        -->
