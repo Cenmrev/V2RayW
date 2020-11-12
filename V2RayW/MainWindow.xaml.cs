@@ -40,6 +40,7 @@ namespace V2RayW
         public bool udpSupport = false;
         public bool shareOverLan = false;
         public bool useCusProfile = false;
+        public bool usePartServer = false;
         public bool useMultipleServer = false;
         public int selectedServerIndex = 0;
         private string selectedCusConfig = "";
@@ -49,7 +50,7 @@ namespace V2RayW
 
         public List<Dictionary<string, object>> profiles = new List<Dictionary<string, object>>();
         public List<Dictionary<string, object>> subsOutbounds = new List<Dictionary<string, object>>();
-
+        public List<object> selectedPartServerIndex = new List<object>();
         public List<string> cusProfiles = new List<string>();
         public string logLevel = "none";
         public bool enableRestore = false;
@@ -282,8 +283,16 @@ namespace V2RayW
                         { "selectedServerIndex", selectedServerIndex },
                         { "selectedCusConfig", selectedCusConfig },
                         { "selectedRoutingSet", selectedRoutingSet },
+                        { "usePartServer", usePartServer },
                         { "useMultipleServer", useMultipleServer },
                         { "useCusProfile", useCusProfile }
+                    }
+                },
+                {
+                    "selectedPartServerIndex",
+                    new Dictionary<string, object>
+                    {
+                        { "index", selectedPartServerIndex }
                     }
                 },
                 {
@@ -328,6 +337,7 @@ namespace V2RayW
                     selectedServerIndex = settings["appStatus"]["selectedServerIndex"];
                     selectedCusConfig = settings["appStatus"]["selectedCusConfig"];
                     selectedRoutingSet = settings["appStatus"]["selectedRoutingSet"];
+                    usePartServer = settings["appStatus"]["usePartServer"];
                     useMultipleServer = settings["appStatus"]["useMultipleServer"];
                     useCusProfile = settings["appStatus"]["useCusProfile"];
 
@@ -340,6 +350,10 @@ namespace V2RayW
                     dnsString = settings["dnsString"];
                     enableRestore = settings["enableRestore"];
 
+                    foreach (int index in settings["selectedPartServerIndex"]["index"])
+                    {
+                        selectedPartServerIndex.Add((int)index);
+                    }
                     subscriptionTag = settings["subscriptions"]["tag"];
                     foreach (string subscription in settings["subscriptions"]["url"])
                     {
@@ -448,10 +462,12 @@ namespace V2RayW
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"pac\" + selectedPacFileName, Properties.Resources.simplepac);
             }
 
-            selectedServerIndex = Math.Min(profiles.Count + subsOutbounds.Count - 1, selectedServerIndex);
+            selectedServerIndex = Math.Min(profiles.Count + subsOutbounds.Count - 1, selectedServerIndex);   
+            selectedPartServerIndex.RemoveAll(x => (int)x >= (profiles.Count + subsOutbounds.Count));
             if (profiles.Count + subsOutbounds.Count > 0)
             {
                 selectedServerIndex = Math.Max(selectedServerIndex, 0);
+                selectedPartServerIndex = selectedPartServerIndex.Count > 0 ? selectedPartServerIndex : new List<object> { 0 };
             }
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"config\" + selectedCusConfig))
             {
@@ -512,6 +528,11 @@ namespace V2RayW
             {
                 WriteSettings();
             }
+        }
+
+        private bool exceed(int s)
+        {
+            return (profiles.Count + subsOutbounds.Count) < selectedPartServerIndex.Count ? true : false;
         }
         #endregion
 
@@ -621,7 +642,7 @@ namespace V2RayW
         #endregion
 
         #region server info management
-
+        private const int usePartServerTag = -9;
         private const int useAllServerTag = -10;
         private const int useCusConfigTag = -11;
         private bool speedtestState = true;
@@ -676,11 +697,12 @@ namespace V2RayW
             foreach (Dictionary<string, object> outbound in this.profiles)
             {
                 var tagadd = responseTime.ContainsKey(outbound["tag"].ToString()) ? "[" + responseTime[outbound["tag"].ToString()] + "]" : null;
+                bool selectedOutboundIndex = usePartServer ? selectedPartServerIndex.Exists(x => (int)x == tagIndex) : selectedServerIndex == tagIndex;
                 var newOutboundItem = new MenuItem
                 {
                     Header = outbound["tag"] + tagadd,
                     Tag = tagIndex,
-                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
+                    IsChecked = selectedOutboundIndex && !useMultipleServer && !useCusProfile
                 };
                 newOutboundItem.Click += SwitchServer;
                 serverMenuList.Items.Add(newOutboundItem);
@@ -689,11 +711,12 @@ namespace V2RayW
             foreach (Dictionary<string, object> outbound in this.subsOutbounds)
             {
                 var tagadd = responseTime.ContainsKey(outbound["tag"].ToString()) ? "[" + responseTime[outbound[@"tag"].ToString()] + "]" : null;
+                bool selectedOutboundIndex = usePartServer ? selectedPartServerIndex.Exists(x => (int)x == tagIndex) : selectedServerIndex == tagIndex;
                 var newOutboundItem = new MenuItem
                 {
                     Header = outbound["tag"] + tagadd,
                     Tag = tagIndex,
-                    IsChecked = tagIndex == selectedServerIndex && !useMultipleServer && !useCusProfile
+                    IsChecked = selectedOutboundIndex && !useMultipleServer && !useCusProfile
                 };
                 newOutboundItem.Click += SwitchServer;
                 serverMenuList.Items.Add(newOutboundItem);
@@ -707,6 +730,17 @@ namespace V2RayW
                     Header = Strings.useall,
                     Tag = useAllServerTag,
                     IsChecked = !useCusProfile && useMultipleServer
+                };
+                newItem.Click += SwitchServer;
+                serverMenuList.Items.Add(newItem);
+            }
+            if (profiles.Count + subsOutbounds.Count > 0)
+            {
+                var newItem = new MenuItem
+                {
+                    Header = Strings.usepart,
+                    IsChecked = !useCusProfile && usePartServer,
+                    Tag = usePartServerTag
                 };
                 newItem.Click += SwitchServer;
                 serverMenuList.Items.Add(newItem);
@@ -746,20 +780,47 @@ namespace V2RayW
             int senderTag = (int)(sender as MenuItem).Tag;
             if (senderTag >= 0 && senderTag < outboundCount)
             {
-                this.useMultipleServer = false;
-                this.useCusProfile = false;
-                this.selectedServerIndex = senderTag;
+                useMultipleServer = false;
+                useCusProfile = false;
+
+                if (usePartServer)
+                {
+                    if (selectedPartServerIndex.Count == 1 && selectedPartServerIndex.Exists(x => (int)x == senderTag))
+                    {
+                        return;
+                    }
+                    else if (selectedPartServerIndex.Exists(x => (int)x == senderTag))
+                    {
+                        selectedPartServerIndex.Remove(senderTag);
+                    }
+                    else
+                    {
+                        selectedPartServerIndex.Add(senderTag);
+                    }
+                }
+                else
+                {
+                    selectedServerIndex = senderTag;
+                }
             }
             else if (senderTag == useCusConfigTag)
             {
                 useMultipleServer = false;
                 useCusProfile = true;
+                usePartServer = false;
                 selectedCusConfig = ((sender as MenuItem).Header as string).Substring(1);
             }
             else if (senderTag == useAllServerTag)
             {
                 useMultipleServer = true;
                 useCusProfile = false;
+                usePartServer = false;
+            }
+            else if (senderTag == usePartServerTag)
+            {
+                useMultipleServer = false;
+                useCusProfile = false;
+                usePartServer = !usePartServer;
             }
             Debug.WriteLine("switch server");
             this.CoreConfigChanged(sender);
@@ -1025,10 +1086,15 @@ namespace V2RayW
 
             Dictionary<string, object> outboundsForConfig = new Dictionary<string, object>();
             Dictionary<string, object> uniqueTagOutbounds = new Dictionary<string, object>();
-
+            int tag = 0;
             foreach (Dictionary<string, object> outbound in allOutbounds)
             {
                 uniqueTagOutbounds[outbound[@"tag"].ToString()] = outbound;
+                if (usePartServer && !selectedPartServerIndex.Exists(x => (int)x == tag))
+                {
+                    uniqueTagOutbounds.Remove(outbound[@"tag"].ToString());
+                }
+                tag += 1;
             }
             var uniqueTagsExceptDirectDecline = new List<object>(uniqueTagOutbounds.Keys);
             uniqueTagOutbounds["direct"] = Utilities.OUTBOUND_DIRECT;
@@ -1040,7 +1106,7 @@ namespace V2RayW
             {
                 if (aRule.ContainsKey("outboundTag") && aRule["outboundTag"].ToString() == "main")
                 {
-                    if (!useMultipleServer)
+                    if (!useMultipleServer && !usePartServer)
                     {
                         aRule["outboundTag"] = allOutbounds[selectedServerIndex][@"tag"].ToString();
                     }
@@ -1203,8 +1269,6 @@ namespace V2RayW
             Process.Start("http://127.0.0.1:18000/config.json");
         }
 
-        #endregion
-
         private void ShowLogMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"log\");
@@ -1215,5 +1279,7 @@ namespace V2RayW
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"pac\pac.js", Properties.Resources.simplepac);
             UpdatePacMenuList();
         }
+
+        #endregion
     }
 }

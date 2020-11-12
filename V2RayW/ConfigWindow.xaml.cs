@@ -37,19 +37,19 @@ namespace V2RayW
         public List<Dictionary<string, object>> routingRuleSets;
         public bool enableRestore;
         private BackgroundWorker coreVersionCheckWorker = new BackgroundWorker();
-        private ObservableCollection<ProtocolUI> pui = new ObservableCollection<ProtocolUI>();
+        private ObservableCollection<ProtocolUI> protocolList = new ObservableCollection<ProtocolUI>();
 
         public ConfigWindow()
         {
             InitializeComponent();
 
             // initialize UI
-            protocolComboBox.ItemsSource = pui;
+            protocolComboBox.ItemsSource = protocolList;
             protocolComboBox.DisplayMemberPath = "UI";
             protocolComboBox.SelectedValuePath = "Protocol";
             foreach (var protocol in Utilities.PROTOCOL_LIST.Zip(Utilities.PROTOCOL_LIST_UI, Tuple.Create))
             {
-                pui.Add(new ProtocolUI { UI= protocol.Item2, Protocol=protocol.Item1});
+                protocolList.Add(new ProtocolUI { UI= protocol.Item2, Protocol=protocol.Item1});
 
             }
             foreach (string security in Utilities.VMESS_SECURITY_LIST) 
@@ -413,12 +413,24 @@ namespace V2RayW
             RefreshListBox();
         }
 
+        private void ShowLogButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"log\");
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void CloneMenuItem_Click(object sender, RoutedEventArgs e)
         {
             profiles.Add(Utilities.DeepClone(profiles[vmessListBox.SelectedIndex]));
             RefreshListBox();
         }
 
+        #region import & subscription & share
         private void ShareMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
@@ -491,17 +503,6 @@ namespace V2RayW
            
         }
 
-        private void ShowLogButton_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"log\");
-        }
-
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
         private void ImportClipboard_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -548,8 +549,6 @@ namespace V2RayW
                 return;
             }
         }
-
-        #region import & subscription
 
         void subscriptionWorker_DoWork(object sender, DoWorkEventArgs e)
         {

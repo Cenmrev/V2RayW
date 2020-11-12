@@ -1177,6 +1177,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Use Part 的本地化字符串。
+        /// </summary>
+        public static string usepart {
+            get {
+                return ResourceManager.GetString("usepart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 User ID: 的本地化字符串。
         /// </summary>
         public static string UserID {

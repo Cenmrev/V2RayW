@@ -44,9 +44,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v2.2.7"
+          automatic_release_tag: "v2.3.0"
           prerelease: false
-          title: "v2.2.7"
+          title: "v2.3.0"
           files:  |
             V2RayW.zip
      

@@ -519,4 +519,7 @@ v2ray-core\geosite.dat</value>
   <data name="messagetag" xml:space="preserve">
     <value>标签(tag)</value>
   </data>
+  <data name="usepart" xml:space="preserve">
+    <value>使用部分</value>
+  </data>
 </root>

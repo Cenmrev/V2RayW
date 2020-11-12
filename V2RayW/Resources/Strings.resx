@@ -519,4 +519,7 @@ v2ray-core\geosite.dat</value>
   <data name="messagetag" xml:space="preserve">
     <value>tag</value>
   </data>
+  <data name="usepart" xml:space="preserve">
+    <value>Use Part</value>
+  </data>
 </root>
